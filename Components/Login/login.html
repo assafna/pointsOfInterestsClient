@@ -1,9 +1,10 @@
 <h2><center>Please enter Username and Password</center></h2>
-<form name = "loginForm">
+<form name = "loginForm" ng-controller="loginController">
     <label>Username: </label>
-    <input type = "text" name = "username" ng-model = "">
+    <input type = "text" name = "username" ng-model = "lgnCtrl.user.username">
     <br>
     <label>Password: </label>
-    <input type = "password" name = "password" ng-model="">
-    <button type = "submit" ng-click="lgnCtrl.login()">Login</button>
+    <input type = "password" name = "password" ng-model = "lgnCtrl.user.password">
+    <br>
+    <button type = "submit" ng-click = "lgnCtrl.login()">Submit</button>
 </form>
