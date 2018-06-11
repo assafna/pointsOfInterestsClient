@@ -7,7 +7,7 @@ angular.module('poiApp')
         City: self.City,
         Country: self.Country,
         Email: self.Email,
-        Category1: self.Category1,
+        Categories: self.Categories,
         Category2: self.Category2,
         Category3: self.Category3,
         Category4: self.Category4,
@@ -16,6 +16,11 @@ angular.module('poiApp')
         Ans1: self.Ans1,
         Ans2: self.Ans1
     }
+
+    //let countries = self.getCountries();
+    let countries = ['a', 'b', 'c'];
+    let questions = self.getQuestions();
+    let categories = self.getCategories();
 
     self.register = function(){
          // register user
@@ -28,6 +33,20 @@ angular.module('poiApp')
              self.signUp.content = "Something went wrong";
          });
     }
+
+    self.getCountries = function(){
+        return $http.get(serverUrl + "/Countries")
+    }
+
+    self.getCategories = function(){
+        return $http.get(serverUrl + "/Categories")
+    }
+
+    self.getQuestions = function(){
+        return $http.get(serverUrl + "/Questions")
+    }
+
+
 
 
 }]);

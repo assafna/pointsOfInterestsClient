@@ -1,0 +1,37 @@
+<h1>Register</h1> 
+<form ng-controller="regCtrl">
+    <label>First Name:</label>
+    <input type = "text" id = "firstName" placeholder = "Enter First Name " ng-model = "user.Firstname">
+    <br><br>
+    <label>Last Name:</label>
+    <input type = "text" id = "lastName" placeholder = "Enter Last Name " ng-model = "user.Lastname">
+    <br><br>
+    <label>Country:</label>
+    <select ng-model="Country" ng-options="country for country in countries"></select>
+    <br><br>
+    <label>City:</label>
+    <input type = "text" id = "City" placeholder = "Enter City " ng-model = "user.City"> 
+    <br><br>
+    <label>Email:</label>
+    <input type = "email" id = "email" placeholder = "Enter Email " ng-model = "user.Email">
+    <br><br>
+    <label>Favorite Categories:</label>
+    <label ng-repeat="category in Categories">
+        <input type="checkbox" checklist-model="user.Categories" checklist-value="category"> {{category}}
+    </label>
+    <br><br>
+    <label>First Varification Question:</label>
+    <select ng-model="QuestId1" ng-options="question for question in questions"></select>
+    <br><br>
+    <label>Answer for Your Firts Question:</label>
+    <input type = "text" id = "ans2" placeholder = "Enter Answer " ng-model = "user.Ans1">
+    <br><br>
+    <label>Second Varification Question:</label>
+    <select ng-model="QuestId2" ng-options="question for question in questions"></select>
+    <br><br>
+    <label>Answer for Your Second Question</label>
+    <input type = "text" id = "ans2" placeholder = "Enter Answer " ng-model = "user.Ans1">
+    <br><br>
+</form>
+
+
