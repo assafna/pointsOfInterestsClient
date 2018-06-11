@@ -1,0 +1,6 @@
+<h2><center>Please enter Username and Password</center></h2>
+<form name = "loginForm" ng-submit = "lgnCtrl.login(loginForm.$valid)" novalidate>
+    <input type = "text" name = "username" ng-model = "">
+    <input type = "password" name = "password" ng-model=""
+    <button ng-click="srvCtrl.login()">Login</button>
+</form>

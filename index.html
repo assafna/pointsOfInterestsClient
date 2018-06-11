@@ -1,8 +1,28 @@
 <html ng-app="poiApp">
     <head>
-        <title>Points Of Interests</title>
+        <title>Points of Interests</title>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+        <script src="app.js"></script>
+        <script src="Components/Login/lgnCtrl.js"></script>
+        <script src="Components/Home/homeCtrl.js"></script>
+        <script src="Components/About/abtCtrl.js"></script>
+        <script src="Components/Register/regCtrl.js"></script>
+        <script src="Components/POI/poiCtrl.js"></script>
+        <script src="Components/FavPOI/fpoiCtrl.js"></script>
+
     </head>
     <body>
-        
+        <h1><center>Points of Interests</center></h1>
+        <ul>
+            <li><a class="active" href="#/home">Home</a></li>
+            <li><a href="#/register">Register</a></li>
+            <li><a href="#/poi">Points of Intersets</a></li>
+            <li><a href="#/favPoi">Favourite POI</a></li>
+            <li><a href="#/about">About</a></li>
+        </ul>
+        <!-- location of changed content -->
+        <div ng-view></div>
     </body>
 </html>
