@@ -1,9 +1,9 @@
 <h2><center>Please enter Username and Password</center></h2>
-<form name = "loginForm" ng-submit = "lgnCtrl.login(loginForm.$valid)" novalidate>
-    <label>Username:</label>
+<form name = "loginForm">
+    <label>Username: </label>
     <input type = "text" name = "username" ng-model = "">
     <br>
-    <label>Password:</label>
+    <label>Password: </label>
     <input type = "password" name = "password" ng-model="">
-    <button type = "submit" ng-click="srvCtrl.login()">Login</button>
+    <button type = "submit" ng-click="lgnCtrl.login()">Login</button>
 </form>
