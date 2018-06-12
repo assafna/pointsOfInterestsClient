@@ -1,5 +1,5 @@
 <h1>Register</h1> 
-<form ng-controller="regCtrl">
+<form ng-controller="registerController">
     <label>First Name:</label>
     <input type = "text" id = "firstName" placeholder = "Enter First Name " ng-model = "user.Firstname">
     <br><br>
@@ -7,7 +7,7 @@
     <input type = "text" id = "lastName" placeholder = "Enter Last Name " ng-model = "user.Lastname">
     <br><br>
     <label>Country:</label>
-    <select ng-model="Country" ng-options="country for country in countries"></select>
+    <select ng-model="user.Country" ng-options="country for country in countries"></select>
     <br><br>
     <label>City:</label>
     <input type = "text" id = "City" placeholder = "Enter City " ng-model = "user.City"> 

@@ -24,11 +24,11 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
         })
         .when('/poi', {
             templateUrl: 'Components/POI/poi.html',
-            controller : 'poiCtrl as poiCtrl'
+            controller : 'poiController as poiCtrl'
         })
         .when('/favPoi', {
             templateUrl: 'Components/FavPOI/favPoi.html',
-            controller : 'favPoiCtrl as fpoiCtrl'
+            controller : 'favouritePoiController as fpoiCtrl'
         })
         .otherwise({ redirectTo: '/' });
 }]);

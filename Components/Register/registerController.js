@@ -1,5 +1,7 @@
 angular.module('poiApp')
 .controller('registerController',['$http',  function($http){
+    let serverUrl = 'http://localhost:8080/';
+
     self = this;
     let user = {
         Firstname: self.Firstname,
@@ -17,10 +19,23 @@ angular.module('poiApp')
         Ans2: self.Ans1
     }
 
+    
+    self.getCountries = function(){
+        return $http.get(serverUrl + "/Countries")
+    }
+
+    self.getCategories = function(){
+        return $http.get(serverUrl + "/Categories")
+    }
+
+    self.getQuestions = function(){
+        return $http.get(serverUrl + "/Questions")
+    }
+
     //let countries = self.getCountries();
     let countries = ['a', 'b', 'c'];
-    let questions = self.getQuestions();
-    let categories = self.getCategories();
+    //let questions = self.getQuestions();
+    //let categories = self.getCategories();
 
     self.register = function(){
          // register user
@@ -34,17 +49,6 @@ angular.module('poiApp')
          });
     }
 
-    self.getCountries = function(){
-        return $http.get(serverUrl + "/Countries")
-    }
-
-    self.getCategories = function(){
-        return $http.get(serverUrl + "/Categories")
-    }
-
-    self.getQuestions = function(){
-        return $http.get(serverUrl + "/Questions")
-    }
 
 
 
