@@ -65,6 +65,7 @@ div.desc {
 }
 
 .responsive {
+    
     padding: 0 6px;
     float: left;
     width: 32%;
@@ -87,5 +88,18 @@ div.desc {
     content: "";
     display: table;
     clear: both;
+}
+
+.box{
+	float: left;
+	width:45%;
+	padding: 10px;
+	box-sizing: border-box;
+	min-height: 500px;
+ 	text-align: center;
+ 	background-color: #e6f2ff;
+ 	font-size:20px;
+     border-radius: 8px;
+    margin: 20px;
 }
   

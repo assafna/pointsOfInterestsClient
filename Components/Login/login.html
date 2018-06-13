@@ -27,19 +27,11 @@
     </form>
 </div>
 
-<!-- <div>
-    <h1>Exoplor!</h1>
-    <p id="photos" ng-repeat="poi in lgnCtrl.randPopularPOI">
-             <span ng-bind="poi.poiInfo.POI_name"></span> <br>
-            <br> <img ng-src="{{poi.poiInfo.ImgPath}}">
- 
-         </p>
-</div> -->
 <h1><center>Explore!</center></h1>
 <div ng-repeat="poi in lgnCtrl.randPopularPOI" class="responsive">
         <div class="gallery">
           <a target="_blank" href="{{poi.poiInfo.ImgPath}}">
-            <img src="{{poi.poiInfo.ImgPath}}" height="150">
+            <img src="{{poi.poiInfo.ImgPath}}" height="100">
           </a>
           <div class="desc">{{poi.poiInfo.POI_name}}</div>
         </div>
