@@ -1,6 +1,6 @@
 angular.module('poiApp'/*, ["checklist-model"]*/)
 .controller('registerController',['$http',  function($http){
-    let serverUrl = 'http://localhost:3000';
+    let serverUrl = 'http://localhost:3000/';
 
     self = this;
 
@@ -19,17 +19,17 @@ angular.module('poiApp'/*, ["checklist-model"]*/)
         QuestId1: self.QuestId1,
         QuestId2: self.QuestId2,
         Ans1: self.Ans1,
-        Ans2: self.Ans1
+        Ans2: self.Ans2
     }
 
-    $http.get(serverUrl + "/Countries")
+    $http.get(serverUrl + "Countries")
     .then(function(response){
         self.countries = response.data;
     },function(response){
         self.countries = [];
     })
 
-    $http.get(serverUrl + "/Categories")
+    $http.get(serverUrl + "Categories")
     .then(function(response){
         self.categories = response.data;
     },function(response){
@@ -37,31 +37,47 @@ angular.module('poiApp'/*, ["checklist-model"]*/)
     })
 
     
-    $http.get(serverUrl + "/Questions")
+    $http.get(serverUrl + "Questions")
     .then(function(response){
         self.questions = response.data;
     },function(response){
         self.questions = [];
     })
 
-    self.quesFilter = function (item) { 
-        return true; 
-    };
+    //initial categories according to user choise
+    self.checkOptions = function(choices){
+        var chosen = [];
+        for(let i = 0; i < choices.length; i++){
+            if (choices[i].checked) {
+                chosen.push(choices[i].Category_id);
+            }
+        }
+        if(chosen.length < 2)
+            self.lessThen2Categories = true;
+        else{
+            self.lessThen2Categories = false;
+            self.user.Category1 = chosen[0];
+            self.user.Category2 = chosen[1];
+            if(chosen.length > 2)
+                self.user.Category3 = chosen[2];
+            if(chosen.length > 3)
+                self.user.Category4 = chosen[3];
+        }       
+    }
 
+    self.closeDialog = function(){
+        document.getElementById("registerDialog").close();
+    }
 
     self.register = function(){
-        self.user.Category1 = self.chosenCategories[0];
-        self.user.Category2 = self.chosenCategories[1];
-        if(self.chosenCategories.length > 2)
-            self.user.Category3 = self.chosenCategories[2];
-        if(self.chosenCategories.length > 3)
-            self.user.Category4 = self.chosenCategories[3];
-
+        self.checkOptions(self.categories);
          // register user
-         $http.post(serverUrl + "/users/register", self.user)
+         $http.post(serverUrl + "users/register", self.user)
          .then(function (response) {
              //First function handles success
-             self.register.content = response.data;
+             self.username = response.data.username;
+             self.password = response.data.password;
+             document.getElementById("registerDialog").showModal();
          }, function (response) {
              //Second function handles error
              self.register.content = "Something went wrong";

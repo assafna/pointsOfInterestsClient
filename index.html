@@ -1,9 +1,11 @@
 <html ng-app="poiApp">
     <head>
+            <link rel="stylesheet" type-"text/css" href="style.css" />
         <title>Points of Interests</title>
 
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+        <!-- <script src="node_modules/angular-local-storage/dist/angular-local-storage.min.js"></script> -->
         <script src="app.js"></script>
         <script src="Services/setHeader-service.js"></script>
         <script src="Components/Login/loginController.js"></script>
@@ -15,14 +17,17 @@
 
     </head>
     <body>
+        <div id="navbar">
+            <a class="active" href="#/home">Home</a>
+            <a href="#/login">Login</a>
+            <a href="#/sign in">Sign in</a>
+            <a href="#/poi">Points of Intersets</a>
+            <a href="#/favPoi">Favourite POI</a>
+            <a href="#/about">About</a>
+        </div>
+        <!-- <section id="top-picture"></section> -->
         <h1><center>Points of Interests</center></h1>
-        <ul>
-            <li><a class="active" href="#/home">Home</a></li>
-            <li><a href="#/register">Register</a></li>
-            <li><a href="#/poi">Points of Intersets</a></li>
-            <li><a href="#/favPoi">Favourite POI</a></li>
-            <li><a href="#/about">About</a></li>
-        </ul>
+
         <!-- location of changed content -->
         <div ng-view></div>
     </body>

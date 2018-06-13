@@ -3,7 +3,7 @@ angular.module("poiApp")
 
         var self=this;
 
-        self.addLocalStorage = function (key, value) {
+        self.addToLocalStorage = function (key, value) {
             var dataVal = localStorageService.get(key);
             console.log(dataVal)
             if (!dataVal)
@@ -16,7 +16,7 @@ angular.module("poiApp")
 
 
 
-        self.getLocalStorage= function (key)
+        self.getFromLocalStorage= function (key)
         {
            return  localStorageService.get(key)
         }

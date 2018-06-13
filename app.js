@@ -9,6 +9,10 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
             templateUrl: 'Components/Login/login.html',
             controller : 'loginController as lgnCtrl'
         })
+        .when('/login', {
+            templateUrl: 'Components/Login/login.html',
+            controller : 'loginController as lgnCtrl'
+        })
         // registered
         .when('/home', {
             templateUrl: 'Components/Home/home.html',
@@ -18,7 +22,7 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
             templateUrl: 'Components/About/about.html',
             controller : 'aboutController as abtCtrl'
         })
-        .when('/register', {
+        .when('/sign in', {
             templateUrl: 'Components/Register/register.html',
             controller : 'registerController as regCtrl'
         })

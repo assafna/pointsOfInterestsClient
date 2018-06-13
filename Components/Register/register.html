@@ -53,9 +53,13 @@
 
     <label>Favorite Categories:</label>
     <label ng-repeat="category in regCtrl.categories">
-        <input type="checkbox"  checklist-model="regCtrl.chosenCategories" checklist-value="category.Category_id"> {{category.Category_name}}
+        <!-- <input type="checkbox"  checklist-model="regCtrl.chosenCategories" checklist-value="category.Category_id"> {{category.Category_name}} -->
+        <input type="checkbox" value="{{category.Category_id}}" ng-model="category.checked"> {{category.Category_name}}
     </label>
-    <br><br><p> {{regCtrl.chosenCategories}}</p>
+    <span class="error" ng-show="regCtrl.lessThen2Categories">
+        Please choose at least 2 categories
+    </span>
+    <br><br>
 
     <label>First Verification Question:</label>
     <select name = "ques1" ng-model="regCtrl.user.QuestId1" ng-options="question.Question_id[0] as question.Question_name for question in regCtrl.questions" required></select>
@@ -72,7 +76,7 @@
     <br><br>
 
     <label>Second Varification Question:</label>
-    <select name = "ques2" ng-model="regCtrl.user.QuestId2" ng-options="question.Question_id[0] as question.Question_name for question in regCtrl.questions | filter : !{question.Question_id == QuestId1}" required></select>
+    <select name = "ques2" ng-model="regCtrl.user.QuestId2" ng-options="question.Question_id[0] as question.Question_name for question in regCtrl.questions" required></select>
     <span class="error" ng-show="registerForm.ques2.$error.required">
         This is a required field
     </span>
@@ -86,6 +90,15 @@
 
     <br><br>
     <button type="submit" ng-click="regCtrl.register()" ng-disabled="registerForm.$invalid">Register</button>
+
+    <dialog id="registerDialog" ng-model="regCtrl.register">
+        <center>
+            <h1>Registration successfully completed!</h1>
+            <p>Your username is: {{regCtrl.username}}</p> 
+            <p>Your password is: {{regCtrl.password}}</p> 
+            <button ng-click="regCtrl.closeDialog()">close</button>
+        </center>
+    </dialog>
 </form>
 
 
