@@ -1,0 +1,8 @@
+<div ng-repeat="poi in poiCtrl.pois" class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="{{poi.poiInfo.ImgPath}}">
+            <img src="{{poi.poiInfo.ImgPath}}" height="100">
+          </a>
+          <div class="desc">{{poi.poiInfo.POI_name}}</div>
+        </div>
+      </div>
