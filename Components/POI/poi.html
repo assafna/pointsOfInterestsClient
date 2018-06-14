@@ -1,4 +1,25 @@
-<div ng-repeat="poi in poiCtrl.pois" class="responsive">
+<div id="filter">
+  <label>Sort By Category:</label>
+  <select ng-model="poiCtrl.chosenCategory" ng-options="category.Category_id[0] as category.Category_name for category in poiCtrl.categories"></select>
+  <br><br>
+</div>
+
+<div  ng-show = "poiCtrl.chosenCategory != 5">
+  <h1 class="category-header">{{poiCtrl.categories[poiCtrl.chosenCategory].Category_name}}</h1>
+ <div id= "img-poi" ng-repeat="poi in poiCtrl.pois | filter: { poiInfo: {Category : poiCtrl.chosenCategory}} " class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="{{poi.poiInfo.ImgPath}}">
+        <img src="{{poi.poiInfo.ImgPath}}" height="100">
+      </a>
+      <div class="desc">{{poi.poiInfo.POI_name}}</div>
+    </div>
+  </div>
+</div>
+
+<!-- show all poi according to categories -->
+<div ng-show = "poiCtrl.chosenCategory == 5" ng-repeat="category in poiCtrl.categories | filter: poiCtrl.categoryFilter">
+  <h1 class="category-header">{{category.Category_name}}</h1>
+<div id= "img-poi" ng-repeat="poi in poiCtrl.pois | filter: { poiInfo: {Category : category.Category_id}} | orderBy : poiInfo.POI_avgRank " class="responsive">
         <div class="gallery">
           <a target="_blank" href="{{poi.poiInfo.ImgPath}}">
             <img src="{{poi.poiInfo.ImgPath}}" height="100">
@@ -6,3 +27,4 @@
           <div class="desc">{{poi.poiInfo.POI_name}}</div>
         </div>
       </div>
+    </div>

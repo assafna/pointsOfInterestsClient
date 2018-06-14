@@ -1,0 +1,17 @@
+
+#img-poi {
+    width:  370px;
+    height: 370px;
+    background-position: 50% 50%;
+    background-repeat:   no-repeat;
+    background-size:     cover;
+}
+
+.category-header{
+    width: 100%; 
+    /* background-color: aqua; */
+}
+
+#filter{
+    width: 100%;
+}

@@ -1,12 +1,14 @@
 <html ng-app="poiApp">
     <head>
-            <link rel="stylesheet" type-"text/css" href="style.css" />
+        <link rel="stylesheet" type-"text/css" href="style.css" />
+        <link rel="stylesheet" type-"text/css" href="Components/POI/poiStyle.css" />
         <title>Points of Interests</title>
 
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
         <!-- <script src="node_modules/angular-local-storage/dist/angular-local-storage.min.js"></script> -->
         <script src="app.js"></script>
+        <script src="indexController.js"></script>
         <script src="Services/setHeader-service.js"></script>
         <script src="Components/Login/loginController.js"></script>
         <script src="Components/Home/homeController.js"></script>
@@ -16,7 +18,7 @@
         <script src="Components/FavPOI/favouritePoiController.js"></script> 
 
     </head>
-    <body>
+    <body ng-controller="indexController as indxCtrl">
         <div id="navbar">
             <a class="active" href="#/home">Home</a>
             <a href="#/login">Login</a>
@@ -24,6 +26,11 @@
             <a href="#/poi">Points of Intersets</a>
             <a href="#/favPoi">Favourite POI</a>
             <a href="#/about">About</a>
+            <div class="topnav-right">
+                <input type="text" placeholder="Search..">
+                <a ng-show="inxCtrl.loggedIn" ng-model="indxCtrl.userName">hello {{indxCtrl.userName}}</a>
+                
+            </div>
         </div>
         <!-- <section id="top-picture"></section> -->
         <h1><center>Points of Interests</center></h1>
