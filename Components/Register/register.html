@@ -76,7 +76,7 @@
     <br><br>
 
     <label>Second Varification Question:</label>
-    <select name = "ques2" ng-model="regCtrl.user.QuestId2" ng-options="question.Question_id[0] as question.Question_name for question in regCtrl.questions" required></select>
+    <select name = "ques2" ng-model="regCtrl.user.QuestId2" ng-options="question.Question_id[0] as question.Question_name for question in regCtrl.questions | filter : regCtrl.quesFilter" required></select>
     <span class="error" ng-show="registerForm.ques2.$error.required">
         This is a required field
     </span>

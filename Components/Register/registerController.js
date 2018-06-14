@@ -70,6 +70,10 @@ angular.module('poiApp'/*, ["checklist-model"]*/)
         $window.location.href = '#/home';
     }
 
+    self.quesFilter = function(ques){
+        return ques.Question_id != self.user.QuestId1;
+    }
+
     self.register = function(){
         self.checkOptions(self.categories);
          // register user

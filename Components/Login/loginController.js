@@ -37,13 +37,24 @@ angular.module('poiApp')
                     self.login.content = response.data.token;
                     setHeadersToken.set(self.login.content);
                     localStorageService.set('token', self.login.content);
+                    localStorageService.set('username', self.user.username);
+                   // addFavouritePOItoLocalStorage();
                     $window.location.href = '#/home';
                 }
-               // localStorageModel.addToLocalStorage('token', self.login.content);
             }, function (response) {
                 // second function handles error
                 self.login.content = "Something went wrong!";
             });
+    }
+
+    function addFavouritePOItoLocalStorage(){
+        $http.get(serverUrl + "poi/validation/FavoritePointsOfInterest")
+        .then(function (response) {
+            localStorageService.set('favouritePOIS', response.data);
+        }, function(response){
+            self.login.content = "Something went wrong!"
+        })
+
     }
 
     self.retrivePassword = function(){
@@ -59,7 +70,13 @@ angular.module('poiApp')
     self.showForgetPassword = function(){
         self.forgetPassword = true;
     }
-
- 
+/*
+    $http.get(serverUrl + "poi/AllPointsOfInterst")
+    .then(function(response){
+        localStorageService.set('allPOI', response.data);
+    },function(response){
+        self.pois = [];
+    }) 
+    */
     
 }]);
