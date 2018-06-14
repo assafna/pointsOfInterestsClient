@@ -1,5 +1,5 @@
 angular.module('poiApp')
-.controller('loginController', ['setHeadersToken', '$http', '$window', function(setHeadersToken, $http, $window) {
+.controller('loginController', ['setHeadersToken', '$http', '$window', 'localStorageService', function(setHeadersToken, $http, $window, localStorageService) {
     self = this;
 
     let serverUrl = 'http://localhost:3000/';
@@ -36,6 +36,7 @@ angular.module('poiApp')
                 else{
                     self.login.content = response.data.token;
                     setHeadersToken.set(self.login.content);
+                    localStorageService.set('token', self.login.content);
                     $window.location.href = '#/home';
                 }
                // localStorageModel.addToLocalStorage('token', self.login.content);

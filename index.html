@@ -4,19 +4,6 @@
         <link rel="stylesheet" type-"text/css" href="Components/POI/poiStyle.css" />
         <title>Points of Interests</title>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
-        <!-- <script src="node_modules/angular-local-storage/dist/angular-local-storage.min.js"></script> -->
-        <script src="app.js"></script>
-        <script src="indexController.js"></script>
-        <script src="Services/setHeader-service.js"></script>
-        <script src="Components/Login/loginController.js"></script>
-        <script src="Components/Home/homeController.js"></script>
-        <script src="Components/About/aboutcontroller.js"></script>
-        <script src="Components/Register/registerController.js"></script>
-        <script src="Components/POI/poiController.js"></script>
-        <script src="Components/FavPOI/favouritePoiController.js"></script> 
-
     </head>
     <body ng-controller="indexController as indxCtrl">
         <div id="navbar">
@@ -37,5 +24,19 @@
 
         <!-- location of changed content -->
         <div ng-view></div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+       
+        <script src="app.js"></script>
+        <script src="indexController.js"></script>
+        <script src="Services/setHeader-service.js"></script>
+        <script src="Components/Login/loginController.js"></script>
+        <script src="Components/Home/homeController.js"></script>
+        <script src="Components/About/aboutcontroller.js"></script>
+        <script src="Components/Register/registerController.js"></script>
+        <script src="Components/POI/poiController.js"></script>
+        <script src="Components/FavPOI/favouritePoiController.js"></script> 
+        <script src="node_modules/angular-local-storage/dist/angular-local-storage.min.js"></script>
     </body>
 </html>

@@ -1,5 +1,5 @@
 angular.module('poiApp'/*, ["checklist-model"]*/)
-.controller('registerController',['$http',  function($http){
+.controller('registerController',['$http', '$window',  function($http, $window){
     let serverUrl = 'http://localhost:3000/';
 
     self = this;
@@ -67,6 +67,7 @@ angular.module('poiApp'/*, ["checklist-model"]*/)
 
     self.closeDialog = function(){
         document.getElementById("registerDialog").close();
+        $window.location.href = '#/home';
     }
 
     self.register = function(){

@@ -1,4 +1,4 @@
-let app = angular.module('poiApp', ["ngRoute"]);
+let app = angular.module('poiApp', ['ngRoute','LocalStorageModule']);
 
 app.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('');
@@ -35,4 +35,8 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
             controller : 'favouritePoiController as fpoiCtrl'
         })
         .otherwise({ redirectTo: '/' });
-}]);
+}])
+
+.config(function(localStorageServiceProvider){
+    localStorageServiceProvider.setPrefix('poiApp');
+});
