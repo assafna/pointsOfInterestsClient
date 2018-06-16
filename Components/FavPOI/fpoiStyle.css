@@ -1,0 +1,14 @@
+#star {
+    cursor: pointer;
+  }
+
+span {
+  content: "\2605";
+  color: rgb(255, 203, 0);
+}
+  #ster{
+    color: rgb(255, 203, 0);
+  }
+  #star.fav:hover:after {
+    content: ' \2606';
+  }

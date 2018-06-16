@@ -1,37 +1,82 @@
 <div id="filter">
-  <label>Sort By Category:</label>
+  <label>Search by Category:</label>
   <select ng-model="poiCtrl.chosenCategory" ng-options="category.Category_id[0] as category.Category_name for category in poiCtrl.categories"></select>
+  <label>Sort By Rank:</label>
+  <input type="checkbox" ng-model="poiCtrl.sortByRate">
   <br><br>
 </div>
 
 <div>
-  <label>Search By Name:</label>
+  <label>Search by Name:</label>
   <input type="text" placeholder="Search.." ng-model="poiCtrl.search">
+  <br><br>
 </div>
 
 
-
-<div  ng-show = "poiCtrl.chosenCategory != 5">
-  <h1 class="category-header">{{poiCtrl.categories[poiCtrl.chosenCategory].Category_name}}</h1>
- <div id= "img-poi" ng-repeat="poi in poiCtrl.pois | filter: { poiInfo: {Category : poiCtrl.chosenCategory}} | lowercase |filter : poiCtrl.search " class="responsive">
-    <div class="gallery">
-      <a target="_blank" href="{{poi.poiInfo.ImgPath}}">
-        <img src="{{poi.poiInfo.ImgPath}}" height="100">
-      </a>
-      <div class="desc">{{poi.poiInfo.POI_name}}</div>
-    </div>
-  </div>
-</div>
-
-<!-- show all poi according to categories -->
-<div ng-show = "poiCtrl.chosenCategory == 5" ng-repeat="category in poiCtrl.categories | filter: poiCtrl.categoryFilter">
-  <h1 class="category-header">{{category.Category_name}}</h1>
-<div id= "img-poi" ng-repeat="poi in poiCtrl.pois | filter: { poiInfo: {Category : category.Category_id}} | lowercase | filter : poiCtrl.search | orderBy : poiInfo.POI_avgRank " class="responsive">
-        <div class="gallery">
-          <a target="_blank" href="{{poi.poiInfo.ImgPath}}">
-            <img src="{{poi.poiInfo.ImgPath}}" height="100">
-          </a>
-          <div class="desc">{{poi.poiInfo.POI_name}}</div>
+<div ng-show="!poiCtrl.sortByRate">
+  <!-- show specific category -->
+  <div  ng-show = "poiCtrl.chosenCategory != 5">
+    <h1 class="category-header">{{poiCtrl.categories[poiCtrl.chosenCategory].Category_name}}</h1>
+  <div id= "img-poi" ng-repeat="poi in poiCtrl.pois | filter: { poiInfo: {Category : poiCtrl.chosenCategory}} | lowercase | filter : poiCtrl.search  as results" class="responsive">
+      <div class="gallery">
+        <a target="_blank" href="{{poi.poiInfo.ImgPath}}">
+          <img src="{{poi.poiInfo.ImgPath}}" height="100">
+        </a>
+        <div class="desc">{{poi.poiInfo.POI_name}}
+            <button ng-click="poiCtrl.open()" ng-model=poiCtrl.button>save</button>
+            <button ng-click="poiCtrl.openReviewDialog(poi.poiInfo.POI_id, poi.poiInfo.POI_name)">Review</button>      
         </div>
+
       </div>
     </div>
+    <span>{{results.length}} results found</span>
+  </div>
+
+  <div ng-show = "poiCtrl.chosenCategory == 5" ng-repeat="category in poiCtrl.categories | filter: poiCtrl.categoryFilter">
+    <h1 class="category-header">{{category.Category_name}}</h1>
+  <div id= "img-poi" ng-repeat="poi in poiCtrl.pois | filter: { poiInfo: {Category : category.Category_id}} | lowercase | filter : poiCtrl.search as results" class="responsive">
+          <div class="gallery">
+            <a target="_blank" href="{{poi.poiInfo.ImgPath}}">
+              <img src="{{poi.poiInfo.ImgPath}}" height="100">
+            </a>
+            <div class="desc">{{poi.poiInfo.POI_name}}
+                <button ng-click="poiCtrl.addToFavourite(poi.poiInfo.POI_id)">save</button>
+                <button ng-click="poiCtrl.openReviewDialog(poi.poiInfo.POI_id, poi.poiInfo.POI_name)">Review</button>      
+            </div>
+          </div>
+        </div>
+        <span>{{results.length}} results found</span>
+      </div> 
+</div>
+
+<div ng-show="poiCtrl.sortByRate">
+  <h1> Points of View Sorted Accoording to Rank</h1>
+  <h3> In order to search by name or by category please uncheck the rank checkbox</h3>
+    <div id= "img-poi" ng-repeat="poi in poiCtrl.pois | orderBy : '-poiInfo.POI_avgRank'" class="responsive">
+            
+      <div class="gallery">
+              <a target="_blank" href="{{poi.poiInfo.ImgPath}}">
+                <img src="{{poi.poiInfo.ImgPath}}" height="100">
+              </a>
+              <div class="desc">{{poi.poiInfo.POI_name}}
+                  <button ng-click="poiCtrl.addToFavourite(poi.poiInfo.POI_id)">save</button> 
+                  <button ng-click="poiCtrl.openReviewDialog(poi.poiInfo.POI_id, poi.poiInfo.POI_name)">Review</button>      
+     
+              </div>
+            </div>
+          </div>
+        </div>
+  
+<dialog id="reviewDialog">
+    <center>
+        <h1>Review for {{poiCtrl.review.poiName}}</h1>
+        <label>Rank Point of Intrest:</label>
+        <select ng-options="i for i in [1, 2, 3, 4, 5]" ng-model=poiCtrl.review.rank>{{i}}</select>
+        <br><br>
+        <label>Review:</label>
+        <textarea placeholder="Enter your review..." ng-model=poiCtrl.review.review></textarea>
+        <br><br>
+        <button ng-click="poiCtrl.addReview()">Add Review</button>
+        <button ng-click="poiCtrl.closeDialog()">Close</button>
+    </center>
+</dialog>

@@ -3,6 +3,7 @@
         <link rel="stylesheet" type-"text/css" href="style.css" />
         <link rel="stylesheet" type-"text/css" href="Components/POI/poiStyle.css" />
         <link rel="stylesheet" type-"text/css" href="Components/home/homeStyle.css" />
+        <link rel="stylesheet" type-"text/css" href="Components/FavPOI/fpoiStyle.css" />
 
         <title>Points of Interests</title>
 
@@ -16,7 +17,6 @@
             <a href="#/favPoi">Favourite POI</a>
             <a href="#/about">About</a>
             <div class="topnav-right">
-                <input type="text" placeholder="Search..">
                 <a ng-model="indxCtrl.userName">hello {{indxCtrl.userName}}</a>
                 
             </div>
@@ -33,6 +33,7 @@
         <script src="app.js"></script>
         <script src="indexController.js"></script>
         <script src="Services/setHeader-service.js"></script>
+        <script src="Services/favouriteList-service.js"></script>
         <script src="Components/Login/loginController.js"></script>
         <script src="Components/Home/homeController.js"></script>
         <script src="Components/About/aboutcontroller.js"></script>
