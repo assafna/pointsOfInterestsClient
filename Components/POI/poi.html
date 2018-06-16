@@ -23,8 +23,8 @@
           <img src="{{poi.poiInfo.ImgPath}}" height="100">
         </a>
         <div class="desc">{{poi.poiInfo.POI_name}}
-            <button ng-click="poiCtrl.open()" ng-model=poiCtrl.button>save</button>
-            <button ng-click="poiCtrl.openReviewDialog(poi.poiInfo.POI_id, poi.poiInfo.POI_name)">Review</button>      
+            <button ng-show="poiCtrl.loggedIn" ng-click="poiCtrl.open()" ng-model=poiCtrl.button>save</button>
+            <button ng-show="poiCtrl.loggedIn" ng-click="poiCtrl.openReviewDialog(poi.poiInfo.POI_id, poi.poiInfo.POI_name)">Review</button>      
         </div>
 
       </div>

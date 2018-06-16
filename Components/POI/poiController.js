@@ -1,9 +1,11 @@
 angular.module('poiApp')
-.controller('poiController', ['$http', 'localStorageService','favouriteList', function($http, localStorageService, favouriteList) {
+.controller('poiController', ['$http', 'localStorageService','favouriteList','$scope', function($http, localStorageService, favouriteList, $scope) {
     self = this;
 
     let serverUrl = 'http://localhost:3000/';
     self.chosenCategory = 5;
+    self.loggedIn = $scope.indxCtrl.loggedIn;
+
 
     self.pois = localStorageService.get('allPOI')
 

@@ -1,5 +1,5 @@
 angular.module('poiApp')
-.controller('loginController', ['setHeadersToken', '$http', '$window', 'localStorageService', function(setHeadersToken, $http, $window, localStorageService) {
+.controller('loginController', ['setHeadersToken', '$http', '$window', 'localStorageService', '$scope', function(setHeadersToken, $http, $window, localStorageService, $scope) {
     self = this;
 
     let serverUrl = 'http://localhost:3000/';
@@ -37,7 +37,8 @@ angular.module('poiApp')
                     self.login.content = response.data.token;
                     setHeadersToken.set(self.login.content);
                     localStorageService.set('token', self.login.content);
-                    localStorageService.set('username', self.user.username);
+                    $scope.indxCtrl.userName = self.user.username;
+                    $scope.indxCtrl.loggedIn = true;
                     addFavouritePOItoLocalStorage();
                     $window.location.href = '#/home';
                 }
