@@ -4,9 +4,16 @@
   <br><br>
 </div>
 
+<div>
+  <label>Search By Name:</label>
+  <input type="text" placeholder="Search.." ng-model="poiCtrl.search">
+</div>
+
+
+
 <div  ng-show = "poiCtrl.chosenCategory != 5">
   <h1 class="category-header">{{poiCtrl.categories[poiCtrl.chosenCategory].Category_name}}</h1>
- <div id= "img-poi" ng-repeat="poi in poiCtrl.pois | filter: { poiInfo: {Category : poiCtrl.chosenCategory}} " class="responsive">
+ <div id= "img-poi" ng-repeat="poi in poiCtrl.pois | filter: { poiInfo: {Category : poiCtrl.chosenCategory}} | lowercase |filter : poiCtrl.search " class="responsive">
     <div class="gallery">
       <a target="_blank" href="{{poi.poiInfo.ImgPath}}">
         <img src="{{poi.poiInfo.ImgPath}}" height="100">
@@ -19,7 +26,7 @@
 <!-- show all poi according to categories -->
 <div ng-show = "poiCtrl.chosenCategory == 5" ng-repeat="category in poiCtrl.categories | filter: poiCtrl.categoryFilter">
   <h1 class="category-header">{{category.Category_name}}</h1>
-<div id= "img-poi" ng-repeat="poi in poiCtrl.pois | filter: { poiInfo: {Category : category.Category_id}} | orderBy : poiInfo.POI_avgRank " class="responsive">
+<div id= "img-poi" ng-repeat="poi in poiCtrl.pois | filter: { poiInfo: {Category : category.Category_id}} | lowercase | filter : poiCtrl.search | orderBy : poiInfo.POI_avgRank " class="responsive">
         <div class="gallery">
           <a target="_blank" href="{{poi.poiInfo.ImgPath}}">
             <img src="{{poi.poiInfo.ImgPath}}" height="100">

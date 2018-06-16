@@ -109,12 +109,5 @@ div.desc {
     float: right;
   }
 
-  /* Style the search box inside the navigation bar */
-.topnav-right input[type=text] {
-    padding: 6px;
-    border: none;
-    margin-top: 8px;
-    margin-right: 16px;
-    font-size: 17px;
-}
+ 
   

@@ -1,6 +1,6 @@
 
 #img-poi {
-    width:  370px;
+    width:  20%;
     height: 370px;
     background-position: 50% 50%;
     background-repeat:   no-repeat;
@@ -13,5 +13,12 @@
 }
 
 #filter{
-    width: 100%;
+    width: 50%;
+}
+
+ input[type=text] {
+    padding: 6px;
+    margin-top: 8px;
+    margin-right: 16px;
+    font-size: 17px;
 }

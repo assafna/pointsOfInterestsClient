@@ -1,17 +1,11 @@
 angular.module('poiApp')
-.controller('poiController', ['$http', function($http) {
+.controller('poiController', ['$http', 'localStorageService', function($http, localStorageService) {
     self = this;
 
     let serverUrl = 'http://localhost:3000/';
     self.chosenCategory = 5;
 
-
-    $http.get(serverUrl + "poi/AllPointsOfInterst")
-    .then(function(response){
-        self.pois = response.data;
-    },function(response){
-        self.pois = [];
-    })
+    self.pois = localStorageService.get('allPOI')
 
     $http.get(serverUrl + "Categories")
     .then(function(response){
@@ -22,6 +16,6 @@ angular.module('poiApp')
     })
 
     self.categoryFilter = function(category){
-        return category.Category_id != 5;
+        return category.Category_id != 5 && category.Category_id != 0;
     }
 }]);

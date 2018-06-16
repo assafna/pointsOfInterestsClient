@@ -38,7 +38,7 @@ angular.module('poiApp')
                     setHeadersToken.set(self.login.content);
                     localStorageService.set('token', self.login.content);
                     localStorageService.set('username', self.user.username);
-                   // addFavouritePOItoLocalStorage();
+                    addFavouritePOItoLocalStorage();
                     $window.location.href = '#/home';
                 }
             }, function (response) {
@@ -70,13 +70,13 @@ angular.module('poiApp')
     self.showForgetPassword = function(){
         self.forgetPassword = true;
     }
-/*
+
     $http.get(serverUrl + "poi/AllPointsOfInterst")
     .then(function(response){
         localStorageService.set('allPOI', response.data);
     },function(response){
         self.pois = [];
     }) 
-    */
+    
     
 }]);

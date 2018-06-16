@@ -5,7 +5,7 @@ angular.module('poiApp')
         self.userName = setHeadersToken.userName
         //self.userName = localStorageService.get('username');
         //if(self.userName)
-        self.loggedIn = true;
+            self.loggedIn = true;
         self.search = false;
 
     }]);
