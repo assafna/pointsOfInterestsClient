@@ -14,6 +14,10 @@ angular.module('poiApp')
         }
         $window.location.reload();    
     }
+
+    self.showPoiDetails = function(id){
+        $scope.indxCtrl.showPoiDetails(id);
+    }
 }]);
 // // add class 'fav' to each favorite
 // favorites.forEach(function(favorite) {

@@ -10,6 +10,7 @@ angular.module('poiApp')
     self.pois = localStorageService.get('allPOI')
 
     self.review = {
+
         rank : 0,
         review : ""
     }
@@ -45,7 +46,7 @@ angular.module('poiApp')
 
     self.addReview = function(){
         if(parseInt(self.review.rank) > 0){
-            $http.post(serverUrl + 'validation/rankPointOfInterest', self.review)
+            $http.post(serverUrl + 'poi/validation/rankPointOfInterest', self.review)
             .then(function(response){
                 console.log(response.data);
             },function(response){
@@ -53,7 +54,7 @@ angular.module('poiApp')
             })
         }
         if(self.review.review.length > 0){
-            $http.post(serverUrl + 'validation/reviewPointOfInterest', self.review)
+            $http.post(serverUrl + 'poi/validation/reviewPointOfInterest', self.review)
                 .then(function(response){
                     console.log(response.data);
                 },function(response){
@@ -61,11 +62,16 @@ angular.module('poiApp')
                 })
         }
         document.getElementById("reviewDialog").close();
+        alert("review added seccussfully");
 
     }
 
     self.closeDialog = function(){
         document.getElementById("reviewDialog").close();
+    }
+
+    self.showPoiDetails = function(id){
+        $scope.indxCtrl.showPoiDetails(id);
     }
     
     

@@ -61,8 +61,10 @@ angular.module('poiApp')
     self.retrivePassword = function(){
         $http.post(serverUrl + "users/retrivePassword", self.data)
         .then(function(response){
-            self.user.correctPassword = response.data.success;
-            self.user.password = response.data.password;
+            if(response.data.success)
+                 self.user.password = response.data.password;
+            else
+                alert("wrong varification details");
         }, function(response){
             self.login.content = "Something went wrong!"
         });

@@ -1,9 +1,7 @@
 <h1><center>Your Favourite Points of Intrests</center></h1>
 <div id="img-poi" ng-repeat="poi in fpoiCtrl.savedPOI" class="responsive">
         <div class="gallery">
-          <a target="_blank" href="{{poi.poiInfo.ImgPath}}">
-            <img src="{{poi.poiInfo.ImgPath}}" height="100">
-          </a>
+            <img src="{{poi.poiInfo.ImgPath}}" height="100" ng-click=fpoiCtrl.showPoiDetails(poi.poiInfo.POI_id)>
           <div class="desc">{{poi.poiInfo.POI_name}}
                 <!-- <a id="star" ng-click="fpoiCtrl.addToFavourite">&#9733;</a> -->
                 <button ng-click="fpoiCtrl.addToFavourite(poi.poiInfo.POI_id)">dd</button>

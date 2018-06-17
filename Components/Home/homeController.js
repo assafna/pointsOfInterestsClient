@@ -1,5 +1,5 @@
 angular.module('poiApp')
-.controller('homeController', ['$http', 'localStorageService', function($http, localStorageService) {
+.controller('homeController', ['$http', 'localStorageService', '$scope', function($http, localStorageService, $scope) {
     self = this;
 
     let serverUrl = 'http://localhost:3000/';
@@ -34,5 +34,9 @@ angular.module('poiApp')
         var dateB = new Date(b.poiInfo.AddDate).getTime();
         return dateB - dateA;  
     }; 
+
+    self.showPoiDetails = function(id){
+        $scope.indxCtrl.showPoiDetails(id);
+    }
     
 }]);

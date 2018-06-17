@@ -5,14 +5,14 @@
         <link rel="stylesheet" type-"text/css" href="Components/home/homeStyle.css" />
         <link rel="stylesheet" type-"text/css" href="Components/FavPOI/fpoiStyle.css" />
 
-        <title>Points of Interests</title>
+        <title>Rio de Janeiro</title>
 
     </head>
     <body ng-controller="indexController as indxCtrl">
         <div id="navbar">
             <a ng-show="indxCtrl.loggedIn" class="active" href="#/home">Home</a>
-            <a href="#/login">Login</a>
-            <a href="#/sign in">Sign in</a>
+            <a ng-show="!indxCtrl.loggedIn" href="#/login">Login</a>
+            <a ng-show="!indxCtrl.loggedIn" href="#/sign in">Sign in</a>
             <a href="#/poi">Points of Intersets</a>
             <a ng-show="indxCtrl.loggedIn" href="#/favPoi">Favourite POI</a>
             <a href="#/about">About</a>
@@ -21,20 +21,20 @@
                 <!-- <a ng-show="indxCtrl.loggedIn" ng-click="indxCtrl.logout()">Logout</a> -->
             </div>
         </div>
+
         <!-- <section id="top-picture"></section> -->
         <h1><center>Points of Interests</center></h1>
 
         <dialog id="poiDialog">
             <center>
                 <h1>More Details</h1>
-                <p ng-model="indxCtrl.poiToShow.poiInfo.NumOfViewers">Number of viewers: {{indxCtrl.poiToShow.poiInfo.NumOfViewers}}</p> 
-                <p ng-model="indxCtrl.poiToShow.poiInfo.POI_description">Description: {{indxCtrl.poiToShow.poiInfo.POI_description}}</p> 
-                <p ng-model="indxCtrl.poi.poiInfo.POI_avgRank">rate: {{indxCtrl.poi.poiInfo.POI_avgRank}}</p>
+                <p ng-model="indxCtrl.poiToShow.numOfViewrs">Number of viewers: {{indxCtrl.poiToShow.numOfViewrs}}</p> 
+                <p ng-model="indxCtrl.poiToShow.description">Description: {{indxCtrl.poiToShow.description}}</p> 
+                <p ng-model="indxCtrl.poiToShow.avgRank">rate: {{indxCtrl.poiToShow.avgRank}}</p>
                 <h3>Reviews</h3> 
                 <div ng-repeat="review in indxCtrl.poiToShow.poiReview">
                     <p>{{review.POI_reviewDate}}    {{POI_review}}</p>
                 </div>
-
                 <button ng-click="indxCtrl.closeDialog()">close</button>
             </center>
         </dialog>

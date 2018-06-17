@@ -4,10 +4,13 @@ angular.module('poiApp')
         let serverUrl = 'http://localhost:3000/';
 
         self = this;
-        self.userName = setHeadersToken.userName;
+        self.userName = guest;
         //self.userName = localStorageService.get('username');
         //if(self.userName)
         self.loggedIn = false;
+        self.poiToShow = {
+
+        }
 
         $http.get(serverUrl + "poi/AllPointsOfInterst")
         .then(function(response){
@@ -21,9 +24,13 @@ angular.module('poiApp')
             for(let i = 0; i < pois.length; i++){
                 if(pois[i].poiInfo.POI_id == id){
                     self.poiToShow = pois[i];
+                    self.poiToShow.description = pois[i].poiInfo.POI_description;
+                    self.poiToShow.avgRank = pois[i].poiInfo.POI_angRank;
+                    self.poiToShow.numOfViewrs = pois[i].poiInfo.NumOfViewers;
+                    self.poiToShow.reviews = pois[i].poiReview;
                     break;
                 }
-            }          
+            }
             document.getElementById("poiDialog").showModal();
            //add 1 to num of viewers
             $http.put(serverUrl + "poi/updateNumberOfViewers", { poiId: self.poiToShow.poiInfo.POI_id})
