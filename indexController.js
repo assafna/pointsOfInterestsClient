@@ -1,11 +1,11 @@
 angular.module('poiApp')
-    .controller('indexController',['setHeadersToken', 'localStorageService', '$window', 'poiDetails','$http', function (setHeadersToken, localStorageService, $window, poiDetails, $http) {
+    .controller('indexController',['setHeadersToken', 'localStorageService', '$window', 'poiDetails','$http','checkTokenValidation', function (setHeadersToken, localStorageService, $window, poiDetails, $http, checkTokenValidation) {
 
         let serverUrl = 'http://localhost:3000/';
 
         self = this;
         self.userName = "guest";
-        self.loggedIn = false;
+        self.loggedIn = checkTokenValidation.check();
         self.poiToShow = {}
 
         $http.get(serverUrl + "poi/AllPointsOfInterst")

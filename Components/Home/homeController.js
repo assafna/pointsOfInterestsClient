@@ -1,5 +1,5 @@
 angular.module('poiApp')
-.controller('homeController', ['$http', 'localStorageService', '$scope', function($http, localStorageService, $scope) {
+.controller('homeController', ['$http', 'localStorageService', '$scope', 'checkTokenValidation', function($http, localStorageService, $scope, checkTokenValidation) {
     self = this;
 
     let serverUrl = 'http://localhost:3000/';
@@ -8,6 +8,8 @@ angular.module('poiApp')
         password: self.password,
         isAdmin: self.isAdmin
     }
+    self.loggedIn = checkTokenValidation.check();
+
 
     self.noFavorites = false;
 

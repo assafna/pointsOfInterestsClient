@@ -1,7 +1,8 @@
 angular.module('poiApp')
-.controller('favouritePoiController', ['$http', 'localStorageService', 'favouriteList', '$window','$scope', function($http, localStorageService, favouriteList, $window, $scope) {
+.controller('favouritePoiController', ['$http', 'localStorageService', 'favouriteList', '$window','$scope', 'checkTokenValidation', function($http, localStorageService, favouriteList, $window, $scope, checkTokenValidation) {
     self = this;
     let serverUrl = 'http://localhost:3000/';
+    self.loggedIn = checkTokenValidation.check();
 
 
     // get favorites from local storage or empty array

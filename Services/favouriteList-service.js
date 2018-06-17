@@ -36,6 +36,8 @@ angular.module('poiApp')
 
     this.contains = function(id){
         let favList = localStorageService.get('favouritePOIS');
+        if(favList == null)
+            return false;
         for(let i = 0; i < favList.length; i++){
             if(favList[i].poiInfo.POI_id == id)
                 return true;
