@@ -2,9 +2,13 @@
 <div id="img-poi" ng-repeat="poi in fpoiCtrl.savedPOI" class="responsive">
         <div class="gallery">
             <img src="{{poi.poiInfo.ImgPath}}" height="100" ng-click=fpoiCtrl.showPoiDetails(poi.poiInfo.POI_id)>
-          <div class="desc">{{poi.poiInfo.POI_name}}
+          <div class="desc">{{poi.poiInfo.POI_order}}. {{poi.poiInfo.POI_name}}
                 <!-- <a id="star" ng-click="fpoiCtrl.addToFavourite">&#9733;</a> -->
-                <button ng-click="fpoiCtrl.addToFavourite(poi.poiInfo.POI_id)">dd</button>
+                <button ng-click="fpoiCtrl.addToFavourite(poi.poiInfo.POI_id)">save</button>
+                <br><br>
+                <button ng-click="fpoiCtrl.moveUp(poi.poiInfo.POI_id)">&#8592</button> 
+                <button ng-click="fpoiCtrl.moveDown(poi.poiInfo.POI_id)">&#8594</button>
+
         </div>
       </div>
     </div>

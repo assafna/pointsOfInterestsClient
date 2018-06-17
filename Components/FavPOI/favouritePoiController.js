@@ -2,6 +2,7 @@ angular.module('poiApp')
 .controller('favouritePoiController', ['$http', 'localStorageService', 'favouriteList', '$window','$scope', function($http, localStorageService, favouriteList, $window, $scope) {
     self = this;
 
+
     // get favorites from local storage or empty array
     self.savedPOI = localStorageService.get('favouritePOIS');
 
@@ -17,6 +18,50 @@ angular.module('poiApp')
 
     self.showPoiDetails = function(id){
         $scope.indxCtrl.showPoiDetails(id);
+    }
+
+    self.moveUp = function(id){
+        for(let i = 0; i < self.savedPOI.length; i++){
+            if(self.savedPOI[i].poiInfo.POI_id == id){
+                if(i == 0)
+                    alert("POI already the first")
+                else{
+                    let temp = self.savedPOI[i-1];
+                    self.savedPOI[i-1] = self.savedPOI[i];
+                    let prevOrder = self.savedPOI[i-1].poiInfo.POI_order
+                    self.savedPOI[i-1].poiInfo.POI_order = temp.poiInfo.POI_order;
+                    self.savedPOI[i] = temp;
+                    self.savedPOI[i].poiInfo.POI_order = prevOrder;
+                    localStorageService.remove('favouritePOIS');
+                    localStorageService.add('favouritePOIS', self.savedPOI);
+                    $window.location.reload();    
+                }
+                break;
+            }
+        }
+    }
+
+
+    
+    self.moveDown = function(id){
+        for(let i = 0; i < self.savedPOI.length; i++){
+            if(self.savedPOI[i].poiInfo.POI_id == id){
+                if(i == self.savedPOI.length - 1)
+                    alert("POI already the last")
+                else{
+                    let temp = self.savedPOI[i+1];
+                    self.savedPOI[i+1] = self.savedPOI[i];
+                    let prevOrder = self.savedPOI[i+1].poiInfo.POI_order
+                    self.savedPOI[i+1].poiInfo.POI_order = temp.poiInfo.POI_order;
+                    self.savedPOI[i] = temp;
+                    self.savedPOI[i].poiInfo.POI_order = prevOrder;
+                    localStorageService.remove('favouritePOIS');
+                    localStorageService.add('favouritePOIS', self.savedPOI);
+                    $window.location.reload();    
+                }
+                break;
+            }
+        }
     }
 }]);
 // // add class 'fav' to each favorite
