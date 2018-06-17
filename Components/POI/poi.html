@@ -22,7 +22,7 @@
           <img src="{{poi.poiInfo.ImgPath}}" height="100" ng-click=poiCtrl.showPoiDetails(poi.poiInfo.POI_id)>
         <div class="desc">{{poi.poiInfo.POI_name}}
             <div ng-show="poiCtrl.loggedIn">
-                <button ng-click="poiCtrl.addToFavourite(poi.poiInfo.POI_id)">save</button> 
+                <a id="star" ng-click="poiCtrl.addToFavourite(poi.poiInfo.POI_id)" ng-class="{checked: poi.checked}">&#9733;</a>
                 <button ng-click="poiCtrl.openReviewDialog(poi.poiInfo.POI_id, poi.poiInfo.POI_name)">Review</button>      
               </div>     
         </div>
@@ -39,7 +39,7 @@
               <img src="{{poi.poiInfo.ImgPath}}" height="100" ng-click=poiCtrl.showPoiDetails(poi.poiInfo.POI_id)>
             <div class="desc">{{poi.poiInfo.POI_name}}
                 <div ng-show="poiCtrl.loggedIn">
-                    <button ng-click="poiCtrl.addToFavourite(poi.poiInfo.POI_id)">save</button> 
+                    <a id="star" ng-click="poiCtrl.addToFavourite(poi.poiInfo.POI_id)" ng-class="{checked: poi.checked}">&#9733;</a>
                     <button ng-click="poiCtrl.openReviewDialog(poi.poiInfo.POI_id, poi.poiInfo.POI_name)">Review</button>      
                   </div>    
             </div>
@@ -58,8 +58,8 @@
                 <img src="{{poi.poiInfo.ImgPath}}" height="100" ng-click=poiCtrl.showPoiDetails(poi.poiInfo.POI_id)>
               <div class="desc">{{poi.poiInfo.POI_name}}
                 <div ng-show="poiCtrl.loggedIn">
-                  <button ng-click="poiCtrl.addToFavourite(poi.poiInfo.POI_id)">save</button> 
-                  <button ng-click="poiCtrl.openReviewDialog(poi.poiInfo.POI_id, poi.poiInfo.POI_name)">Review</button>      
+                    <a id="star" ng-click="poiCtrl.addToFavourite(poi.poiInfo.POI_id)" ng-class="{checked: poi.checked}">&#9733;</a>
+                    <button ng-click="poiCtrl.openReviewDialog(poi.poiInfo.POI_id, poi.poiInfo.POI_name)">Review</button>      
                 </div>
               </div>
             </div>

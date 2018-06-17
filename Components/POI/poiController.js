@@ -8,6 +8,13 @@ angular.module('poiApp')
 
 
     self.pois = localStorageService.get('allPOI')
+    for(let i = 0; i < self.pois.length; i++){
+        if(favouriteList.contains(self.pois[i].poiInfo.POI_id))
+            self.pois[i].checked = true;
+        else
+            self.pois[i].checked = false;
+        
+    }
 
     self.review = {
 
@@ -36,6 +43,15 @@ angular.module('poiApp')
         else{
             favouriteList.add(id);
         }
+        checkOrUncheck(id);
+    }
+
+    function checkOrUncheck(id){
+        for(let i = 0; i < self.pois.length; i++){
+            if(self.pois[i].poiInfo.POI_id == id)
+                self.pois[i].checked = !self.pois[i].checked;
+        }
+
     }
 
     self.openReviewDialog = function(poiId, poiName){

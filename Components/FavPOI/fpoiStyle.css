@@ -2,13 +2,9 @@
     cursor: pointer;
   }
 
-span {
-  content: "\2605";
-  color: rgb(255, 203, 0);
-}
-  #ster{
+  .checked{
     color: rgb(255, 203, 0);
   }
-  #star.fav:hover:after {
+  .unchecked {
     content: ' \2606';
   }

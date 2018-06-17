@@ -1,11 +1,14 @@
 angular.module('poiApp')
 .controller('favouritePoiController', ['$http', 'localStorageService', 'favouriteList', '$window','$scope', function($http, localStorageService, favouriteList, $window, $scope) {
     self = this;
+    let serverUrl = 'http://localhost:3000/';
 
 
     // get favorites from local storage or empty array
     self.savedPOI = localStorageService.get('favouritePOIS');
-
+    for(let i = 0; i < self.savedPOI.length; i++)
+        self.savedPOI[i].checked = true;
+ 
     self.addToFavourite = function(id){
         if(favouriteList.contains(id)){
             favouriteList.remove(id);
@@ -13,7 +16,14 @@ angular.module('poiApp')
         else{
             favouriteList.add(id);
         }
-        $window.location.reload();    
+        checkOrUncheck(id);    
+    }
+    function checkOrUncheck(id){
+        for(let i = 0; i < self.savedPOI.length; i++){
+            if(self.savedPOI[i].poiInfo.POI_id == id)
+                self.savedPOI[i].checked = !self.savedPOI[i].checked;
+        }
+
     }
 
     self.showPoiDetails = function(id){
@@ -40,8 +50,6 @@ angular.module('poiApp')
             }
         }
     }
-
-
     
     self.moveDown = function(id){
         for(let i = 0; i < self.savedPOI.length; i++){
@@ -62,6 +70,21 @@ angular.module('poiApp')
                 break;
             }
         }
+    }
+
+    self.saveFavListToServer = function(){
+        let favListFromLocalStorage = localStorageService.get('favouritePOIS');
+        let favPoisIdsByOrder = []
+        for(let i = 0; i < favListFromLocalStorage.length; i++){
+            favPoisIdsByOrder.push(parseInt(favListFromLocalStorage[i].poiInfo.POI_id));
+        }
+        console.log(favPoisIdsByOrder)
+        $http.put(serverUrl + "poi/validation/updateFavoritePointsOfInterest", {poisId : favPoisIdsByOrder})
+        .then(function(response){
+            console.log(response);
+        },function(response){
+            console.log(response);
+        })
     }
 }]);
 // // add class 'fav' to each favorite
