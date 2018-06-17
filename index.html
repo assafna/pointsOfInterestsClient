@@ -19,8 +19,6 @@
             <div class="topnav-right">
                 <a ng-show="indxCtrl.loggedIn" ng-model="indxCtrl.userName">hello {{indxCtrl.userName}}</a>
                 <!-- <a ng-show="indxCtrl.loggedIn" ng-click="indxCtrl.logout()">Logout</a> -->
-
-                
             </div>
         </div>
         <!-- <section id="top-picture"></section> -->
@@ -29,6 +27,18 @@
         <!-- location of changed content -->
         <div ng-view></div>
 
+        <dialog id="poiDialog" ng-model="indxCtrl.register">
+                <center>
+                    <h1>More Details</h1>
+                    <p>Number of watchs: {{indxCtrl.poi.poiInfo.NumOfViewers}}</p> 
+                    <p>Descruption: {{indxCtrl.poi.poiInfo.POI_escription}}</p> 
+                    <p>rate: {{indxCtrl.poi.poiInfo.POI_AvgRank}}</p>
+                    <h3>Reviews</h3> 
+
+                    <button ng-click="indx.Ctrl.closeDialog()">close</button>
+                </center>
+            </dialog>
+
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
        
@@ -36,6 +46,7 @@
         <script src="indexController.js"></script>
         <script src="Services/setHeader-service.js"></script>
         <script src="Services/favouriteList-service.js"></script>
+        <script src="Services/poiDetails-service.js"></script>
         <script src="Components/Login/loginController.js"></script>
         <script src="Components/Home/homeController.js"></script>
         <script src="Components/About/aboutcontroller.js"></script>

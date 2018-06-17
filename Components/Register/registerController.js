@@ -1,5 +1,5 @@
 angular.module('poiApp'/*, ["checklist-model"]*/)
-.controller('registerController',['$http', '$window',  function($http, $window){
+.controller('registerController',['$http', '$window','$scope',  function($http, $window, $scope){
     let serverUrl = 'http://localhost:3000/';
 
     self = this;
@@ -87,6 +87,10 @@ angular.module('poiApp'/*, ["checklist-model"]*/)
              //Second function handles error
              self.register.content = "Something went wrong";
          });
+    }
+
+    self.show = function(id){
+        $scope.indxCtrl.showPoiDetails(id);
     }
 
 
