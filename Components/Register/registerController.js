@@ -52,8 +52,10 @@ angular.module('poiApp'/*, ["checklist-model"]*/)
                 chosen.push(choices[i].Category_id);
             }
         }
-        if(chosen.length < 2)
+        if(chosen.length < 2){
             self.lessThen2Categories = true;
+            return false;
+        }
         else{
             self.lessThen2Categories = false;
             self.user.Category1 = chosen[0];
@@ -62,12 +64,13 @@ angular.module('poiApp'/*, ["checklist-model"]*/)
                 self.user.Category3 = chosen[2];
             if(chosen.length > 3)
                 self.user.Category4 = chosen[3];
+            return true;
         }       
     }
 
     self.closeDialog = function(){
         document.getElementById("registerDialog").close();
-        $window.location.href = '#/home';
+        $window.location.href = '#/login';
     }
 
     self.quesFilter = function(ques){
@@ -75,22 +78,27 @@ angular.module('poiApp'/*, ["checklist-model"]*/)
     }
 
     self.register = function(){
-        self.checkOptions(self.categories);
-         // register user
-         $http.post(serverUrl + "users/register", self.user)
-         .then(function (response) {
-             //First function handles success
-             self.username = response.data.username;
-             self.password = response.data.password;
-             document.getElementById("registerDialog").showModal();
-         }, function (response) {
-             //Second function handles error
-             self.register.content = "Something went wrong";
-         });
+        if(self.checkOptions(self.categories)){
+            // register user
+            $http.post(serverUrl + "users/register", self.user)
+            .then(function (response) {
+                //First function handles success
+                self.username = response.data.username;
+                self.password = response.data.password;
+                document.getElementById("registerDialog").showModal();
+            }, function (response) {
+                //Second function handles error
+                self.register.content = "Something went wrong";
+            });
+        }
     }
 
     self.show = function(id){
         $scope.indxCtrl.showPoiDetails(id);
+    }
+
+    self.categoryFilter = function(category){
+        return category.Category_id != 5 && category.Category_id != 0;
     }
 
 

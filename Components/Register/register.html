@@ -52,7 +52,7 @@
     <br><br>
 
     <label>Favorite Categories:</label>
-    <label ng-repeat="category in regCtrl.categories">
+    <label ng-repeat="category in regCtrl.categories | filter: regCtrl.categoryFilter">
         <!-- <input type="checkbox"  checklist-model="regCtrl.chosenCategories" checklist-value="category.Category_id"> {{category.Category_name}} -->
         <input type="checkbox" value="{{category.Category_id}}" ng-model="category.checked"> {{category.Category_name}}
     </label>

@@ -40,7 +40,6 @@ angular.module('poiApp')
                     $scope.indxCtrl.userName = self.user.username;
                     $scope.indxCtrl.loggedIn = true;
                     addFavouritePOItoLocalStorage();
-                    $window.location.href = '#/home';
                 }
             }, function (response) {
                 // second function handles error
@@ -49,12 +48,22 @@ angular.module('poiApp')
     }
 
     function addFavouritePOItoLocalStorage(){
-        $http.get(serverUrl + "poi/validation/FavoritePointsOfInterest")
-        .then(function (response) {
-            localStorageService.set('favouritePOIS', response.data);
-        }, function(response){
-            self.login.content = "Something went wrong!"
-        })
+        try{
+            $http.get(serverUrl + "poi/validation/FavoritePointsOfInterest")
+            .then(function (response) {
+                if(response.data.message == "no Favorite Points Of Interest")
+                    localStorageService.set('favouritePOIS', []);
+                else
+                    localStorageService.set('favouritePOIS', response.data);
+                $window.location.href = '#/home';
+            }, function(response){
+                self.login.content = "Something went wrong!"
+            })
+        }
+        catch(err){
+            localStorageService.set('favouritePOIS', []);
+            $window.location.href = '#/home';
+        }
 
     }
 

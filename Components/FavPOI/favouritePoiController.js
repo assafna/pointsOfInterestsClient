@@ -1,5 +1,5 @@
 angular.module('poiApp')
-.controller('favouritePoiController', ['$http', 'localStorageService', 'favouriteList', '$window', function($http, localStorageService, favouriteList, $window) {
+.controller('favouritePoiController', ['$http', 'localStorageService', 'favouriteList', '$window','$scope', function($http, localStorageService, favouriteList, $window, $scope) {
     self = this;
 
     // get favorites from local storage or empty array

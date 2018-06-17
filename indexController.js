@@ -4,13 +4,9 @@ angular.module('poiApp')
         let serverUrl = 'http://localhost:3000/';
 
         self = this;
-        self.userName = guest;
-        //self.userName = localStorageService.get('username');
-        //if(self.userName)
+        self.userName = "guest";
         self.loggedIn = false;
-        self.poiToShow = {
-
-        }
+        self.poiToShow = {}
 
         $http.get(serverUrl + "poi/AllPointsOfInterst")
         .then(function(response){
@@ -20,14 +16,20 @@ angular.module('poiApp')
         }) 
 
         self.showPoiDetails = function(id){
-            pois = localStorageService.get('allPOI');
+            let pois = localStorageService.get('allPOI')
+            // $http.get(serverUrl + "poi/AllPointsOfInterst")
+            // .then(function(response){
+            //     pois = response.data;
+            // },function(response){
+            //     pois = [];
+            // }) 
             for(let i = 0; i < pois.length; i++){
                 if(pois[i].poiInfo.POI_id == id){
                     self.poiToShow = pois[i];
                     self.poiToShow.description = pois[i].poiInfo.POI_description;
                     self.poiToShow.avgRank = pois[i].poiInfo.POI_angRank;
                     self.poiToShow.numOfViewrs = pois[i].poiInfo.NumOfViewers;
-                    self.poiToShow.reviews = pois[i].poiReview;
+                    self.poiToShow.reviews = pois[i].poiInfo.poiReview;
                     break;
                 }
             }
@@ -46,13 +48,13 @@ angular.module('poiApp')
             document.getElementById("poiDialog").close();
         }
 
-        // self.logout = function(){
-        //     self.loggedIn = false;
-        //     self.userName = localStorageService.remove('favouritePOIS');
-        //     self.userName = localStorageService.remove('token');
-        //     $window.location.href = '#/login';
+         self.logout = function(){
+             self.loggedIn = false;
+             localStorageService.remove('token');
+             localStorageService.remove('favouritePOIS');
+             $window.location.href = '#/login';
 
-        // }
+         }
 
 
 

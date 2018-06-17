@@ -5,7 +5,7 @@
         <link rel="stylesheet" type-"text/css" href="Components/home/homeStyle.css" />
         <link rel="stylesheet" type-"text/css" href="Components/FavPOI/fpoiStyle.css" />
 
-        <title>Rio de Janeiro</title>
+        <title>Points of Interests</title>
 
     </head>
     <body ng-controller="indexController as indxCtrl">
@@ -17,13 +17,13 @@
             <a ng-show="indxCtrl.loggedIn" href="#/favPoi">Favourite POI</a>
             <a href="#/about">About</a>
             <div class="topnav-right">
-                <a ng-show="indxCtrl.loggedIn" ng-model="indxCtrl.userName">hello {{indxCtrl.userName}}</a>
-                <!-- <a ng-show="indxCtrl.loggedIn" ng-click="indxCtrl.logout()">Logout</a> -->
+                <a ng-model="indxCtrl.userName">hello {{indxCtrl.userName}}</a>
+                <a ng-show="indxCtrl.loggedIn" ng-click="indxCtrl.logout()">Logout</a>
             </div>
         </div>
 
         <!-- <section id="top-picture"></section> -->
-        <h1><center>Points of Interests</center></h1>
+        <h1><center>Rio de Janeiro</center></h1>
 
         <dialog id="poiDialog">
             <center>

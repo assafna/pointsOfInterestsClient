@@ -9,6 +9,9 @@ angular.module('poiApp')
         isAdmin: self.isAdmin
     }
 
+    self.noFavorites = false;
+
+
     $http.get(serverUrl + "poi/validation/RecomendedPointsOfInterest")
     .then(function(response){
         self.recomendedPOI = response.data;
@@ -19,10 +22,18 @@ angular.module('poiApp')
     
     self.getLastSavedPOIs = function(){
         let pois = localStorageService.get('favouritePOIS');
-        pois.sort(sortByDate);
-        self.savedPOI = [];
-        for(let i = 0; i < 2 && pois.length; i++)
-            self.savedPOI.push(pois[i]);
+        self.savedPOI = [];      
+        if(pois.length == 0 || pois == "undefined")
+            self.noFavorites = true;
+        else{
+            self.savedPOI.push(pois[pois.length - 1]);
+            if(pois.length > 1)
+                self.savedPOI.push(pois[pois.length - 2]);
+
+        //pois.sort(sortByDate);
+        //for(let i = 0; i < 2 && pois.length; i++)
+          //  self.savedPOI.push(pois[i]);
+        }
     }
 
     self.getLastSavedPOIs();
