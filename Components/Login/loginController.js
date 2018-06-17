@@ -72,12 +72,10 @@ angular.module('poiApp')
         self.forgetPassword = true;
     }
 
-    $http.get(serverUrl + "poi/AllPointsOfInterst")
-    .then(function(response){
-        localStorageService.set('allPOI', response.data);
-    },function(response){
-        self.pois = [];
-    }) 
+    self.showPoiDetails = function(id){
+        $scope.indxCtrl.showPoiDetails(id);
+    }
+    
     
     
 }]);

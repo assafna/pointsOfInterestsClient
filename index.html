@@ -24,20 +24,25 @@
         <!-- <section id="top-picture"></section> -->
         <h1><center>Points of Interests</center></h1>
 
+        <dialog id="poiDialog">
+            <center>
+                <h1>More Details</h1>
+                <p ng-model="indxCtrl.poiToShow.poiInfo.NumOfViewers">Number of viewers: {{indxCtrl.poiToShow.poiInfo.NumOfViewers}}</p> 
+                <p ng-model="indxCtrl.poiToShow.poiInfo.POI_description">Description: {{indxCtrl.poiToShow.poiInfo.POI_description}}</p> 
+                <p ng-model="indxCtrl.poi.poiInfo.POI_avgRank">rate: {{indxCtrl.poi.poiInfo.POI_avgRank}}</p>
+                <h3>Reviews</h3> 
+                <div ng-repeat="review in indxCtrl.poiToShow.poiReview">
+                    <p>{{review.POI_reviewDate}}    {{POI_review}}</p>
+                </div>
+
+                <button ng-click="indxCtrl.closeDialog()">close</button>
+            </center>
+        </dialog>
+
         <!-- location of changed content -->
         <div ng-view></div>
 
-        <dialog id="poiDialog" ng-model="indxCtrl.register">
-                <center>
-                    <h1>More Details</h1>
-                    <p>Number of watchs: {{indxCtrl.poi.poiInfo.NumOfViewers}}</p> 
-                    <p>Descruption: {{indxCtrl.poi.poiInfo.POI_escription}}</p> 
-                    <p>rate: {{indxCtrl.poi.poiInfo.POI_AvgRank}}</p>
-                    <h3>Reviews</h3> 
-
-                    <button ng-click="indx.Ctrl.closeDialog()">close</button>
-                </center>
-            </dialog>
+ 
 
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>

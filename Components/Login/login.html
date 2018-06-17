@@ -30,9 +30,19 @@
 <h1><center>Explore!</center></h1>
 <div ng-repeat="poi in lgnCtrl.randPopularPOI" class="responsive">
         <div class="gallery">
-          <a target="_blank" href="{{poi.poiInfo.ImgPath}}">
-            <img src="{{poi.poiInfo.ImgPath}}" height="100">
-          </a>
+            <img src="{{poi.poiInfo.ImgPath}}" height="100" ng-click="lgnCtrl.showPoiDetails(poi.poiInfo.POI_id)">
           <div class="desc">{{poi.poiInfo.POI_name}}</div>
         </div>
       </div>
+
+      <dialog id="poiDialog" ng-model="lgnCtrl.poi">
+        <center>
+            <h1>More Details</h1>
+            <p ng-model="lgnCtrl.poi.poiInfo.NumOfViewers">Number of viewers: {{lgnCtrl.poi.poiInfo.NumOfViewers}}</p> 
+            <p ng-model="lgnCtrl.poi.poiInfo.POI_description">Description: {{lgnCtrl.poi.poiInfo.POI_description}}</p> 
+            <p>rate: {{lgnCtrl.poi.poiInfo.POI_avgRank}}</p>
+            <h3>Reviews</h3> 
+
+            <button ng-click="lgnCtrl.closeDialog()">close</button>
+        </center>
+    </dialog>
