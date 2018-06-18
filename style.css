@@ -115,3 +115,13 @@ div.desc {
 .error {
     color: red;
 }
+
+.navBardemoBasicUsage md-content .ext-content {
+    padding: 50px;
+    margin: 20px;
+    background-color: #FFF2E0; }
+
+#loginDiv {
+    margin: auto;
+    width: 500px;
+}

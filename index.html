@@ -1,68 +1,113 @@
-<html ng-app="poiApp">
-    <head>
-        <!-- css -->
-        <link rel="stylesheet" type-"text/css" href="style.css" />
-        <link rel="stylesheet" type-"text/css" href="Components/POI/poiStyle.css" />
-        <link rel="stylesheet" type-"text/css" href="Components/home/homeStyle.css" />
-        <link rel="stylesheet" type-"text/css" href="Components/FavPOI/fpoiStyle.css" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <title>Points of Interests</title>
-    </head>
-    <body ng-controller="indexController as indxCtrl">
-        <!-- navigation bar -->
-        <div id="navbar">
-            <a ng-show="checkLogin()" class="active" href="#/home">Home</a>
-            <a ng-show="!checkLogin()" href="#/login">Login</a>
-            <a ng-show="!checkLogin()" href="#/signUp">Sign Up</a>
-            <a href="#/poi">Points of Intersets</a>
-            <a ng-show="checkLogin()" href="#/favPoi">Favourite POI</a>
-            <a href="#/about">About</a>
-            <div class="topnav-right">
-                <a ng-model="userName">Hello {{userName}}</a>
-                <a ng-show="checkLogin()" ng-click="logout()">Logout</a>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- css -->
+    <link rel="stylesheet" type- "text/css" href="style.css" />
+    <link rel="stylesheet" type- "text/css" href="Components/POI/poiStyle.css" />
+    <link rel="stylesheet" type- "text/css" href="Components/home/homeStyle.css" />
+    <link rel="stylesheet" type- "text/css" href="Components/FavPOI/fpoiStyle.css" />
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+    <!-- Angular Material style sheet -->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.css">
+    <title>Points of Interests</title>
+</head>
+
+<body ng-app="poiApp" ng-controller="indexController as indxCtrl" ng-cloak>
+
+    <!-- angularjs module nav bar -->
+    <md-content class="md-padding">
+        <md-nav-bar id="navbarAngularMaterial" md-no-ink-bar="disableInkBar" md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
+            <md-nav-item md-nav-href="#/home" ng-show="checkLogin()" name="home" class="active">
+                Home
+            </md-nav-item>
+            <md-nav-item md-nav-href="#/login" ng-show="!checkLogin()" name="login">
+                Login
+            </md-nav-item>
+            <md-nav-item md-nav-href="#/signUp" ng-show="!checkLogin()" name="signUp">
+                Sign Up
+            </md-nav-item>
+            <md-nav-item md-nav-href="#/poi" name="poi">
+                Points of Interests
+            </md-nav-item>
+            <md-nav-item md-nav-href="#/favPoi" ng-show="checkLogin()" name="favPoi">
+                Favourite POI
+            </md-nav-item>
+            <md-nav-item md-nav-href="#/about" name="about">
+                About
+            </md-nav-item>
+            <md-nav-item md-nav-click="logout()" ng-show="checkLogin()" name="logout">
+                Logout
+            </md-nav-item>
+        </md-nav-bar>
+    </md-content>
+
+    <div class="topnav-right">
+        <a ng-model="userName">Hello {{userName}}</a>
+        <a ng-show="checkLogin()" ng-click="logout()">Logout</a>
+    </div>
+
+    <!-- <section id="top-picture"></section> -->
+    <h1 class="md-display-1">
+        <center>Rio de Janeiro</center>
+    </h1>
+    <!-- review dialog -->
+    <dialog id="poiDialog">
+        <center>
+            <h1>More Details</h1>
+            <p ng-model="poiToShow.poiInfo.NumOfViewers">Number of Viewers: {{poiToShow.poiInfo.NumOfViewers}}</p>
+            <p ng-model="poiToShow.poiInfo.POI_description">Description: {{poiToShow.poiInfo.POI_description}}</p>
+            <p ng-model="poiToShow.poiInfo.POI_avgRank">Rank: {{poiToShow.poiInfo.POI_avgRank}}</p>
+            <h3>Reviews</h3>
+            <div ng-repeat="review in poiToShow.poiReview">
+                <p>{{review.POI_reviewDate}} {{review.POI_review}}</p>
             </div>
-        </div>
-        <!-- <section id="top-picture"></section> -->
-        <h1><center>Rio de Janeiro</center></h1>
-        <!-- review dialog -->
-        <dialog id="poiDialog">
-            <center>
-                <h1>More Details</h1>
-                <p ng-model="poiToShow.poiInfo.NumOfViewers">Number of Viewers: {{poiToShow.poiInfo.NumOfViewers}}</p> 
-                <p ng-model="poiToShow.poiInfo.POI_description">Description: {{poiToShow.poiInfo.POI_description}}</p> 
-                <p ng-model="poiToShow.poiInfo.POI_avgRank">Rank: {{poiToShow.poiInfo.POI_avgRank}}</p>
-                <h3>Reviews</h3> 
-                <div ng-repeat="review in poiToShow.poiReview">
-                    <p>{{review.POI_reviewDate}}    {{review.POI_review}}</p>
-                </div>
-                <button ng-click="indxCtrl.closeDialog()">Close</button>
-            </center>
-        </dialog>
-        
-        <!-- location of changed content -->
-        <div ng-view onload="indxCtrl.checkToken()"></div>
+            <button ng-click="indxCtrl.closeDialog()">Close</button>
+        </center>
+    </dialog>
 
-        <!-- loaded scripts -->
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
-       
-        <script src="app.js"></script>
-        <script src="indexController.js"></script>
+    <!-- location of changed content -->
+    <div ng-view onload="indxCtrl.checkToken()"></div>
 
-        <script src="Services/setHeader-service.js"></script>
-        <script src="Services/favouriteList-service.js"></script>
-        <script src="Services/poiDetails-service.js"></script>
+    <!-- loaded scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
 
-        <script src="Components/Login/loginController.js"></script>
-        <script src="Components/Home/homeController.js"></script>
-        <script src="Components/About/aboutcontroller.js"></script>
-        <script src="Components/Register/registerController.js"></script>
-        <script src="Components/POI/poiController.js"></script>
-        <script src="Components/FavPOI/favouritePoiController.js"></script> 
+    <script src="app.js"></script>
+    <script src="indexController.js"></script>
 
-        <script src="node_modules/angular-local-storage/dist/angular-local-storage.min.js"></script>
+    <script src="Services/setHeader-service.js"></script>
+    <script src="Services/favouriteList-service.js"></script>
+    <script src="Services/poiDetails-service.js"></script>
 
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    </body>
+    <script src="Components/Login/loginController.js"></script>
+    <script src="Components/Home/homeController.js"></script>
+    <script src="Components/About/aboutcontroller.js"></script>
+    <script src="Components/Register/registerController.js"></script>
+    <script src="Components/POI/poiController.js"></script>
+    <script src="Components/FavPOI/favouritePoiController.js"></script>
+
+    <script src="node_modules/angular-local-storage/dist/angular-local-storage.min.js"></script>
+
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Angular Material requires Angular.js Libraries -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-messages.min.js"></script>
+
+    <!-- Angular Material Library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.js"></script>
+
+    <!-- Your application bootstrap  -->
+    <!-- <script type="text/javascript">    
+        /**
+         * You must include the dependency on 'ngMaterial' 
+         */
+        angular.module('poiApp', ['ngMaterial', 'ngMessages']);
+    </script> -->
+</body>
+
 </html>

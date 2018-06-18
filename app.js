@@ -1,4 +1,4 @@
-let app = angular.module('poiApp', ['ngRoute', 'LocalStorageModule']);
+let app = angular.module('poiApp', ['ngRoute', 'ngMaterial', 'ngMessages', 'LocalStorageModule']);
 
 app.config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('');

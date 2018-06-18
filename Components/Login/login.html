@@ -1,67 +1,40 @@
-<form class="form" name="loginForm">
-    <center>
-        <table id="loginTable">
-            <thead>
-                <tr>
-                    <th colspan="2">
-                        <h2>Welcome!</h2>
-                        <h3>Please sign in</h3>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
+<center>
+    <div id="loginDiv" md-whiteframe="1">
+        <md-content layout-padding>
+            <center>
+                <h2 class="md-title">Welcome! Please sign in</h2>
+            </center>
+            <div layout-gt-sm="row">
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Username</label>
+                    <input type="text" name="username" ng-model="lgnCtrl.user.username">
+                </md-input-container>
 
-                <tr>
-                    <td>
-                        <label>Username:</label>
-                    </td>
-                    <td>
-                        <input type="text" name="username" ng-model="lgnCtrl.user.username">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>Password: </label>
-                    </td>
-                    <td>
-                        <input type="password" name="password" ng-model="lgnCtrl.user.password">
-                    </td>
-                </tr>
-                <tr>
-                    <td>&nbsp;</td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <center>
-                            <button type="submit" ng-click="lgnCtrl.login()" style="font-size: 16px;">Submit</button>
-                        </center>
-                    </td>
-                </tr>
-                <tr>
-                    <td>&nbsp;</td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <center>
-                            <button ng-click="lgnCtrl.showForgetPassword()" style="font-size: 10px;">Forgot my password</button>
-                        </center>
-                    </td>
-                </tr>
-                <tr>
-                    <td>&nbsp;</td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <p>Still don't have an account? please
-                            <a href="#/signUp">sign up</a>.
-                        </p>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </center>
-
-</form>
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Password</label>
+                    <input type="password" name="password" ng-model="lgnCtrl.user.password">
+                </md-input-container>
+            </div>
+            <div>
+                <center>
+                    <md-button class="md-raised md-primary" type="submit" ng-click="lgnCtrl.login()">Submit</md-button>
+                </center>
+            </div>
+            <div>
+                <center>
+                    <md-button ng-click="lgnCtrl.showForgetPassword()">Forgot my password</md-button>
+                </center>
+            </div>
+            <div>
+                <center>
+                    <p class="md-caption">Still don't have an account? please
+                        <a href="#/signUp">sign up</a>
+                    </p>
+                </center>
+            </div>
+        </md-content>
+    </div>
+</center>
 
 <div ng-show="lgnCtrl.forgetPassword">
     <form class="form" name="retrivePassword">
@@ -92,4 +65,3 @@
         <div class="desc">{{poi.poiInfo.POI_name}}</div>
     </div>
 </div>
-
