@@ -1,5 +1,5 @@
 angular.module('poiApp'/*, ["checklist-model"]*/)
-.controller('registerController',['$http', '$window','$scope','checkTokenValidation',  function($http, $window, $scope, checkTokenValidation){
+.controller('registerController',['$http', '$window','$scope','checkTokenValidation','localStorageService',  function($http, $window, $scope, checkTokenValidation, localStorageService){
     let serverUrl = 'http://localhost:3000/';
 
     self = this;
@@ -31,12 +31,8 @@ angular.module('poiApp'/*, ["checklist-model"]*/)
         self.countries = [];
     })
 
-    $http.get(serverUrl + "Categories")
-    .then(function(response){
-        self.categories = response.data;
-    },function(response){
-        self.categories = [];
-    })
+    self.categories = localStorageService.get('categories');
+
 
     
     $http.get(serverUrl + "Questions")

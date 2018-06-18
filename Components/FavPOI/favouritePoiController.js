@@ -4,6 +4,8 @@ angular.module('poiApp')
     let serverUrl = 'http://localhost:3000/';
     self.loggedIn = checkTokenValidation.check();
 
+    self.categories = localStorageService.get('categories');
+    self.categories.push({Category_id:'5', Category_name:'show all'});
 
     // get favorites from local storage or empty array
     self.savedPOI = localStorageService.get('favouritePOIS');
@@ -25,7 +27,6 @@ angular.module('poiApp')
             if(self.savedPOI[i].poiInfo.POI_id == id)
                 self.savedPOI[i].checked = !self.savedPOI[i].checked;
         }
-
     }
 
     self.showPoiDetails = function(id){

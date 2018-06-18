@@ -25,10 +25,10 @@
     <h1 class="category-header">{{poiCtrl.categories[poiCtrl.chosenCategory].Category_name}}</h1>
   <div id= "img-poi" ng-repeat="poi in poiCtrl.pois | filter: { poiInfo: {Category : poiCtrl.chosenCategory}} | lowercase | filter : poiCtrl.search  as results" class="responsive">
       <div class="gallery">
-        <img src="{{poi.poiInfo.ImgPath}}" height="100" ng-click="lgnCtrl.showPoiDetails(poi.poiInfo.POI_id)">
+        <img src="{{poi.poiInfo.ImgPath}}" height="100" ng-click="poiCtrl.showPoiDetails(poi.poiInfo.POI_id)">
         <div class="desc">{{poi.poiInfo.POI_name}}
             <div ng-show="poiCtrl.loggedIn">
-                <a id="star" ng-click="poiCtrl.addToFavourite(poi.poiInfo.POI_id)" ng-class="{checked: poi.checked}">&#9733;</a>
+                <span id="star" ng-click="poiCtrl.addToFavourite(poi.poiInfo.POI_id)" ng-class="{checked: poi.checked}">&#9733;</span>
                 <button ng-click="poiCtrl.openReviewDialog(poi.poiInfo.POI_id, poi.poiInfo.POI_name)">Review</button>      
               </div>     
         </div>
@@ -42,10 +42,10 @@
     <h1 class="category-header">{{category.Category_name}}</h1>
   <div id= "img-poi" ng-repeat="poi in poiCtrl.pois | filter: { poiInfo: {Category : category.Category_id}} | lowercase | filter : poiCtrl.search as results" class="responsive">
           <div class="gallery">
-            <img src="{{poi.poiInfo.ImgPath}}" height="100" ng-click="lgnCtrl.showPoiDetails(poi.poiInfo.POI_id)">
+            <img src="{{poi.poiInfo.ImgPath}}" height="100" ng-click="poiCtrl.showPoiDetails(poi.poiInfo.POI_id)">
             <div class="desc">{{poi.poiInfo.POI_name}}
                 <div ng-show="poiCtrl.loggedIn">
-                    <a id="star" ng-click="poiCtrl.addToFavourite(poi.poiInfo.POI_id)" ng-class="{checked: poi.checked}">&#9733;</a>
+                  <span id="star" ng-click="poiCtrl.addToFavourite(poi.poiInfo.POI_id)" ng-class="{checked: poi.checked}">&#9733;</span>
                     <button ng-click="poiCtrl.openReviewDialog(poi.poiInfo.POI_id, poi.poiInfo.POI_name)">Review</button>      
                   </div>    
             </div>
@@ -61,10 +61,10 @@
     <div id= "img-poi" ng-repeat="poi in poiCtrl.pois | orderBy : '-poiInfo.POI_avgRank'" class="responsive">
             
       <div class="gallery">
-        <img src="{{poi.poiInfo.ImgPath}}" height="100" ng-click="lgnCtrl.showPoiDetails(poi.poiInfo.POI_id)">
+        <img src="{{poi.poiInfo.ImgPath}}" height="100" ng-click="poiCtrl.showPoiDetails(poi.poiInfo.POI_id)">
               <div class="desc">{{poi.poiInfo.POI_name}}
                 <div ng-show="poiCtrl.loggedIn">
-                    <a id="star" ng-click="poiCtrl.addToFavourite(poi.poiInfo.POI_id)" ng-class="{checked: poi.checked}">&#9733;</a>
+                  <span id="star" ng-click="poiCtrl.addToFavourite(poi.poiInfo.POI_id)" ng-class="{checked: poi.checked}">&#9733;</span>
                     <button ng-click="poiCtrl.openReviewDialog(poi.poiInfo.POI_id, poi.poiInfo.POI_name)">Review</button>      
                 </div>
               </div>
