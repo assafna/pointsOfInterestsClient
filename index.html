@@ -28,12 +28,12 @@
         <dialog id="poiDialog">
             <center>
                 <h1>More Details</h1>
-                <p ng-model="indxCtrl.poiToShow.numOfViewrs">Number of Viewers: {{indxCtrl.poiToShow.numOfViewrs}}</p> 
-                <p ng-model="indxCtrl.poiToShow.description">Description: {{indxCtrl.poiToShow.description}}</p> 
-                <p ng-model="indxCtrl.poiToShow.avgRank">Rank: {{indxCtrl.poiToShow.avgRank}}</p>
+                <p ng-model="poiToShow.poiInfo.NumOfViewers">Number of Viewers: {{poiToShow.poiInfo.NumOfViewers}}</p> 
+                <p ng-model="poiToShow.poiInfo.POI_description">Description: {{poiToShow.poiInfo.POI_description}}</p> 
+                <p ng-model="poiToShow.poiInfo.POI_avgRank">Rank: {{poiToShow.poiInfo.POI_avgRank}}</p>
                 <h3>Reviews</h3> 
-                <div ng-repeat="review in indxCtrl.poiToShow.poiReview">
-                    <p>{{review.POI_reviewDate}}    {{POI_review}}</p>
+                <div ng-repeat="review in poiToShow.poiReview">
+                    <p>{{review.POI_reviewDate}}    {{review.POI_review}}</p>
                 </div>
                 <button ng-click="indxCtrl.closeDialog()">Close</button>
             </center>

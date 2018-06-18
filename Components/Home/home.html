@@ -3,7 +3,7 @@
         <h1><center>Recommend For You</center></h1>
         <div id="img1" ng-repeat="poi in homeCtrl.recomendedPOI" class="responsive">
                 <div class="gallery">
-                    <img src="{{poi.poiInfo.ImgPath}}" height="100" ng-click=homeCtrl.showPoiDetails(poi.poiInfo.POI_id)>
+                  <a target="_blank" href="Components/poiInfo.html"><img src="{{poi.poiInfo.ImgPath}}" height="100"></a>
                   <div class="desc">{{poi.poiInfo.POI_name}}</div>
                 </div>
               </div>
@@ -14,7 +14,7 @@
         <h1><center>Last Saved POI</center></h1>
         <div ng-show="!homeCtrl.noFavorites" id="img2" ng-repeat="poi in homeCtrl.savedPOI" class="responsive">
           <div class="gallery">
-              <img src="{{poi.poiInfo.ImgPath}}" height="100" ng-click=homeCtrl.showPoiDetails(poi.poiInfo.POI_id)>
+            <a target="_blank" href="Components/poiInfo.html"><img src="{{poi.poiInfo.ImgPath}}" height="100"></a>
             <div class="desc">{{poi.poiInfo.POI_name}}</div>
           </div>
         </div>
