@@ -1,64 +1,67 @@
 <html ng-app="poiApp">
     <head>
+        <!-- css -->
         <link rel="stylesheet" type-"text/css" href="style.css" />
         <link rel="stylesheet" type-"text/css" href="Components/POI/poiStyle.css" />
         <link rel="stylesheet" type-"text/css" href="Components/home/homeStyle.css" />
         <link rel="stylesheet" type-"text/css" href="Components/FavPOI/fpoiStyle.css" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
         <title>Points of Interests</title>
-
     </head>
     <body ng-controller="indexController as indxCtrl">
+        <!-- navigation bar -->
         <div id="navbar">
             <a ng-show="checkLogin()" class="active" href="#/home">Home</a>
             <a ng-show="!checkLogin()" href="#/login">Login</a>
-            <a ng-show="!checkLogin()" href="#/sign in">Sign in</a>
+            <a ng-show="!checkLogin()" href="#/signUp">Sign Up</a>
             <a href="#/poi">Points of Intersets</a>
             <a ng-show="checkLogin()" href="#/favPoi">Favourite POI</a>
             <a href="#/about">About</a>
             <div class="topnav-right">
-                <a ng-model="userName">hello {{userName}}</a>
+                <a ng-model="userName">Hello {{userName}}</a>
                 <a ng-show="checkLogin()" ng-click="logout()">Logout</a>
             </div>
         </div>
-
         <!-- <section id="top-picture"></section> -->
         <h1><center>Rio de Janeiro</center></h1>
-
+        <!-- review dialog -->
         <dialog id="poiDialog">
             <center>
                 <h1>More Details</h1>
-                <p ng-model="indxCtrl.poiToShow.numOfViewrs">Number of viewers: {{indxCtrl.poiToShow.numOfViewrs}}</p> 
+                <p ng-model="indxCtrl.poiToShow.numOfViewrs">Number of Viewers: {{indxCtrl.poiToShow.numOfViewrs}}</p> 
                 <p ng-model="indxCtrl.poiToShow.description">Description: {{indxCtrl.poiToShow.description}}</p> 
-                <p ng-model="indxCtrl.poiToShow.avgRank">rate: {{indxCtrl.poiToShow.avgRank}}</p>
+                <p ng-model="indxCtrl.poiToShow.avgRank">Rank: {{indxCtrl.poiToShow.avgRank}}</p>
                 <h3>Reviews</h3> 
                 <div ng-repeat="review in indxCtrl.poiToShow.poiReview">
                     <p>{{review.POI_reviewDate}}    {{POI_review}}</p>
                 </div>
-                <button ng-click="indxCtrl.closeDialog()">close</button>
+                <button ng-click="indxCtrl.closeDialog()">Close</button>
             </center>
         </dialog>
-
+        
         <!-- location of changed content -->
         <div ng-view onload="indxCtrl.checkLogin()"></div>
 
- 
-
+        <!-- loaded scripts -->
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
        
         <script src="app.js"></script>
         <script src="indexController.js"></script>
+
         <script src="Services/setHeader-service.js"></script>
         <script src="Services/favouriteList-service.js"></script>
         <script src="Services/poiDetails-service.js"></script>
+
         <script src="Components/Login/loginController.js"></script>
         <script src="Components/Home/homeController.js"></script>
         <script src="Components/About/aboutcontroller.js"></script>
         <script src="Components/Register/registerController.js"></script>
         <script src="Components/POI/poiController.js"></script>
         <script src="Components/FavPOI/favouritePoiController.js"></script> 
+
         <script src="node_modules/angular-local-storage/dist/angular-local-storage.min.js"></script>
+
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     </body>

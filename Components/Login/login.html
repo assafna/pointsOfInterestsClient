@@ -1,50 +1,106 @@
-<form class="form" name = "loginForm">
-    <h2>Please enter Username and Password</h2>
-    <label>Username: </label>
-    <input type = "text" name = "username" ng-model = "lgnCtrl.user.username">
-    <br><br>
-    <label>Password: </label>
-    <input type = "password" name = "password" ng-model = "lgnCtrl.user.password">
-    <br><br>
-    <button type = "submit" ng-click = "lgnCtrl.login()">Submit</button>
-    <button ng-click="lgnCtrl.showForgetPassword()">Forgot my password</button>
-    <br><br>
-    <p>Still don't have an account? please <a href="#/sign in">sign in</a></p>
+<form class="form" name="loginForm">
+    <center>
+        <table id="loginTable">
+            <thead>
+                <tr>
+                    <th colspan="2">
+                        <h2>Welcome!</h2>
+                        <h3>Please sign in</h3>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td>
+                        <label>Username:</label>
+                    </td>
+                    <td>
+                        <input type="text" name="username" ng-model="lgnCtrl.user.username">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Password: </label>
+                    </td>
+                    <td>
+                        <input type="password" name="password" ng-model="lgnCtrl.user.password">
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <center>
+                            <button type="submit" ng-click="lgnCtrl.login()" style="font-size: 16px;">Submit</button>
+                        </center>
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <center>
+                            <button ng-click="lgnCtrl.showForgetPassword()" style="font-size: 10px;">Forgot my password</button>
+                        </center>
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p>Still don't have an account? please
+                            <a href="#/signUp">sign up</a>.
+                        </p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </center>
+
 </form>
 
 <div ng-show="lgnCtrl.forgetPassword">
-    <form class="form" name = "retrivePassword">
+    <form class="form" name="retrivePassword">
         <h2>Please enter your varification details</h2>
         <label>Username: </label>
-        <input type = "text" name = "username" ng-model = "lgnCtrl.data.username">
-        <br><br>
+        <input type="text" name="username" ng-model="lgnCtrl.data.username">
+        <br>
+        <br>
         <label>Verification Question:</label>
-        <select name = "ques1" ng-model="lgnCtrl.data.questId" ng-options="question.Question_id[0] as question.Question_name for question in lgnCtrl.questions"></select>
-        <br><br>
+        <select name="ques1" ng-model="lgnCtrl.data.questId" ng-options="question.Question_id[0] as question.Question_name for question in lgnCtrl.questions"></select>
+        <br>
+        <br>
         <label>Your Answer: </label>
-        <input type = "text" name = "answer" ng-model = "lgnCtrl.data.ans">
-        <br><br>
+        <input type="text" name="answer" ng-model="lgnCtrl.data.ans">
+        <br>
+        <br>
         <button ng-click="lgnCtrl.retrivePassword()">Check my password</button>
         <span ng-model=lgnCtrl.user.password ng-show=lgnCtrl.user.correctPassword>Your password is: {{lgnCtrl.user.password}}</span>
     </form>
 </div>
 
-<h1><center>Explore!</center></h1>
+<h1>
+    <center>Explore!</center>
+</h1>
 <div ng-repeat="poi in lgnCtrl.randPopularPOI" class="responsive">
-        <div class="gallery">
-            <img src="{{poi.poiInfo.ImgPath}}" height="100" ng-click="lgnCtrl.showPoiDetails(poi.poiInfo.POI_id)">
-          <div class="desc">{{poi.poiInfo.POI_name}}</div>
-        </div>
-      </div>
+    <div class="gallery">
+        <img src="{{poi.poiInfo.ImgPath}}" height="100" ng-click="lgnCtrl.showPoiDetails(poi.poiInfo.POI_id)">
+        <div class="desc">{{poi.poiInfo.POI_name}}</div>
+    </div>
+</div>
 
-      <dialog id="poiDialog" ng-model="lgnCtrl.poi">
-        <center>
-            <h1>More Details</h1>
-            <p ng-model="lgnCtrl.poi.poiInfo.NumOfViewers">Number of viewers: {{lgnCtrl.poi.poiInfo.NumOfViewers}}</p> 
-            <p ng-model="lgnCtrl.poi.poiInfo.POI_description">Description: {{lgnCtrl.poi.poiInfo.POI_description}}</p> 
-            <p>rate: {{lgnCtrl.poi.poiInfo.POI_avgRank}}</p>
-            <h3>Reviews</h3> 
+<dialog id="poiDialog" ng-model="lgnCtrl.poi">
+    <center>
+        <h1>More Details</h1>
+        <p ng-model="lgnCtrl.poi.poiInfo.NumOfViewers">Number of viewers: {{lgnCtrl.poi.poiInfo.NumOfViewers}}</p>
+        <p ng-model="lgnCtrl.poi.poiInfo.POI_description">Description: {{lgnCtrl.poi.poiInfo.POI_description}}</p>
+        <p>rate: {{lgnCtrl.poi.poiInfo.POI_avgRank}}</p>
+        <h3>Reviews</h3>
 
-            <button ng-click="lgnCtrl.closeDialog()">close</button>
-        </center>
-    </dialog>
+        <button ng-click="lgnCtrl.closeDialog()">close</button>
+    </center>
+</dialog>

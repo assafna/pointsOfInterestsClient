@@ -1,104 +1,199 @@
-<h1>Register</h1> 
+<form class="form" name="registerForm">
+    <center>
+        <table id="registerTable">
+            <thead>
+                <tr>
+                    <th colspan="3">
+                        <h2>Register</h2>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <label>First Name:</label>
+                    </td>
+                    <td>
+                        <input type="text" name="firstName" placeholder="Enter First Name " ng-model="regCtrl.user.Firstname" required ng-minlength="2">
+                    </td>
+                    <td>
+                        <span class="error" ng-show="registerForm.firstName.$error.required">
+                            This is a required field
+                        </span>
+                        <span class="error" ng-show="registerForm.firstName.$error.minlength">
+                            Minimum length required is 2
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Last Name:</label>
+                    </td>
+                    <td>
+                        <input type="text" name="lastName" placeholder="Enter Last Name " ng-model="regCtrl.user.Lastname" required ng-minlength="2">
 
-<form name="registerForm" >
-    <label>First Name:</label>
-    <input type = "text" name = "firstName" placeholder = "Enter First Name " ng-model = "regCtrl.user.Firstname" 
-    required ng-minlength="2">
-    <span class="error" ng-show="registerForm.firstName.$error.required">
-        This is a required field
-    </span>
-    <span  class="error" ng-show="registerForm.firstName.$error.minlength">
-        Minimum length required is 2
-    </span>
-    <br><br>
+                    </td>
+                    <td>
+                        <span class="error" ng-show="registerForm.lastName.$error.required">
+                            This is a required field
+                        </span>
+                        <span class="error" ng-show="registerForm.lastName.$error.minlength">
+                            Minimum length required is 2
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Country:</label>
+                    </td>
+                    <td>
+                        <select name="country" ng-model="regCtrl.user.Country" ng-options="country.Country_id[0] as country.Country_name for country in regCtrl.countries"
+                            required style="width: 166px"></select>
 
-    <label>Last Name:</label>
-    <input type = "text" name = "lastName" placeholder = "Enter Last Name " ng-model = "regCtrl.user.Lastname" 
-    required ng-minlength="2">
-    <span class="error" ng-show="registerForm.lastName.$error.required">
-        This is a required field
-    </span>
-    <span class="error" ng-show="registerForm.lastName.$error.minlength">
-        Minimum length required is 2
-    </span>
-    <br><br>
+                    </td>
+                    <td>
+                        <span class="error" ng-show="registerForm.country.$error.required">
+                            This is a required field
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>City:</label>
+                    </td>
+                    <td>
+                        <input type="text" name="city" placeholder="Enter City " ng-model="regCtrl.user.City" required ng-minlength="2">
 
-    <label>Country:</label>
-    <select name = "country" ng-model="regCtrl.user.Country" ng-options="country.Country_id[0] as country.Country_name for country in regCtrl.countries" required></select>
-    <span class="error" ng-show="registerForm.country.$error.required">
-        This is a required field
-    </span>
-    <br><br>
+                    </td>
+                    <td>
+                        <span class="error" ng-show="registerForm.city.$error.required">
+                            This is a required field
+                        </span>
+                        <span class="error" ng-show="registerForm.city.$error.minlength">
+                            Minimum length required is 2
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Email:</label>
+                    </td>
+                    <td>
+                        <input type="email" name="email" placeholder="Enter Email " ng-model="regCtrl.user.Email" ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/"
+                            required>
 
-    <label>City:</label>
-    <input type = "text" name = "city" placeholder = "Enter City " ng-model = "regCtrl.user.City" 
-    required ng-minlength="2"> 
-    <span class="error" ng-show="registerForm.city.$error.required">
-        This is a required field
-    </span>
-    <span class="error" ng-show="registerForm.city.$error.minlength">
-        Minimum length required is 2
-    </span>
-    <br><br>
+                    </td>
+                    <td>
+                        <span class="error" ng-show="registerForm.email.$error.required">
+                            This is a required field
+                        </span>
+                        <span class="error" ng-show="registerForm.email.$error.pattern">
+                            Invalid emil address
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Favorite Categories:</label>
+                    </td>
+                    <td>
+                        <label ng-repeat="category in regCtrl.categories | filter: regCtrl.categoryFilter">
+                            <!-- <input type="checkbox"  checklist-model="regCtrl.chosenCategories" checklist-value="category.Category_id"> {{category.Category_name}} -->
+                            <input type="checkbox" value="{{category.Category_id}}" ng-model="category.checked"> {{category.Category_name}}
+                            <br>
+                        </label>
+                    </td>
+                    <td>
+                        <span class="error" ng-show="regCtrl.lessThen2Categories">
+                            Please choose at least 2 categories
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>1st Verification Question:</label>
+                    </td>
+                    <td>
+                        <select name="ques1" ng-model="regCtrl.user.QuestId1" ng-options="question.Question_id[0] as question.Question_name for question in regCtrl.questions"
+                            required style="width: 166px"></select>
+                    </td>
+                    <td>
+                        <span class="error" ng-show="registerForm.ques1.$error.required">
+                            This is a required field
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>1st Verification Answer:</label>
+                    </td>
+                    <td>
+                        <input type="text" name="ans1" placeholder="Enter Answer " ng-model="regCtrl.user.Ans1" required>
+                    </td>
+                    <td>
+                        <span class="error" ng-show="registerForm.ans1.$error.required">
+                            This is a required field
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>2nd Varification Question:</label>
+                    </td>
+                    <td>
+                        <select name="ques2" ng-model="regCtrl.user.QuestId2" ng-options="question.Question_id[0] as question.Question_name for question in regCtrl.questions | filter : regCtrl.quesFilter"
+                            required style="width: 166px"></select>
 
-    <label>Email:</label>
-    <input type = "email" name = "email" placeholder = "Enter Email " ng-model = "regCtrl.user.Email" ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" required>
-    <span class="error" ng-show="registerForm.email.$error.required">
-        This is a required field
-    </span>
-    <span class="error" ng-show="registerForm.email.$error.pattern">
-        Invalid emil address
-    </span>
-    <br><br>
+                    </td>
+                    <td>
+                        <span class="error" ng-show="registerForm.ques2.$error.required">
+                            This is a required field
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>2nd Varification Answer:</label>
+                    </td>
+                    <td>
+                        <input type="text" name="ans2" placeholder="Enter Answer " ng-model="regCtrl.user.Ans2" required>
 
-    <label>Favorite Categories:</label>
-    <label ng-repeat="category in regCtrl.categories | filter: regCtrl.categoryFilter">
-        <!-- <input type="checkbox"  checklist-model="regCtrl.chosenCategories" checklist-value="category.Category_id"> {{category.Category_name}} -->
-        <input type="checkbox" value="{{category.Category_id}}" ng-model="category.checked"> {{category.Category_name}}
-    </label>
-    <span class="error" ng-show="regCtrl.lessThen2Categories">
-        Please choose at least 2 categories
-    </span>
-    <br><br>
-
-    <label>First Verification Question:</label>
-    <select name = "ques1" ng-model="regCtrl.user.QuestId1" ng-options="question.Question_id[0] as question.Question_name for question in regCtrl.questions" required></select>
-    <span class="error" ng-show="registerForm.ques1.$error.required">
-        This is a required field
-    </span>
-    <br><br>
-
-    <label>Answer for Your First Question:</label>
-    <input type = "text" name = "ans1" placeholder = "Enter Answer " ng-model = "regCtrl.user.Ans1" required>
-    <span class="error" ng-show="registerForm.ans1.$error.required">
-        This is a required field
-    </span>
-    <br><br>
-
-    <label>Second Varification Question:</label>
-    <select name = "ques2" ng-model="regCtrl.user.QuestId2" ng-options="question.Question_id[0] as question.Question_name for question in regCtrl.questions | filter : regCtrl.quesFilter" required></select>
-    <span class="error" ng-show="registerForm.ques2.$error.required">
-        This is a required field
-    </span>
-    <br><br>
-
-    <label>Answer for Your Second Question</label>
-    <input type = "text" name = "ans2" placeholder = "Enter Answer " ng-model = "regCtrl.user.Ans2" required>
-    <span class="error" ng-show="registerForm.ans2.$error.required">
-        This is a required field
-    </span>
-
-    <br><br>
-    <button type="submit" ng-click="regCtrl.register()" ng-disabled="registerForm.$invalid">Register</button>
+                    </td>
+                    <td>
+                        <span class="error" ng-show="registerForm.ans2.$error.required">
+                            This is a required field
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <center>
+                            <button type="submit" ng-click="regCtrl.register()" ng-disabled="registerForm.$invalid">Register</button>
+                        </center>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </center>
 
     <dialog id="registerDialog" ng-model="regCtrl.register">
         <center>
             <h1>Registration successfully completed!</h1>
-            <p>Your username is: {{regCtrl.username}}</p> 
-            <p>Your password is: {{regCtrl.password}}</p> 
+            <p>Your username is: {{regCtrl.username}}</p>
+            <p>Your password is: {{regCtrl.password}}</p>
             <button ng-click="regCtrl.closeDialog()">close</button>
         </center>
     </dialog>
 </form>
-
-
