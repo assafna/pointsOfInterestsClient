@@ -62,13 +62,18 @@ angular.module('poiApp')
                 $window.location.href = '#/login';
             }
 
-            // checks if a user is logged in
-            $scope.checkLogin = function () {
-                $scope.loggedIn = checkTokenValidation.check();
-                $scope.userName = localStorageService.get('username');
-                if ($scope.loggedIn)
-                    setHeadersToken.set(localStorageService.get('token'));
-                return $scope.loggedIn;
+         $scope.checkLogin = function(){
+            $scope.loggedIn = checkTokenValidation.check();
+            $scope.userName = localStorageService.get('username');
+            return $scope.loggedIn;
+         }
+         
+         $scope.checkToken = function(){
+            $scope.loggedIn = checkTokenValidation.check();
+            $scope.userName = localStorageService.get('username');
+            if($scope.loggedIn)
+                setHeadersToken.set(localStorageService.get('token'));
+            return $scope.loggedIn;
 
             }
 

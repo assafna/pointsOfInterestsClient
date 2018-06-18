@@ -13,7 +13,7 @@
         <div id="navbar">
             <a ng-show="checkLogin()" class="active" href="#/home">Home</a>
             <a ng-show="!checkLogin()" href="#/login">Login</a>
-            <a ng-show="!checkLogin()" href="#/signUp">Sign Up</a>
+            <a ng-show="!checkLogin()" href="#/signUp">Sign in</a>
             <a href="#/poi">Points of Intersets</a>
             <a ng-show="checkLogin()" href="#/favPoi">Favourite POI</a>
             <a href="#/about">About</a>
@@ -40,7 +40,7 @@
         </dialog>
         
         <!-- location of changed content -->
-        <div ng-view onload="indxCtrl.checkLogin()"></div>
+        <div ng-view onload="indxCtrl.checkToken()"></div>
 
         <!-- loaded scripts -->
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
