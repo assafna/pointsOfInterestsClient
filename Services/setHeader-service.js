@@ -7,8 +7,8 @@ function($http, localStorageService, $window){
     self.addUser = function(token, username){
         localStorageService.set('token', token);
         localStorageService.set('username', username);
-        //localStorageService.set('timeToExpiered', Date.now() + 86400000);
-       localStorageService.set('timeToExpiered', Date.now() + 10000);
+        localStorageService.set('timeToExpiered', Date.now() + 86400000);
+       //localStorageService.set('timeToExpiered', Date.now() + 10000);
 
        addFavouritePOItoLocalStorage();
     }
@@ -18,7 +18,7 @@ function($http, localStorageService, $window){
         localStorageService.remove('username');
         localStorageService.remove('timeToExpiered');
         localStorageService.remove('favouritePOIS');
-        localStorageService.set('username', 'geust');
+        localStorageService.set('username', 'guest');
     }
 
     function addFavouritePOItoLocalStorage(){
@@ -69,7 +69,6 @@ function($http, localStorageService, initUserInLocalStorage, $window){
             }
         }
         else
-            $window.location.href = '#/login';
             return false;
 
         

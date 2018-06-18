@@ -6,6 +6,8 @@ angular.module('poiApp')
     self.chosenCategory = 5;
     self.loggedIn = $scope.indxCtrl.loggedIn;
     //self.loggedIn = checkTokenValidation.check();
+    if(self.loggedIn)
+        self.numOfFavorite =  localStorageService.get('favouritePOIS').length;
 
 
 
@@ -41,9 +43,11 @@ angular.module('poiApp')
     self.addToFavourite = function(id){
         if(favouriteList.contains(id)){
             favouriteList.remove(id);
+            self.numOfFavorite--;
         }
         else{
             favouriteList.add(id);
+            self.numOfFavorite++;
         }
         checkOrUncheck(id);
     }

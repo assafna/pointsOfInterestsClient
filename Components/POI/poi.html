@@ -3,6 +3,12 @@
   <select ng-model="poiCtrl.chosenCategory" ng-options="category.Category_id[0] as category.Category_name for category in poiCtrl.categories"></select>
   <label>Sort By Rank:</label>
   <input type="checkbox" ng-model="poiCtrl.sortByRate">
+  <!-- <a class="red" ng-click="poiCtrl.addToFavourite(poi.poiInfo.POI_id)">&#10084;</a>
+  <label ng-model="poiCtrl.numOfFavorite">{{poiCtrl.numOfFavorite}}</label> -->
+  <a href="#/favPoi" class="btn btn-info btn-lg">
+      <span ng-model="poiCtrl.numOfFavorite" class="glyphicon glyphicon-heart"></span> {{poiCtrl.numOfFavorite}}
+    </a>
+
   <br><br>
 </div>
 

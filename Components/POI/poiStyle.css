@@ -23,6 +23,16 @@
     font-size: 17px;
 }
 
+#star{
+    font-size:30px;
+}
+
+
 .checked{
     color: rgb(255, 203, 0);
   }
+
+.red{
+    color: red;
+    font-size:50px;
+}
