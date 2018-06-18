@@ -61,6 +61,12 @@ angular.module('poiApp')
          $scope.checkLogin = function(){
             $scope.loggedIn = checkTokenValidation.check();
             $scope.userName = localStorageService.get('username');
+            return $scope.loggedIn;
+         }
+         
+         $scope.checkToken = function(){
+            $scope.loggedIn = checkTokenValidation.check();
+            $scope.userName = localStorageService.get('username');
             if($scope.loggedIn)
                 setHeadersToken.set(localStorageService.get('token'));
             return $scope.loggedIn;

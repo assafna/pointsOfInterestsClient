@@ -22,7 +22,7 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
             templateUrl: 'Components/About/about.html',
             controller : 'aboutController as abtCtrl'
         })
-        .when('/sign in', {
+        .when('/sign up', {
             templateUrl: 'Components/Register/register.html',
             controller : 'registerController as regCtrl'
         })
