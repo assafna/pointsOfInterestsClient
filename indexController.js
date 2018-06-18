@@ -1,6 +1,6 @@
 angular.module('poiApp')
-    .controller('indexController', ['setHeadersToken', 'localStorageService', '$window', 'poiDetails', '$http', 'checkTokenValidation', 'initUserInLocalStorage', '$scope',
-        function (setHeadersToken, localStorageService, $window, poiDetails, $http, checkTokenValidation, initUserInLocalStorage, $scope) {
+    .controller('indexController', ['setHeadersToken', 'localStorageService', '$window', 'poiDetails', '$http', 'checkTokenValidation', 'initUserInLocalStorage', '$scope', 'favouriteList',
+        function (setHeadersToken, localStorageService, $window, poiDetails, $http, checkTokenValidation, initUserInLocalStorage, $scope, favouriteList) {
 
             let serverUrl = 'http://localhost:3000/';
 
@@ -20,27 +20,27 @@ angular.module('poiApp')
             // retrieve relevant poi from local storage according to id
             // increase the views of the poi by one
             self.showPoiDetails = function (id) {
-                let pois = localStorageService.get('allPOI')
-                // let pois = [];
-                // $http.get(serverUrl + "poi/AllPointsOfInterst")
-                // .then(function(response){
-                //     pois = response.data;
-                // },function(response){
-                //     pois = [];
-                // }) 
-                for (let i = 0; i < pois.length; i++) {
-                    if (pois[i].poiInfo.POI_id == id) {
-                        $scope.poiToShow = pois[i];
-                        // $scope.poiToShow.description = pois[i].poiInfo.POI_description;
-                        // $scope.poiToShow.avgRank = pois[i].poiInfo.POI_angRank;
-                        // $scope.poiToShow.numOfViewrs = pois[i].poiInfo.NumOfViewers;
-                        // $scope.poiToShow.reviews = pois[i].poiInfo.poiReview;
-                        break;
+                //let pois = localStorageService.get('allPOI')
+                let pois = [];
+                $http.get(serverUrl + "poi/AllPointsOfInterst")
+                .then(function(response){
+                    pois = response.data;
+                    for (let i = 0; i < pois.length; i++) {
+                        if (pois[i].poiInfo.POI_id == id) {
+                            $scope.poiToShow = pois[i];
+                            if(favouriteList.contains(id))
+                                $scope.poiToShow.checked = true;
+
+                            break;
+                        }
                     }
-                }
-                document.getElementById("poiDialog").showModal();
+                    document.getElementById("poiDialog").showModal();
+                },function(response){
+                    pois = [];
+                }) 
+          
                 //add 1 to num of viewers
-                $http.put(serverUrl + "poi/updateNumberOfViewers", { poiId: $scope.poiToShow.poiInfo.POI_id })
+                $http.put(serverUrl + "poi/updateNumberOfViewers", { poiId: id })
                     .then(function (response) {
                         console.log(response)
                     }, function (response) {
@@ -52,6 +52,7 @@ angular.module('poiApp')
             // closing the dialog of a poi
             self.closeDialog = function () {
                 document.getElementById("poiDialog").close();
+                $window.location.reload();
             }
 
             // logging out of the system by deleting him from the local storage
@@ -81,6 +82,19 @@ angular.module('poiApp')
 
             }
 
+            $scope.addToFavourite = function(id){
+                if(favouriteList.contains(id)){
+                    favouriteList.remove(id);
+                    $scope.poiToShow.checked = false;
+                }
+                else{
+                    favouriteList.add(id);
+                    $scope.poiToShow.checked = true;
+                }          
+              }
+        
         }
+
+        
     ]
 );

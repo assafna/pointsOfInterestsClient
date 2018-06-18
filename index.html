@@ -27,13 +27,14 @@
         <!-- review dialog -->
         <dialog id="poiDialog">
             <center>
-                <h1>More Details</h1>
+                <h1 ng-model="poiToShow.poiInfo.POI_name">{{poiToShow.poiInfo.POI_name}}</h1>
+                <span ng-show="checkLogin()" id="star" ng-click="addToFavourite(poiToShow.poiInfo.POI_id)" ng-class="{checked: poiToShow.checked}">&#9733;</span>
                 <p ng-model="poiToShow.poiInfo.NumOfViewers">Number of Viewers: {{poiToShow.poiInfo.NumOfViewers}}</p> 
                 <p ng-model="poiToShow.poiInfo.POI_description">Description: {{poiToShow.poiInfo.POI_description}}</p> 
-                <p ng-model="poiToShow.poiInfo.POI_avgRank">Rank: {{poiToShow.poiInfo.POI_avgRank}}</p>
+                <p ng-model="poiToShow.poiInfo.POI_avgRank">Rank: {{poiToShow.poiInfo.POI_avgRank * 20}}%</p>
                 <h3>Reviews</h3> 
                 <div ng-repeat="review in poiToShow.poiReview">
-                    <p>{{review.POI_reviewDate}}    {{review.POI_review}}</p>
+                    <p>{{review.POI_reviewDate}}  {{review.POI_review}}</p>
                 </div>
                 <button ng-click="indxCtrl.closeDialog()">Close</button>
             </center>
