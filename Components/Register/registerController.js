@@ -3,7 +3,7 @@ angular.module('poiApp'/*, ["checklist-model"]*/)
     let serverUrl = 'http://localhost:3000/';
 
     self = this;
-    self.loggedIn = checkTokenValidation.check();
+    //self.loggedIn = checkTokenValidation.check();
 
 
     self.chosenCategories = [];

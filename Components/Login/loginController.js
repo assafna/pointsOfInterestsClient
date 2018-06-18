@@ -1,5 +1,6 @@
 angular.module('poiApp')
-.controller('loginController', ['setHeadersToken', '$http', '$window', 'localStorageService', '$scope', function(setHeadersToken, $http, $window, localStorageService, $scope) {
+.controller('loginController', ['setHeadersToken', '$http', '$window', 'localStorageService', '$scope','initUserInLocalStorage', 'checkTokenValidation',
+ function(setHeadersToken, $http, $window, localStorageService, $scope, initUserInLocalStorage, checkTokenValidation) {
     self = this;
 
     let serverUrl = 'http://localhost:3000/';
@@ -9,6 +10,8 @@ angular.module('poiApp')
         isAdmin: self.isAdmin
     }
     self.forgetPassword = false;
+   // $scope.indxCtrl.loggedIn = checkTokenValidation.check();
+    //$scope.indxCtrl = localStorageService.get('username');
 
     self.data = {}
 
@@ -36,35 +39,14 @@ angular.module('poiApp')
                 else{
                     self.login.content = response.data.token;
                     setHeadersToken.set(self.login.content);
-                    localStorageService.set('token', self.login.content);
+                    initUserInLocalStorage.addUser(self.login.content, self.user.username);
                     $scope.indxCtrl.userName = self.user.username;
                     $scope.indxCtrl.loggedIn = true;
-                    addFavouritePOItoLocalStorage();
                 }
             }, function (response) {
                 // second function handles error
                 self.login.content = "Something went wrong!";
             });
-    }
-
-    function addFavouritePOItoLocalStorage(){
-        try{
-            $http.get(serverUrl + "poi/validation/FavoritePointsOfInterest")
-            .then(function (response) {
-                if(response.data.message == "no Favorite Points Of Interest")
-                    localStorageService.set('favouritePOIS', []);
-                else
-                    localStorageService.set('favouritePOIS', response.data);
-                $window.location.href = '#/home';
-            }, function(response){
-                self.login.content = "Something went wrong!"
-            })
-        }
-        catch(err){
-            localStorageService.set('favouritePOIS', []);
-            $window.location.href = '#/home';
-        }
-
     }
 
     self.retrivePassword = function(){

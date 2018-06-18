@@ -82,8 +82,9 @@ angular.module('poiApp')
         console.log(favPoisIdsByOrder)
         $http.put(serverUrl + "poi/validation/updateFavoritePointsOfInterest", {poisId : favPoisIdsByOrder})
         .then(function(response){
-            console.log(response);
+            alert("Your list saved seccussfully!")
         },function(response){
+            alert("Something went wrong :(")
             console.log(response);
         })
     }

@@ -1,12 +1,14 @@
 angular.module('poiApp')
-    .controller('indexController',['setHeadersToken', 'localStorageService', '$window', 'poiDetails','$http','checkTokenValidation', function (setHeadersToken, localStorageService, $window, poiDetails, $http, checkTokenValidation) {
+    .controller('indexController',['setHeadersToken', 'localStorageService', '$window', 'poiDetails','$http','checkTokenValidation', 'initUserInLocalStorage',
+     function (setHeadersToken, localStorageService, $window, poiDetails, $http, checkTokenValidation, initUserInLocalStorage) {
 
         let serverUrl = 'http://localhost:3000/';
 
         self = this;
-        self.userName = "guest";
+        self.userName = localStorageService.get('username');
+        self.poiToShow = {};
         self.loggedIn = checkTokenValidation.check();
-        self.poiToShow = {}
+
 
         $http.get(serverUrl + "poi/AllPointsOfInterst")
         .then(function(response){
@@ -49,13 +51,19 @@ angular.module('poiApp')
         }
 
          self.logout = function(){
-             self.loggedIn = false;
-             localStorageService.remove('token');
-             localStorageService.remove('favouritePOIS');
-             $window.location.href = '#/login';
-
+            initUserInLocalStorage.deleteUser();
+            self.loggedIn = false;
+            self.userName = localStorageService.get('username');
+            $window.location.href = '#/login';
+            
          }
 
+         self.checkLogin = function(){
+            self.loggedIn = checkTokenValidation.check();
+            self.userName = localStorageService.get('username');
+            if(self.loggedIn)
+                setHeadersToken.set(localStorageService.get('token'));
 
+         }
 
     }]);
