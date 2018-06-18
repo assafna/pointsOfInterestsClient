@@ -10,12 +10,19 @@ angular.module('poiApp')
 
             // get all pois from the server, insert into local storage
             $http.get(serverUrl + "poi/AllPointsOfInterst")
-                .then(function (response) {
-                    localStorageService.set('allPOI', response.data);
-                }, function (response) {
-                    self.pois = [];
-                    console.log(response);
-                })
+            .then(function (response) {
+                localStorageService.set('allPOI', response.data);
+            }, function (response) {
+                self.pois = [];
+                console.log(response);
+            })
+            
+            $http.get(serverUrl + "Categories")
+            .then(function(response){
+                localStorageService.set('categories', response.data);
+            },function(response){
+                self.categories = [];
+            })
 
             // retrieve relevant poi from local storage according to id
             // increase the views of the poi by one

@@ -27,15 +27,9 @@ angular.module('poiApp')
         review : ""
     }
 
-    self.rankOptions = [1, 2, 3, 4, 5];
+    self.categories = localStorageService.get('categories');
+    self.categories.push({Category_id:'5', Category_name:'show all'});
 
-    $http.get(serverUrl + "Categories")
-    .then(function(response){
-        self.categories = response.data;
-        self.categories.push({Category_id:'5', Category_name:'show all'});
-    },function(response){
-        self.categories = [];
-    })
 
     self.categoryFilter = function(category){
         return category.Category_id != 5 && category.Category_id != 0;
