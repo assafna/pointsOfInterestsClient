@@ -62,49 +62,61 @@
             <div ng-repeat="review in poiToShow.poiReview">
                 <p>{{review.POI_reviewDate}} {{review.POI_review}}</p>
             </div>
-        </div>
-        <!-- <section id="top-picture"></section> -->
-        <h1><center>Rio de Janeiro</center></h1>
-        <!-- review dialog -->
-        <dialog id="poiDialog">
-            <center>
-                <h1 ng-model="poiToShow.poiInfo.POI_name">{{poiToShow.poiInfo.POI_name}}</h1>
-                <span ng-show="checkLogin()" id="star" ng-click="addToFavourite(poiToShow.poiInfo.POI_id)" ng-class="{checked: poiToShow.checked}">&#9733;</span>
-                <p ng-model="poiToShow.poiInfo.NumOfViewers">Number of Viewers: {{poiToShow.poiInfo.NumOfViewers}}</p> 
-                <p ng-model="poiToShow.poiInfo.POI_description">Description: {{poiToShow.poiInfo.POI_description}}</p> 
-                <p ng-model="poiToShow.poiInfo.POI_avgRank">Rank: {{poiToShow.poiInfo.POI_avgRank * 20}}%</p>
-                <h3>Reviews</h3> 
-                <div ng-repeat="review in poiToShow.poiReview">
-                    <p>{{review.POI_reviewDate}}  {{review.POI_review}}</p>
-                </div>
-                <button ng-click="indxCtrl.closeDialog()">Close</button>
-            </center>
-        </dialog>
-        
-        <!-- location of changed content -->
-        <div ng-view onload="indxCtrl.checkToken()"></div>
+            </div>
+            <!-- <section id="top-picture"></section> -->
+            <h1>
+                <center>Rio de Janeiro</center>
+            </h1>
+            <!-- review dialog -->
+            <dialog id="poiDialog">
+                <center>
+                    <h1 ng-model="poiToShow.poiInfo.POI_name">{{poiToShow.poiInfo.POI_name}}</h1>
+                    <span ng-show="checkLogin()" id="star" ng-click="addToFavourite(poiToShow.poiInfo.POI_id)" ng-class="{checked: poiToShow.checked}">&#9733;</span>
+                    <p ng-model="poiToShow.poiInfo.NumOfViewers">Number of Viewers: {{poiToShow.poiInfo.NumOfViewers}}</p>
+                    <p ng-model="poiToShow.poiInfo.POI_description">Description: {{poiToShow.poiInfo.POI_description}}</p>
+                    <p ng-model="poiToShow.poiInfo.POI_avgRank">Rank: {{poiToShow.poiInfo.POI_avgRank * 20}}%</p>
+                    <h3>Reviews</h3>
+                    <div ng-repeat="review in poiToShow.poiReview">
+                        <p>{{review.POI_reviewDate}} {{review.POI_review}}</p>
+                    </div>
+                    <button ng-click="indxCtrl.closeDialog()">Close</button>
+                </center>
+            </dialog>
 
-        <!-- loaded scripts -->
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
-       
-        <script src="app.js"></script>
-        <script src="indexController.js"></script>
+            <!-- location of changed content -->
+            <div ng-view onload="indxCtrl.checkToken()"></div>
 
-        <script src="Services/setHeader-service.js"></script>
-        <script src="Services/favouriteList-service.js"></script>
-        <script src="Services/poiDetails-service.js"></script>
+            <!-- loaded scripts -->
+            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
 
-        <script src="Components/Login/loginController.js"></script>
-        <script src="Components/Home/homeController.js"></script>
-        <script src="Components/About/aboutcontroller.js"></script>
-        <script src="Components/Register/registerController.js"></script>
-        <script src="Components/POI/poiController.js"></script>
-        <script src="Components/FavPOI/favouritePoiController.js"></script> 
+            <script src="app.js"></script>
+            <script src="indexController.js"></script>
 
-        <script src="node_modules/angular-local-storage/dist/angular-local-storage.min.js"></script>
+            <script src="Services/setHeader-service.js"></script>
+            <script src="Services/favouriteList-service.js"></script>
+            <script src="Services/poiDetails-service.js"></script>
 
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    </body>
+            <script src="Components/Login/loginController.js"></script>
+            <script src="Components/Home/homeController.js"></script>
+            <script src="Components/About/aboutcontroller.js"></script>
+            <script src="Components/Register/registerController.js"></script>
+            <script src="Components/POI/poiController.js"></script>
+            <script src="Components/FavPOI/favouritePoiController.js"></script>
+
+            <script src="node_modules/angular-local-storage/dist/angular-local-storage.min.js"></script>
+
+            <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+            <!-- Angular Material requires Angular.js Libraries -->
+            <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script> -->
+            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.min.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-aria.min.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-messages.min.js"></script>
+
+            <!-- Angular Material Library -->
+            <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.js"></script>
+</body>
+
 </html>
