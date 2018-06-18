@@ -3,7 +3,7 @@
         <div class="gallery">
             <img src="{{poi.poiInfo.ImgPath}}" height="100" ng-click=fpoiCtrl.showPoiDetails(poi.poiInfo.POI_id)>
           <div class="desc">{{$index + 1}}. {{poi.poiInfo.POI_name}}
-                <a id="star" ng-click="fpdeoiCtrl.addToFavourite(poi.poiInfo.POI_id)" ng-class="{checked: poi.checked}">&#9733;</a>
+                <a id="star" ng-click="fpoiCtrl.addToFavourite(poi.poiInfo.POI_id)" ng-class="{checked: poi.checked}">&#9733;</a>
                 <br><br>
                 <button ng-click="fpoiCtrl.moveUp(poi.poiInfo.POI_id)">&#8592</button> 
                 <button ng-click="fpoiCtrl.moveDown(poi.poiInfo.POI_id)">&#8594</button>

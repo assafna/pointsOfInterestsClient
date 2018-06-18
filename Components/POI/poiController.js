@@ -5,6 +5,7 @@ angular.module('poiApp')
     let serverUrl = 'http://localhost:3000/';
     self.chosenCategory = 5;
     self.loggedIn = $scope.indxCtrl.loggedIn;
+
     //self.loggedIn = checkTokenValidation.check();
     if(self.loggedIn)
         self.numOfFavorite =  localStorageService.get('favouritePOIS').length;
