@@ -5,7 +5,7 @@ angular.module('poiApp')
             let serverUrl = 'http://localhost:3000/';
 
             self = this;
-            $scope.userName = localStorageService.get('username');
+            $scope.userName = "guest"
             $scope.poiToShow = {};
             $scope.loggedIn = checkTokenValidation.check();
 
@@ -21,13 +21,14 @@ angular.module('poiApp')
             // retrieve relevant poi from local storage according to id
             // increase the views of the poi by one
             self.showPoiDetails = function (id) {
-                let pois = localStorageService.get('allPOI')
-                // $http.get(serverUrl + "poi/AllPointsOfInterst")
-                // .then(function(response){
-                //     pois = response.data;
-                // },function(response){
-                //     pois = [];
-                // }) 
+                //let pois = localStorageService.get('allPOI')
+                let pois = []
+                $http.get(serverUrl + "poi/AllPointsOfInterst")
+                .then(function(response){
+                    pois = response.data;
+                },function(response){
+                    pois = [];
+                }) 
                 for (let i = 0; i < pois.length; i++) {
                     if (pois[i].poiInfo.POI_id == id) {
                         $scope.poiToShow = pois[i];
@@ -65,12 +66,16 @@ angular.module('poiApp')
          $scope.checkLogin = function(){
             $scope.loggedIn = checkTokenValidation.check();
             $scope.userName = localStorageService.get('username');
+            if($scope.userName == null)
+                $scope.userName = "guest";
             return $scope.loggedIn;
          }
          
          $scope.checkToken = function(){
             $scope.loggedIn = checkTokenValidation.check();
             $scope.userName = localStorageService.get('username');
+            if($scope.userName == null)
+                $scope.userName = "guest";
             if($scope.loggedIn)
                 setHeadersToken.set(localStorageService.get('token'));
             return $scope.loggedIn;

@@ -13,6 +13,7 @@ angular.module('poiApp')
     self.addToFavourite = function(id){
         if(favouriteList.contains(id)){
             favouriteList.remove(id);
+            $window.location.reload();
         }
         else{
             favouriteList.add(id);
