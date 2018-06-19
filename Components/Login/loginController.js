@@ -7,20 +7,17 @@ angular.module('poiApp')
     self.user = {
         username: self.username,
         password: self.password,
-        isAdmin: self.isAdmin
+        isAdmin: self.isAdmin,
+
     }
     self.forgetPassword = false;
+    self.showVerQuestions = false;
+    
    // $scope.indxCtrl.loggedIn = checkTokenValidation.check();
     //$scope.indxCtrl = localStorageService.get('username');
 
     self.data = {}
-
-    $http.get(serverUrl + "Questions")
-    .then(function(response){
-        self.questions = response.data;
-    },function(response){
-        self.questions = [];
-    })
+    self.questions = localStorageService.get('questions'); 
 
     $http.get(serverUrl + "poi/RandPopularPointsOfInterst")
     .then(function(response){
@@ -50,10 +47,14 @@ angular.module('poiApp')
     }
 
     self.retrivePassword = function(){
+        
         $http.post(serverUrl + "users/retrivePassword", self.data)
         .then(function(response){
-            if(response.data.success)
+            if(response.data.success){
                  self.user.password = response.data.password;
+                 self.user.correctPassword = true;
+                 self.user.username = self.data.username;
+            }
             else
                 alert("wrong varification details");
         }, function(response){
@@ -63,6 +64,23 @@ angular.module('poiApp')
 
     self.showForgetPassword = function(){
         self.forgetPassword = true;
+        
+    }
+
+    self.showQuestions = function(){
+        $http.get(serverUrl + "users/userQuestions", {params: {username: self.data.username}})
+        .then(function(response){
+            verQuestionsID = response.data;
+            self.verQuestions = []
+            self.verQuestions.push(self.questions[verQuestionsID[0].QuestId1]);
+            self.verQuestions.push(self.questions[verQuestionsID[0].QuestId2]);
+            self.showVerQuestions = true;
+
+        }, function(response){
+            console.log(response);
+        });
+
+        
     }
 
     self.showPoiDetails = function(id){

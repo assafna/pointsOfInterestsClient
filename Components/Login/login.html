@@ -35,16 +35,19 @@
         </md-content>
     </div>
 </center>
-
+<center>
 <div ng-show="lgnCtrl.forgetPassword">
-    <form class="form" name="retrivePassword">
-        <h2>Please enter your varification details</h2>
-        <label>Username: </label>
+        <h2>Varification Details</h2>
+        <label> Please enter your username: </label>
         <input type="text" name="username" ng-model="lgnCtrl.data.username">
+        <br><br>
+        <button ng-click="lgnCtrl.showQuestions()">next</button>
         <br>
         <br>
+</div>
+        <div ng-show="lgnCtrl.showVerQuestions">
         <label>Verification Question:</label>
-        <select name="ques1" ng-model="lgnCtrl.data.questId" ng-options="question.Question_id[0] as question.Question_name for question in lgnCtrl.questions"></select>
+        <select name="ques1" ng-model="lgnCtrl.data.questId" ng-options="question.Question_id[0] as question.Question_name for question in lgnCtrl.verQuestions"></select>
         <br>
         <br>
         <label>Your Answer: </label>
@@ -53,8 +56,8 @@
         <br>
         <button ng-click="lgnCtrl.retrivePassword()">Check my password</button>
         <span ng-model=lgnCtrl.user.password ng-show=lgnCtrl.user.correctPassword>Your password is: {{lgnCtrl.user.password}}</span>
-    </form>
-</div>
+    </div>
+</center>  
 
 <h1>
     <center>Explore!</center>
