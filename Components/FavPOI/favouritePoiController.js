@@ -14,18 +14,9 @@ angular.module('poiApp')
     self.savedPOI = localStorageService.get('favouritePOIS');
  
     self.addToFavourite = function(id){
-        if(favouriteList.contains(id)){
             favouriteList.remove(id);
            // $window.location.reload();
-           $scope.indxCtrl.numOfFavorite--;
-           self.numOfFavorite =  $scope.indxCtrl.numOfFavorite;
-        }
-        else{
-            favouriteList.add(id);
-            $scope.indxCtrl.numOfFavorite++;
-            self.numOfFavorite =  $scope.indxCtrl.numOfFavorite;
-        }
-        checkOrUncheck(id);    
+            checkOrUncheck(id);    
     }
     function checkOrUncheck(id){
         for(let i = 0; i < self.savedPOI.length; i++){
@@ -36,7 +27,6 @@ angular.module('poiApp')
 
     self.showPoiDetails = function(id){
         $scope.indxCtrl.showPoiDetails(id);
-        self.numOfFavorite =  $scope.indxCtrl.numOfFavorite;
     }
 
     self.moveUp = function(id){

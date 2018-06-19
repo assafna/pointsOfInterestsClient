@@ -30,6 +30,13 @@ angular.module('poiApp')
                 self.categories = [];
             })
 
+            $http.get(serverUrl + "Questions")
+            .then(function(response){
+                localStorageService.set('questions', response.data);
+            },function(response){
+                self.questions = [];
+            })
+
             // retrieve relevant poi from local storage according to id
             // increase the views of the poi by one
             self.showPoiDetails = function (id) {

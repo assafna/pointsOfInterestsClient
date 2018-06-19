@@ -32,15 +32,7 @@ angular.module('poiApp'/*, ["checklist-model"]*/)
     })
 
     self.categories = localStorageService.get('categories');
-
-
-    
-    $http.get(serverUrl + "Questions")
-    .then(function(response){
-        self.questions = response.data;
-    },function(response){
-        self.questions = [];
-    })
+    self.questions = localStorageService.get('questions');
 
     //initial categories according to user choise
     self.checkOptions = function(choices){
