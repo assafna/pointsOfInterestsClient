@@ -9,7 +9,7 @@
   <div>
     <!-- show specific category -->
     <div  ng-show = "fpoiCtrl.chosenCategory != 5">
-      <h1 class="category-header">{{fpoiCtrl.categories[fpoiCtrl.chosenCategory].Category_name}}</h1>
+      <h1 class="category-header">{{fpoiCtrl.categories[fpoiCtrl.chosenCategory - 1].Category_name}}</h1>
     <div id= "img-poi" ng-repeat="poi in fpoiCtrl.savedPOI | filter: { poiInfo: {Category : fpoiCtrl.chosenCategory}} | orderBy : (sortByRate) && '-poiInfo.POI_avgRank'" class="responsive">
         <div class="gallery">
           <img src="{{poi.poiInfo.ImgPath}}" height="100" ng-click="fpoiCtrl.showPoiDetails(poi.poiInfo.POI_id)">
@@ -44,6 +44,7 @@
           </div>
         </div> 
   </div>
+  <br>
 <div>
     <button ng-click="fpoiCtrl.saveFavListToServer()">Save my favorite list</button>
   </div>
