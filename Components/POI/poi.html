@@ -2,60 +2,58 @@
   <label>Search by Category:</label>
   <select ng-model="poiCtrl.chosenCategory" ng-options="category.Category_id[0] as category.Category_name for category in poiCtrl.categories"></select>
   <label>Sort By Rank:</label>
-  <input type="checkbox" ng-model="poiCtrl.sortByRate">
-  <!-- <a class="red" ng-click="poiCtrl.addToFavourite(poi.poiInfo.POI_id)">&#10084;</a>
-  <label ng-model="poiCtrl.numOfFavorite">{{poiCtrl.numOfFavorite}}</label> -->
-  <a href="#/favPoi" class="btn btn-info btn-lg">
+  <input type="checkbox" ng-model="sortByRate" ng-check="sortByRate">
+  <a ng-show="poiCtrl.loggedIn" class="red" ng-click="poiCtrl.addToFavourite(poi.poiInfo.POI_id)">&#10084;</a>
+  <label ng-model="poiCtrl.numOfFavorite">{{poiCtrl.numOfFavorite}}</label>
+  <!-- <a href="#/favPoi" class="btn btn-info btn-lg">
       <span ng-model="poiCtrl.numOfFavorite" class="glyphicon glyphicon-heart"></span> {{poiCtrl.numOfFavorite}}
-    </a>
+    </a> -->
 
   <br><br>
 </div>
 
-<div>
+<!-- <div>
   <label>Search by Name:</label>
   <input type="text" placeholder="Search.." ng-model="poiCtrl.search">
   <br><br>
-</div>
+</div> -->
 
 
-<div ng-show="!poiCtrl.sortByRate">
+<div>
   <!-- show specific category -->
   <div  ng-show = "poiCtrl.chosenCategory != 5">
     <h1 class="category-header">{{poiCtrl.categories[poiCtrl.chosenCategory].Category_name}}</h1>
-  <div id= "img-poi" ng-repeat="poi in poiCtrl.pois | filter: { poiInfo: {Category : poiCtrl.chosenCategory}} | lowercase | filter : poiCtrl.search  as results" class="responsive">
+  <div id= "img-poi" ng-repeat="poi in poiCtrl.pois | filter: { poiInfo: {Category : poiCtrl.chosenCategory}} | orderBy : (sortByRate) && '-poiInfo.POI_avgRank'" class="responsive">
       <div class="gallery">
         <img src="{{poi.poiInfo.ImgPath}}" height="100" ng-click="poiCtrl.showPoiDetails(poi.poiInfo.POI_id)">
         <div class="desc">{{poi.poiInfo.POI_name}}
             <div ng-show="poiCtrl.loggedIn">
-                <span id="star" ng-click="poiCtrl.addToFavourite(poi.poiInfo.POI_id)" ng-class="{checked: poi.checked}">&#9733;</span>
+                <span id="star" ng-click="poiCtrl.addToFavourite(poi.poiInfo.POI_id)" ng-class="{checked: poiCtrl.isInFavorites(poi.poiInfo.POI_id)}">&#9733;</span>
                 <button ng-click="poiCtrl.openReviewDialog(poi.poiInfo.POI_id, poi.poiInfo.POI_name)">Review</button>      
               </div>     
         </div>
 
       </div>
     </div>
-    <span>{{results.length}} results found</span>
   </div>
 
   <div ng-show = "poiCtrl.chosenCategory == 5" ng-repeat="category in poiCtrl.categories | filter: poiCtrl.categoryFilter">
     <h1 class="category-header">{{category.Category_name}}</h1>
-  <div id= "img-poi" ng-repeat="poi in poiCtrl.pois | filter: { poiInfo: {Category : category.Category_id}} | lowercase | filter : poiCtrl.search as results" class="responsive">
+  <div id= "img-poi" ng-repeat="poi in poiCtrl.pois | filter: { poiInfo: {Category : category.Category_id}} | orderBy : (sortByRate) && '-poiInfo.POI_avgRank'" class="responsive">
           <div class="gallery">
             <img src="{{poi.poiInfo.ImgPath}}" height="100" ng-click="poiCtrl.showPoiDetails(poi.poiInfo.POI_id)">
             <div class="desc">{{poi.poiInfo.POI_name}}
                 <div ng-show="poiCtrl.loggedIn">
-                  <span id="star" ng-click="poiCtrl.addToFavourite(poi.poiInfo.POI_id)" ng-class="{checked: poi.checked}">&#9733;</span>
+                  <span id="star" ng-click="poiCtrl.addToFavourite(poi.poiInfo.POI_id)" ng-class="{checked: poiCtrl.isInFavorites(poi.poiInfo.POI_id)}">&#9733;</span>
                     <button ng-click="poiCtrl.openReviewDialog(poi.poiInfo.POI_id, poi.poiInfo.POI_name)">Review</button>      
                   </div>    
             </div>
           </div>
         </div>
-        <span>{{results.length}} results found</span>
       </div> 
 </div>
 
-<div ng-show="poiCtrl.sortByRate">
+<!-- <div ng-show="poiCtrl.sortByRate">
   <h1> Points of View Sorted Accoording to Rank</h1>
   <h3> In order to search by name or by category please uncheck the rank checkbox</h3>
     <div id= "img-poi" ng-repeat="poi in poiCtrl.pois | orderBy : '-poiInfo.POI_avgRank'" class="responsive">
@@ -71,17 +69,5 @@
             </div>
           </div>
         </div>
-  
-<dialog id="reviewDialog">
-    <center>
-        <h1>Review for {{poiCtrl.review.poiName}}</h1>
-        <label>Rank Point of Intrest:</label>
-        <select ng-options="i for i in [1, 2, 3, 4, 5]" ng-model=poiCtrl.review.rank>{{i}}</select>
-        <br><br>
-        <label>Review:</label>
-        <textarea placeholder="Enter your review..." ng-model=poiCtrl.review.review></textarea>
-        <br><br>
-        <button ng-click="poiCtrl.addReview()">Add Review</button>
-        <button ng-click="poiCtrl.closeDialog()">Close</button>
-    </center>
-</dialog>
+   -->
+

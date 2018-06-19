@@ -1,12 +1,16 @@
 angular.module('poiApp')
-    .controller('indexController', ['setHeadersToken', 'localStorageService', '$window', 'poiDetails', '$http', 'checkTokenValidation', 'initUserInLocalStorage', '$scope', 'favouriteList',
-        function (setHeadersToken, localStorageService, $window, poiDetails, $http, checkTokenValidation, initUserInLocalStorage, $scope, favouriteList) {
+    .controller('indexController', ['setHeadersToken', 'localStorageService', '$window', '$http', 'checkTokenValidation', 'initUserInLocalStorage', '$scope', 'favouriteList',
+        function (setHeadersToken, localStorageService, $window, $http, checkTokenValidation, initUserInLocalStorage, $scope, favouriteList) {
 
             let serverUrl = 'http://localhost:3000/';
 
             self = this;
             $scope.userName = "guest"
             $scope.loggedIn = checkTokenValidation.check();
+            $scope.review = {}
+            self.numOfFavorite = 0;
+            if($scope.loggedIn)
+                self.numOfFavorite =  localStorageService.get('favouritePOIS').length;
 
             // get all pois from the server, insert into local storage
             $http.get(serverUrl + "poi/AllPointsOfInterst")
@@ -19,6 +23,8 @@ angular.module('poiApp')
             
             $http.get(serverUrl + "Categories")
             .then(function(response){
+                let categories = response.data;
+                categories.splice(0,1);
                 localStorageService.set('categories', response.data);
             },function(response){
                 self.categories = [];
@@ -59,7 +65,7 @@ angular.module('poiApp')
             // closing the dialog of a poi
             self.closeDialog = function () {
                 document.getElementById("poiDialog").close();
-                $window.location.reload();
+                //$window.location.reload();
             }
 
             // logging out of the system by deleting him from the local storage
@@ -93,14 +99,53 @@ angular.module('poiApp')
                 if(favouriteList.contains(id)){
                     favouriteList.remove(id);
                     $scope.poiToShow.checked = false;
+                    self.numOfFavorite--;
                 }
                 else{
                     favouriteList.add(id);
                     $scope.poiToShow.checked = true;
+                    self.numOfFavorite++;
+
                 }          
               }
         
+        
+        
+        self.openReviewDialog = function(poiId, poiName){
+            document.getElementById("reviewDialog").showModal();
+            $scope.review.poiId = poiId;
+            $scope.review.poiName = poiName;
         }
+
+        $scope.closeReviewDialog = function(){
+            document.getElementById("reviewDialog").close();
+        }
+
+        $scope.addReview = function(){
+            if(parseInt($scope.review.rank) > 0){
+                $http.post(serverUrl + 'poi/validation/rankPointOfInterest', $scope.review)
+                .then(function(response){
+                    console.log(response.data);
+                },function(response){
+                    console.log(response.data);
+                })
+            }
+            if($scope.review.review.length > 0){
+                $http.post(serverUrl + 'poi/validation/reviewPointOfInterest', $scope.review)
+                    .then(function(response){
+                        if(response.data.success == true)
+                            alert("review added seccussfully");
+                        else
+                            alert("You can't review the same place more then once");
+
+                    },function(response){
+                        console.log(response.data);
+                    })
+            }
+            document.getElementById("reviewDialog").close();
+    
+        }
+    }
 
         
     ]

@@ -7,7 +7,6 @@ angular.module('poiApp')
         for(let i = 0; i < allPois.length; i++){
             if(allPois[i].poiInfo.POI_id == id){
                 favList.push(allPois[i]);
-                favList[favList.length - 1].poiInfo.AddDate = new Date().setHours(0, 0, 0, 0);;
                 favList[favList.length - 1].checked = true;
                 if(favList.length > 1)
                     favList[favList.length - 1].poiInfo.POI_order = favList[favList.length - 2].poiInfo.POI_order + 1;

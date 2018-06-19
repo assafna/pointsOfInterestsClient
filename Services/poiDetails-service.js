@@ -1,5 +1,5 @@
 angular.module('poiApp')
-.service('poiDetails', ['$http', 'localStorageService', function($http, localStorageService) {
+.service('reviews', ['$http', 'localStorageService', function($http, localStorageService) {
     let serverUrl = 'http://localhost:3000/';
 
     self.setPoi = function(id){

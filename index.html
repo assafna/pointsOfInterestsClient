@@ -67,8 +67,22 @@
         </center>
     </dialog>
 
+    <dialog id="reviewDialog">
+        <center>
+            <h1>Review for {{review.poiName}}</h1>
+            <label>Rank Point of Intrest:</label>
+            <select ng-options="i for i in [1, 2, 3, 4, 5]" ng-model=review.rank>{{i}}</select>
+            <br><br>
+            <label>Review:</label>
+            <textarea placeholder="Enter your review..." ng-model=review.review></textarea>
+            <br><br>
+            <button ng-click="addReview()">Add Review</button>
+            <button ng-click="closeReviewDialog()">Close</button>
+        </center>
+    </dialog>
+
     <!-- location of changed content -->
-    <div ng-view onload="indxCtrl.checkToken()"></div>
+    <div ng-view onload="checkToken()"></div>
 
     <!-- loaded scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
@@ -79,7 +93,7 @@
 
     <script src="Services/setHeader-service.js"></script>
     <script src="Services/favouriteList-service.js"></script>
-    <script src="Services/poiDetails-service.js"></script>
+    <!-- <script src="Services/poiDetails-service.js"></script> -->
 
     <script src="Components/Login/loginController.js"></script>
     <script src="Components/Home/homeController.js"></script>

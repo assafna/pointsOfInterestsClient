@@ -3,22 +3,27 @@ angular.module('poiApp')
     self = this;
     let serverUrl = 'http://localhost:3000/';
     self.loggedIn = checkTokenValidation.check();
+    self.chosenCategory = 5;
+
 
     self.categories = localStorageService.get('categories');
     self.categories.push({Category_id:'5', Category_name:'show all'});
 
+
     // get favorites from local storage or empty array
     self.savedPOI = localStorageService.get('favouritePOIS');
-    for(let i = 0; i < self.savedPOI.length; i++)
-        self.savedPOI[i].checked = true;
  
     self.addToFavourite = function(id){
         if(favouriteList.contains(id)){
             favouriteList.remove(id);
-            $window.location.reload();
+           // $window.location.reload();
+           $scope.indxCtrl.numOfFavorite--;
+           self.numOfFavorite =  $scope.indxCtrl.numOfFavorite;
         }
         else{
             favouriteList.add(id);
+            $scope.indxCtrl.numOfFavorite++;
+            self.numOfFavorite =  $scope.indxCtrl.numOfFavorite;
         }
         checkOrUncheck(id);    
     }
@@ -31,6 +36,7 @@ angular.module('poiApp')
 
     self.showPoiDetails = function(id){
         $scope.indxCtrl.showPoiDetails(id);
+        self.numOfFavorite =  $scope.indxCtrl.numOfFavorite;
     }
 
     self.moveUp = function(id){
@@ -90,4 +96,19 @@ angular.module('poiApp')
             console.log(response);
         })
     }
+    self.openReviewDialog = function(poiId, poiName){
+        $scope.indxCtrl.openReviewDialog(poiId, poiName);
+    }
+
+
+    self.closeReviewDialog = function(){
+        $scope.indxCtrl.closeReviewDialog();
+    }
+
+    self.isInFavorites = function(id){
+        return favouriteList.contains(id);
+
+    }
+
+    
 }]);
