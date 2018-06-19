@@ -43,7 +43,7 @@ angular.module('poiApp')
                     self.savedPOI[i].poiInfo.POI_order = prevOrder;
                     localStorageService.remove('favouritePOIS');
                     localStorageService.add('favouritePOIS', self.savedPOI);
-                    $window.location.reload();    
+                   // $window.location.reload();    
                 }
                 break;
             }
@@ -64,7 +64,7 @@ angular.module('poiApp')
                     self.savedPOI[i].poiInfo.POI_order = prevOrder;
                     localStorageService.remove('favouritePOIS');
                     localStorageService.add('favouritePOIS', self.savedPOI);
-                    $window.location.reload();    
+                   // $window.location.reload();    
                 }
                 break;
             }
