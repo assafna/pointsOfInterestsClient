@@ -1,7 +1,16 @@
 angular.module('poiApp')
     .controller('loginController', ['setHeadersToken', '$http', '$window', 'localStorageService', '$scope', 'initUserInLocalStorage', 'checkTokenValidation',
         function (setHeadersToken, $http, $window, localStorageService, $scope, initUserInLocalStorage, checkTokenValidation) {
+
             self = this;
+
+            var mymap = L.map('mapid').setView([51.505, -0.09], 13);
+            L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiYXNzYWZuYSIsImEiOiJjamluZDB6bXQwY284M2tudzB6NjgyYXJ6In0.JvduB2-EOw4yMWHu6x30EA', {
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                maxZoom: 18,
+                id: 'mapbox.streets',
+                accessToken: 'pk.eyJ1IjoiYXNzYWZuYSIsImEiOiJjamluZDB6bXQwY284M2tudzB6NjgyYXJ6In0.JvduB2-EOw4yMWHu6x30EA'
+            }).addTo(mymap);
 
             let serverUrl = 'http://localhost:3000/';
             self.user = {
