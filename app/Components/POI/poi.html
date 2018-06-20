@@ -8,11 +8,11 @@
         &nbsp;
         <label for="rank">Sort by Rate: </label>
         <input type="checkbox" ng-model="sortByRate" ng-check="sortByRate">
-        <button class="btn btn-default" ng-show="poiCtrl.loggedIn">
-          <a class="red" ng-click="poiCtrl.addToFavourite(poi.poiInfo.POI_id)">
+        <button class="btn btn-default" ng-show="poiCtrl.loggedIn" ng-click="poiCtrl.moveToFavPoi()">
+          <a class="red">
             <span class="glyphicon glyphicon-heart"></span>
           </a>
-          <label ng-model="poiCtrl.numOfFavorite">{{poiCtrl.numOfFavorite}}</label>
+          <label ng-model="poiCtrl.numOfFavorite" >{{poiCtrl.numOfFavorite}}</label>
         </button>
       </div>
     </form>
@@ -31,8 +31,8 @@
                     {{poi.poiInfo.POI_name}}
                   </div>
                   <div ng-show="poiCtrl.loggedIn">
-                    <button type="button" class="btn btn-default">
-                      <span class="glyphicon glyphicon-star" ng-click="poiCtrl.addToFavourite(poi.poiInfo.POI_id)" ng-class="{checked: poiCtrl.isInFavorites(poi.poiInfo.POI_id)}"></span>
+                    <button type="button" class="btn btn-default" ng-click="poiCtrl.addToFavourite(poi.poiInfo.POI_id)">
+                      <span class="glyphicon glyphicon-star" ng-class="{checked: poiCtrl.isInFavorites(poi.poiInfo.POI_id)}"></span>
                     </button>
                     <button type="button" class="btn btn-default" ng-click="poiCtrl.openReviewDialog(poi.poiInfo.POI_id, poi.poiInfo.POI_name)">
                       Review
@@ -59,8 +59,8 @@
                     {{poi.poiInfo.POI_name}}
                   </div>
                   <div ng-show="poiCtrl.loggedIn">
-                    <button type="button" class="btn btn-default">
-                      <span class="glyphicon glyphicon-star" ng-click="poiCtrl.addToFavourite(poi.poiInfo.POI_id)" ng-class="{checked: poiCtrl.isInFavorites(poi.poiInfo.POI_id)}"></span>
+                    <button type="button" class="btn btn-default" ng-click="poiCtrl.addToFavourite(poi.poiInfo.POI_id)">
+                      <span class="glyphicon glyphicon-star" ng-class="{checked: poiCtrl.isInFavorites(poi.poiInfo.POI_id)}"></span>
                     </button>
                     <button type="button" class="btn btn-default" ng-click="poiCtrl.openReviewDialog(poi.poiInfo.POI_id, poi.poiInfo.POI_name)">
                       Review

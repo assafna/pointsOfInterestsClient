@@ -19,7 +19,7 @@ app.config(['$locationProvider', '$routeProvider', function ($locationProvider, 
             controller: 'homeController as homeCtrl'
         })
         .when('/about', {
-            templateUrl: 'CFomponents/About/about.html',
+            templateUrl: 'Components/About/about.html',
             controller: 'aboutController as abtCtrl'
         })
         .when('/signUp', {

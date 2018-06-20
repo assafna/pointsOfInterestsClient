@@ -25,8 +25,8 @@
                     {{$index + 1}}. {{poi.poiInfo.POI_name}}
                   </div>
                   <div ng-show="fpoiCtrl.loggedIn">
-                    <button type="button" class="btn btn-default">
-                      <span class="glyphicon glyphicon-star" ng-click="fpoiCtrl.addToFavourite(poi.poiInfo.POI_id)" ng-class="{checked: fpoiCtrl.isInFavorites(poi.poiInfo.POI_id)}"></span>
+                    <button type="button" class="btn btn-default" ng-click="fpoiCtrl.addToFavourite(poi.poiInfo.POI_id)">
+                      <span class="glyphicon glyphicon-star" ng-class="{checked: fpoiCtrl.isInFavorites(poi.poiInfo.POI_id)}"></span>
                     </button>
                     <button type="button" class="btn btn-default" ng-click="fpoiCtrl.openReviewDialog(poi.poiInfo.POI_id, poi.poiInfo.POI_name)">Review</button>
                     <br>
@@ -54,8 +54,8 @@
                     {{$index + 1}}. {{poi.poiInfo.POI_name}}
                   </div>
                   <div ng-show="fpoiCtrl.loggedIn">
-                    <button type="button" class="btn btn-default">
-                      <span class="glyphicon glyphicon-star" ng-click="fpoiCtrl.addToFavourite(poi.poiInfo.POI_id)" ng-class="{checked: fpoiCtrl.isInFavorites(poi.poiInfo.POI_id)}"></span>
+                    <button type="button" class="btn btn-default" ng-click="fpoiCtrl.addToFavourite(poi.poiInfo.POI_id)">
+                      <span class="glyphicon glyphicon-star" ng-class="{checked: fpoiCtrl.isInFavorites(poi.poiInfo.POI_id)}"></span>
                     </button>
                     <button type="button" class="btn btn-default" ng-click="fpoiCtrl.openReviewDialog(poi.poiInfo.POI_id, poi.poiInfo.POI_name)">Review</button>
                     <br>

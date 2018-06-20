@@ -1,5 +1,6 @@
 angular.module('poiApp')
-    .controller('poiController', ['$http', 'localStorageService', 'favouriteList', '$scope', 'checkTokenValidation', function ($http, localStorageService, favouriteList, $scope, checkTokenValidation) {
+    .controller('poiController', ['$http', 'localStorageService', 'favouriteList', '$scope', 'checkTokenValidation', '$window',
+     function ($http, localStorageService, favouriteList, $scope, checkTokenValidation, $window) {
         self = this;
 
         let serverUrl = 'http://localhost:3000/';
@@ -61,6 +62,10 @@ angular.module('poiApp')
         self.isInFavorites = function (id) {
             return favouriteList.contains(id);
 
+        }
+
+        self.moveToFavPoi = function(){
+            $window.location.href = "#/favPoi"
         }
 
 
