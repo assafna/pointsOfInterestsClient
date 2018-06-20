@@ -1,53 +1,74 @@
-<h1><center>Your Favourite Points of Intrests</center></h1>
-
-<label>Search by Category:</label>
-  <select ng-model="fpoiCtrl.chosenCategory" ng-options="category.Category_id[0] as category.Category_name for category in fpoiCtrl.categories"></select>
-  <label>Sort By Rank:</label>
-  <input type="checkbox" ng-model="sortByRate" ng-check="sortByRate">
-  <br><br>
-
-  <div>
-    <!-- show specific category -->
-    <div  ng-show = "fpoiCtrl.chosenCategory != 5">
-      <h1 class="category-header">{{fpoiCtrl.categories[fpoiCtrl.chosenCategory - 1].Category_name}}</h1>
-    <div id= "img-poi" ng-repeat="poi in fpoiCtrl.savedPOI | filter: { poiInfo: {Category : fpoiCtrl.chosenCategory}} | orderBy : (sortByRate) && '-poiInfo.POI_avgRank'" class="responsive">
-        <div class="gallery">
-          <img src="{{poi.poiInfo.ImgPath}}" height="100" ng-click="fpoiCtrl.showPoiDetails(poi.poiInfo.POI_id)">
-          <div class="desc">{{$index + 1}}. {{poi.poiInfo.POI_name}}
-              <div ng-show="fpoiCtrl.loggedIn">
-                  <span id="star" ng-click="fpoiCtrl.addToFavourite(poi.poiInfo.POI_id)" ng-class="{checked: fpoiCtrl.isInFavorites(poi.poiInfo.POI_id)}">&#9733;</span>
-                  <button ng-click="fpoiCtrl.openReviewDialog(poi.poiInfo.POI_id, poi.poiInfo.POI_name)">Review</button>   
-                  <br><br>
-                  <button ng-click="fpoiCtrl.moveUp(poi.poiInfo.POI_id)">&#8592</button> 
-                  <button ng-click="fpoiCtrl.moveDown(poi.poiInfo.POI_id)">&#8594</button>   
-                </div>     
-          </div>
-  
-        </div>
+<div class="panel panel-primary">
+  <div class="panel-heading">Your Favourite Points of Intrests</div>
+  <div class="container panel-body">
+    <form class="form-inline">
+      <div class="form-group">
+        <label for="categories">Filter by Category: </label>
+        <select class="form-control" id="category" ng-model="fpoiCtrl.chosenCategory" ng-options="category.Category_id[0] as category.Category_name for category in fpoiCtrl.categories"></select>
+        &nbsp;
+        <label for="rank">Sort by Rate: </label>
+        <input type="checkbox" ng-model="sortByRate" ng-check="sortByRate">
       </div>
-    </div>
-  
-    <div ng-show = "fpoiCtrl.chosenCategory == 5">
-    <div id= "img-poi" ng-repeat="poi in fpoiCtrl.savedPOI| orderBy : (sortByRate) && '-poiInfo.POI_avgRank'" class="responsive">
-            <div class="gallery">
-              <img src="{{poi.poiInfo.ImgPath}}" height="100" ng-click="fpoiCtrl.showPoiDetails(poi.poiInfo.POI_id)">
-              <div class="desc">{{$index + 1}}. {{poi.poiInfo.POI_name}}
+    </form>
+    <br>
+    <!-- show specific category -->
+    <div class="panel panel-default" ng-show="fpoiCtrl.chosenCategory!=5">
+      <div class="panel-heading">{{fpoiCtrl.categories[fpoiCtrl.chosenCategory - 1].Category_name}}</div>
+      <center>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-sm-3" ng-repeat="poi in fpoiCtrl.savedPOI | filter: { poiInfo: {Category : fpoiCtrl.chosenCategory}} | orderBy : (sortByRate) && '-poiInfo.POI_avgRank'">
+              <div class="thumbnail">
+                <a href="">
+                  <img class="thumbnailImage" src="{{poi.poiInfo.ImgPath}}" ng-click="fpoiCtrl.showPoiDetails(poi.poiInfo.POI_id)">
+                  <div class="caption">
+                    {{$index + 1}}. {{poi.poiInfo.POI_name}}
+                  </div>
                   <div ng-show="fpoiCtrl.loggedIn">
-                    <span id="star" ng-click="fpoiCtrl.addToFavourite(poi.poiInfo.POI_id)" ng-class="{checked: fpoiCtrl.isInFavorites(poi.poiInfo.POI_id)}">&#9733;</span>
-                      <button ng-click="fpoiCtrl.openReviewDialog(poi.poiInfo.POI_id, poi.poiInfo.POI_name)">Review</button>   
-                      <br><br>
-                      <button ng-click="fpoiCtrl.moveUp(poi.poiInfo.POI_id)">&#8592</button> 
-                      <button ng-click="fpoiCtrl.moveDown(poi.poiInfo.POI_id)">&#8594</button>      
-                    </div>    
+                    <button type="button" class="btn btn-default">
+                      <span class="glyphicon glyphicon-star" ng-click="fpoiCtrl.addToFavourite(poi.poiInfo.POI_id)" ng-class="{checked: fpoiCtrl.isInFavorites(poi.poiInfo.POI_id)}"></span>
+                    </button>
+                    <button type="button" class="btn btn-default" ng-click="fpoiCtrl.openReviewDialog(poi.poiInfo.POI_id, poi.poiInfo.POI_name)">Review</button>
+                    <br>
+                    <button type="button" class="btn btn-default glyphicon glyphicon-chevron-left" ng-click="fpoiCtrl.moveUp(poi.poiInfo.POI_id)"></button>
+                    <button type="button" class="btn btn-default glyphicon glyphicon-chevron-right" ng-click="fpoiCtrl.moveDown(poi.poiInfo.POI_id)"></button>
+                  </div>
+                </a>
               </div>
             </div>
           </div>
-        </div> 
+        </div>
+      </center>
+    </div>
+    <!-- show all categories -->
+    <div class="panel panel-default" ng-show="fpoiCtrl.chosenCategory==5">
+      <div class="panel-heading">{{fpoiCtrl.categories[fpoiCtrl.chosenCategory - 1].Category_name}}</div>
+      <center>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-sm-3" ng-repeat="poi in fpoiCtrl.savedPOI | filter: { poiInfo: {Category : category.Category_id}} | orderBy : (sortByRate) && '-poiInfo.POI_avgRank'">
+              <div class="thumbnail">
+                <a href="">
+                  <img class="thumbnailImage" src="{{poi.poiInfo.ImgPath}}" ng-click="fpoiCtrl.showPoiDetails(poi.poiInfo.POI_id)">
+                  <div class="caption">
+                    {{$index + 1}}. {{poi.poiInfo.POI_name}}
+                  </div>
+                  <div ng-show="fpoiCtrl.loggedIn">
+                    <button type="button" class="btn btn-default">
+                      <span class="glyphicon glyphicon-star" ng-click="fpoiCtrl.addToFavourite(poi.poiInfo.POI_id)" ng-class="{checked: fpoiCtrl.isInFavorites(poi.poiInfo.POI_id)}"></span>
+                    </button>
+                    <button type="button" class="btn btn-default" ng-click="fpoiCtrl.openReviewDialog(poi.poiInfo.POI_id, poi.poiInfo.POI_name)">Review</button>
+                    <br>
+                    <button type="button" class="btn btn-default glyphicon glyphicon-chevron-left" ng-click="fpoiCtrl.moveUp(poi.poiInfo.POI_id)"></button>
+                    <button type="button" class="btn btn-default glyphicon glyphicon-chevron-right" ng-click="fpoiCtrl.moveDown(poi.poiInfo.POI_id)"></button>
+                  </div>
+              </div>
+              </a>
+            </div>
+          </div>
+        </div>
+    </div>
+    </center>
   </div>
-  <br>
-<div>
-    <button ng-click="fpoiCtrl.saveFavListToServer()">Save my favorite list</button>
-  </div>
-  
-
-    
+  <button ng-click="fpoiCtrl.saveFavListToServer()">Save my favorite list</button>
+</div>

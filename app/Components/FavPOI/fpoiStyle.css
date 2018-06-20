@@ -1,10 +1,7 @@
-#star {
-    cursor: pointer;
-  }
+.checked {
+  color: rgb(255, 203, 0);
+}
 
-  .checked{
-    color: rgb(255, 203, 0);
-  }
-  .unchecked {
-    content: ' \2606';
-  }
+.unchecked {
+  content: ' \2606';
+}

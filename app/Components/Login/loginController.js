@@ -1,92 +1,89 @@
 angular.module('poiApp')
-.controller('loginController', ['setHeadersToken', '$http', '$window', 'localStorageService', '$scope','initUserInLocalStorage', 'checkTokenValidation',
- function(setHeadersToken, $http, $window, localStorageService, $scope, initUserInLocalStorage, checkTokenValidation) {
-    self = this;
+    .controller('loginController', ['setHeadersToken', '$http', '$window', 'localStorageService', '$scope', 'initUserInLocalStorage', 'checkTokenValidation',
+        function (setHeadersToken, $http, $window, localStorageService, $scope, initUserInLocalStorage, checkTokenValidation) {
+            self = this;
 
-    let serverUrl = 'http://localhost:3000/';
-    self.user = {
-        username: self.username,
-        password: self.password,
-        isAdmin: self.isAdmin,
-
-    }
-    self.forgetPassword = false;
-    self.showVerQuestions = false;
-    
-   // $scope.indxCtrl.loggedIn = checkTokenValidation.check();
-    //$scope.indxCtrl = localStorageService.get('username');
-
-    self.data = {}
-    self.questions = localStorageService.get('questions'); 
-
-    $http.get(serverUrl + "poi/RandPopularPointsOfInterst")
-    .then(function(response){
-        self.randPopularPOI = response.data;
-    },function(response){
-        self.randPopularPOI = [];
-    })
-
-    self.login = function () {
-        // register user
-        $http.post(serverUrl + "users/login", self.user)
-            .then(function (response) {
-                // first function handles success.
-                if(!response.data.success)
-                    alert("Wrong username or password!")
-                else{
-                    self.login.content = response.data.token;
-                    setHeadersToken.set(self.login.content);
-                    initUserInLocalStorage.addUser(self.login.content, self.user.username);
-                    $scope.indxCtrl.userName = self.user.username;
-                    $scope.indxCtrl.loggedIn = true;
-                }
-            }, function (response) {
-                // second function handles error
-                self.login.content = "Something went wrong!";
-            });
-    }
-
-    self.retrivePassword = function(){
-        
-        $http.post(serverUrl + "users/retrivePassword", self.data)
-        .then(function(response){
-            if(response.data.success){
-                 self.user.password = response.data.password;
-                 self.user.correctPassword = true;
-                 self.user.username = self.data.username;
+            let serverUrl = 'http://localhost:3000/';
+            self.user = {
+                username: self.username,
+                password: self.password,
+                isAdmin: self.isAdmin
             }
-            else
-                alert("wrong varification details");
-        }, function(response){
-            self.login.content = "Something went wrong!"
-        });
-    }
+            self.forgetPassword = false;
+            self.showVerQuestions = false;
+            // $scope.indxCtrl.loggedIn = checkTokenValidation.check();
+            //$scope.indxCtrl = localStorageService.get('username');
 
-    self.showForgetPassword = function(){
-        self.forgetPassword = true;
-        
-    }
+            self.data = {}
+            self.questions = localStorageService.get('questions');
 
-    self.showQuestions = function(){
-        $http.get(serverUrl + "users/userQuestions", {params: {username: self.data.username}})
-        .then(function(response){
-            verQuestionsID = response.data;
-            self.verQuestions = []
-            self.verQuestions.push(self.questions[verQuestionsID[0].QuestId1]);
-            self.verQuestions.push(self.questions[verQuestionsID[0].QuestId2]);
-            self.showVerQuestions = true;
+            $http.get(serverUrl + "poi/RandPopularPointsOfInterst")
+                .then(function (response) {
+                    self.randPopularPOI = response.data;
+                }, function (response) {
+                    self.randPopularPOI = [];
+                })
 
-        }, function(response){
-            console.log(response);
-        });
+            self.login = function () {
+                // register user
+                $http.post(serverUrl + "users/login", self.user)
+                    .then(function (response) {
+                        // first function handles success.
+                        if (!response.data.success)
+                            alert("Wrong username or password!")
+                        else {
+                            self.login.content = response.data.token;
+                            setHeadersToken.set(self.login.content);
+                            initUserInLocalStorage.addUser(self.login.content, self.user.username);
+                            $scope.indxCtrl.userName = self.user.username;
+                            $scope.indxCtrl.loggedIn = true;
+                        }
+                    }, function (response) {
+                        // second function handles error
+                        self.login.content = "Something went wrong!";
+                    });
+            }
 
-        
-    }
+            self.retrivePassword = function () {
 
-    self.showPoiDetails = function(id){
-        $scope.indxCtrl.showPoiDetails(id);
-    }
-    
-    
-    
-}]);
+                $http.post(serverUrl + "users/retrivePassword", self.data)
+                    .then(function (response) {
+                        if (response.data.success) {
+                            self.user.password = response.data.password;
+                            self.user.correctPassword = true;
+                            self.user.username = self.data.username;
+                        }
+                        else
+                            alert("Wrong verification details!");
+                    }, function (response) {
+                        self.login.content = "Something went wrong!"
+                    });
+            }
+
+            self.showForgetPassword = function () {
+                self.forgetPassword = true;
+            }
+
+            self.showQuestions = function () {
+                $http.get(serverUrl + "users/userQuestions", { params: { username: self.data.username } })
+                    .then(function (response) {
+                        verQuestionsID = response.data;
+                        self.verQuestions = []
+                        self.verQuestions.push(self.questions[verQuestionsID[0].QuestId1]);
+                        self.verQuestions.push(self.questions[verQuestionsID[0].QuestId2]);
+                        self.showVerQuestions = true;
+
+                    }, function (response) {
+                        console.log(response);
+                    });
+
+
+            }
+
+            self.showPoiDetails = function (id) {
+                $scope.indxCtrl.showPoiDetails(id);
+            }
+
+
+
+        }]);

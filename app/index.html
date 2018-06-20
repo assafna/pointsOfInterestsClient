@@ -1,56 +1,87 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- css -->
-    <link rel="stylesheet" type- "text/css" href="style.css" />
-    <link rel="stylesheet" type- "text/css" href="Components/POI/poiStyle.css" />
-    <link rel="stylesheet" type- "text/css" href="Components/home/homeStyle.css" />
-    <link rel="stylesheet" type- "text/css" href="Components/FavPOI/fpoiStyle.css" />
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
-    <!-- Angular Material style sheet -->
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.css">
+    <link rel="stylesheet" type- "text/css" href="./style.css" />
+    <link rel="stylesheet" type- "text/css" href="./Components/POI/poiStyle.css" />
+    <link rel="stylesheet" type- "text/css" href="./Components/home/homeStyle.css" />
+    <link rel="stylesheet" type- "text/css" href="./Components/FavPOI/fpoiStyle.css" />
+    <link rel="stylesheet" type- "text/css" href="./Components/Login/loginStyle.css" />
+    <!-- bootstrap - Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <title>Points of Interests</title>
 </head>
 
-<body ng-app="poiApp" ng-controller="indexController as indxCtrl" ng-cloak>
+<body ng-app="poiApp" ng-controller="indexController as indxCtrl">
 
-    <!-- angularjs module nav bar -->
-    <md-content class="md-padding">
-        <md-nav-bar id="navbarAngularMaterial" md-no-ink-bar="disableInkBar" md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
-            <md-nav-item md-nav-href="#/home" ng-show="checkLogin()" name="home" class="active">
-                Home
-            </md-nav-item>
-            <md-nav-item md-nav-href="#/login" ng-show="!checkLogin()" name="login">
-                Login
-            </md-nav-item>
-            <md-nav-item md-nav-href="#/signUp" ng-show="!checkLogin()" name="signUp">
-                Sign Up
-            </md-nav-item>
-            <md-nav-item md-nav-href="#/poi" name="poi">
-                Points of Interests
-            </md-nav-item>
-            <md-nav-item md-nav-href="#/favPoi" ng-show="checkLogin()" name="favPoi">
-                Favourite POI
-            </md-nav-item>
-            <md-nav-item md-nav-href="#/about" name="about">
-                About
-            </md-nav-item>
-            <md-nav-item md-nav-click="logout()" ng-show="checkLogin()" name="logout">
-                Logout
-            </md-nav-item>
-        </md-nav-bar>
-    </md-content>
+    <div id="main">
+        <!-- bootstrap nav bar -->
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" ng-show="checkLogin()" href="#/home">
+                        <span class="glyphicon glyphicon-home"></span>
+                    </a>
+                    <a class="navbar-brand" ng-hide="checkLogin()" href="#">
+                        <span class="glyphicon glyphicon-home"></span>
+                    </a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="active" ng-show="checkLogin()" name="home">
+                        <a href="#/home">Home</a>
+                    </li>
+                    <li name="poi">
+                        <a href="#/poi">Points of Interests</a>
+                    </li>
+                    <li ng-show="checkLogin()" name="favPoi">
+                        <a href="#/favPoi">Favourite POIs</a>
+                    </li>
+                    <li name="about">
+                        <a href="#/about">About</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li name="hello">
+                        <a ng-model="userName">Hello {{userName}}</a>
+                    </li>
+                    <li ng-show="!checkLogin()" name="signUp">
+                        <a href="#/signUp">
+                            <span class="glyphicon glyphicon-user"></span> Sign Up</a>
+                    </li>
+                    <li ng-show="!checkLogin()" name="login">
+                        <a href="#/login">
+                            <span class="glyphicon glyphicon-log-in"></span> Login</a>
+                    </li>
+                    <li ng-show="checkLogin()" name="logout" ng-click="logout()">
+                        <a href="#">
+                            <span class="glyphicon glyphicon-log-out"></span> Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <br>
+        <br>
+        <br>
 
-    <div class="topnav-right">
-        <a ng-model="userName">Hello {{userName}}</a>
-        <a ng-show="checkLogin()" ng-click="logout()">Logout</a>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <center>
+                        <img src="../assets/img/logo.png" height="50%" width="50%">
+                    </center>
+                    <br>
+                </div>
+            </div>
+            <div class="row">
+                <!-- location of changed content -->
+                <div ng-view onload="checkToken()"></div>
+            </div>
+        </div>
     </div>
 
-    <!-- <section id="top-picture"></section> -->
-    <h1 class="md-display-1">
-        <center>Rio de Janeiro</center>
-    </h1>
     <!-- review dialog -->
     <dialog id="poiDialog">
         <center>
@@ -72,49 +103,42 @@
             <h1>Review for {{review.poiName}}</h1>
             <label>Rank Point of Intrest:</label>
             <select ng-options="i for i in [1, 2, 3, 4, 5]" ng-model=review.rank>{{i}}</select>
-            <br><br>
+            <br>
+            <br>
             <label>Review:</label>
             <textarea placeholder="Enter your review..." ng-model=review.review></textarea>
-            <br><br>
+            <br>
+            <br>
             <button ng-click="addReview()">Add Review</button>
             <button ng-click="closeReviewDialog()">Close</button>
         </center>
     </dialog>
 
-    <!-- location of changed content -->
-    <div ng-view onload="checkToken()"></div>
-
     <!-- loaded scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
 
-    <script src="app.js"></script>
-    <script src="indexController.js"></script>
+    <script src="./app.js"></script>
+    <script src="./indexController.js"></script>
 
-    <script src="shared/Services/setHeader-service.js"></script>
-    <script src="shared/Services/favouriteList-service.js"></script>
+    <script src="./shared/Services/setHeader-service.js"></script>
+    <script src="./shared/Services/favouriteList-service.js"></script>
     <!-- <script src="Services/poiDetails-service.js"></script> -->
 
-    <script src="Components/Login/loginController.js"></script>
-    <script src="Components/Home/homeController.js"></script>
-    <script src="Components/About/aboutcontroller.js"></script>
-    <script src="Components/Register/registerController.js"></script>
-    <script src="Components/POI/poiController.js"></script>
-    <script src="Components/FavPOI/favouritePoiController.js"></script>
+    <script src="./Components/Login/loginController.js"></script>
+    <script src="./Components/Home/homeController.js"></script>
+    <script src="./Components/About/aboutcontroller.js"></script>
+    <script src="./Components/Register/registerController.js"></script>
+    <script src="./Components/POI/pFoiController.js"></script>
+    <script src="./Components/FavPOI/favouritePoiController.js"></script>
 
     <script src="../assets/node_modules/angular-local-storage/dist/angular-local-storage.min.js"></script>
 
-    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    <!-- Angular Material requires Angular.js Libraries -->
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script> -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-aria.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-messages.min.js"></script>
-
-    <!-- Angular Material Library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.js"></script>
+    <!-- bootstrap - Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 </body>
 
 </html>

@@ -1,70 +1,75 @@
-<center>
-    <div id="loginDiv" md-whiteframe="1">
-        <md-content layout-padding>
+<!-- login form -->
+<div class="panel panel-primary">
+    <div class="panel-heading">Welcome! Please sign in</div>
+    <div class="container panel-body">
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" class="form-control" id="username" placeholder="Enter username" name="username" ng-model="lgnCtrl.user.username">
+            </div>
+            <div class="form-group">
+                <label for="pwd">Password:</label>
+                <input type="password" class="form-control" id="password" placeholder="Enter password" name="password" ng-model="lgnCtrl.user.password">
+            </div>
             <center>
-                <h2 class="md-title">Welcome! Please sign in</h2>
+                <button type="submit" class="btn btn-primary" ng-click="lgnCtrl.login()">Submit</button>
             </center>
-            <div layout-gt-sm="row">
-                <md-input-container class="md-block" flex-gt-sm>
-                    <label>Username</label>
-                    <input type="text" name="username" ng-model="lgnCtrl.user.username">
-                </md-input-container>
-
-                <md-input-container class="md-block" flex-gt-sm>
-                    <label>Password</label>
-                    <input type="password" name="password" ng-model="lgnCtrl.user.password">
-                </md-input-container>
-            </div>
+            &nbsp;
             <div>
                 <center>
-                    <md-button class="md-raised md-primary" type="submit" ng-click="lgnCtrl.login()">Submit</md-button>
+                    <button class="btn btn-default" ng-click="lgnCtrl.showForgetPassword()">Forgot my password</md-button>
                 </center>
             </div>
-            <div>
-                <center>
-                    <md-button ng-click="lgnCtrl.showForgetPassword()">Forgot my password</md-button>
-                </center>
-            </div>
-            <div>
-                <center>
-                    <p class="md-caption">Still don't have an account? please
-                        <a href="#/signUp">sign up</a>
-                    </p>
-                </center>
-            </div>
-        </md-content>
+            &nbsp;
+            <center>
+                <p class="text-info">Still don't have an account? please
+                    <a href="#/signUp">sign up</a>.
+                </p>
+            </center>
+        </form>
     </div>
-</center>
-<center>
-<div ng-show="lgnCtrl.forgetPassword">
-        <h2>Varification Details</h2>
-        <label> Please enter your username: </label>
-        <input type="text" name="username" ng-model="lgnCtrl.data.username">
-        <br><br>
-        <button ng-click="lgnCtrl.showQuestions()">next</button>
-        <br>
-        <br>
 </div>
-        <div ng-show="lgnCtrl.showVerQuestions">
-        <label>Verification Question:</label>
-        <select name="ques1" ng-model="lgnCtrl.data.questId" ng-options="question.Question_id[0] as question.Question_name for question in lgnCtrl.verQuestions"></select>
-        <br>
-        <br>
-        <label>Your Answer: </label>
-        <input type="text" name="answer" ng-model="lgnCtrl.data.ans">
-        <br>
-        <br>
-        <button ng-click="lgnCtrl.retrivePassword()">Check my password</button>
-        <span ng-model=lgnCtrl.user.password ng-show=lgnCtrl.user.correctPassword>Your password is: {{lgnCtrl.user.password}}</span>
-    </div>
-</center>  
 
-<h1>
-    <center>Explore!</center>
-</h1>
-<div ng-repeat="poi in lgnCtrl.randPopularPOI" class="responsive">
-    <div class="gallery">
-        <img src="{{poi.poiInfo.ImgPath}}" height="100" ng-click="lgnCtrl.showPoiDetails(poi.poiInfo.POI_id)">
-        <div class="desc">{{poi.poiInfo.POI_name}}</div>
+<!-- forgot password -->
+<div class="panel panel-info" ng-show="lgnCtrl.forgetPassword">
+    <div class="panel-heading">Forgot password</div>
+    <div class="container panel-body">
+        <form>
+            <div class="form-group">
+                <label for="usernamer">Username:</label>
+                <input type="text" class="form-control" id="username" placeholder="Enter username" name="username" ng-model="lgnCtrl.data.username">
+            </div>
+            <div class="form-group">
+                <label for="verificationQuestion">Verification Question:</label>
+                <select class="form-control" name="ques1" ng-model="lgnCtrl.data.questId" ng-options="question.Question_id[0] as question.Question_name for question in lgnCtrl.questions"></select>
+            </div>
+            <div class="form-group">
+                <label for="verificationAnswer">Verification Answer:</label>
+                <input type="text" class="form-control" id="answer" placeholder="Enter answer" name="answer" ng-model="lgnCtrl.data.ans">
+            </div>
+            <button type="submit" class="btn btn-default" ng-click="lgnCtrl.retrivePassword()">Retrieve my password</button>
+            <span ng-model="lgnCtrl.user.password" ng-show="lgnCtrl.user.correctPassword">Your password is: {{lgnCtrl.user.password}}</span>
+        </form>
     </div>
+</div>
+
+<!-- explore -->
+<div class="panel panel-default">
+    <div class="panel-heading">Explore!</div>
+    <center>
+        <div class="container panel-body">
+            <div class="row">
+                <div class="col-sm-4" ng-repeat="poi in lgnCtrl.randPopularPOI">
+                    <div class="thumbnail">
+                        <a href="">
+                            <img class="thumbnailImageLogin" src="{{poi.poiInfo.ImgPath}}" ng-click="lgnCtrl.showPoiDetails(poi.poiInfo.POI_id)">
+                            <div class="caption">
+                                {{poi.poiInfo.POI_name}}
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </center>
 </div>

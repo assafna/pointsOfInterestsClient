@@ -1,4 +1,4 @@
-let app = angular.module('poiApp', ['ngRoute', 'ngMaterial', 'ngMessages', 'LocalStorageModule']);
+let app = angular.module('poiApp', ['ngRoute', 'LocalStorageModule']);
 
 app.config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('');
@@ -19,7 +19,7 @@ app.config(['$locationProvider', '$routeProvider', function ($locationProvider, 
             controller: 'homeController as homeCtrl'
         })
         .when('/about', {
-            templateUrl: 'Components/About/about.html',
+            templateUrl: 'CFomponents/About/about.html',
             controller: 'aboutController as abtCtrl'
         })
         .when('/signUp', {

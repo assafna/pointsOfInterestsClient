@@ -1,36 +1,15 @@
-#img-poi {
-    width: 20%;
-    height: 370px;
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-.category-header {
-    width: 100%;
-    /* background-color: aqua; */
-}
-
-#filter {
-    width: 50%;
-}
-
-/* input[type=text] {
-    padding: 6px;
-    margin-top: 8px;
-    margin-right: 16px;
-    font-size: 17px;
-} */
-
-#star {
-    font-size: 30px;
-}
-
 .checked {
     color: rgb(255, 203, 0);
 }
 
 .red {
     color: red;
-    font-size: 50px;
+}
+
+.thumbnailImage {
+    height: 200px !important;
+}
+
+a {
+    text-decoration: none !important;
 }
