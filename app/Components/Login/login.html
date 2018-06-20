@@ -33,22 +33,27 @@
 <!-- forgot password -->
 <div class="panel panel-info" ng-show="lgnCtrl.forgetPassword">
     <div class="panel-heading">Forgot password</div>
-    <div class="container panel-body">
+    <div class="container panel-body" ng-show="lgnCtrl.forgetPassword">
         <form>
             <div class="form-group">
-                <label for="usernamer">Username:</label>
+                <label for="username">Username:</label>
                 <input type="text" class="form-control" id="username" placeholder="Enter username" name="username" ng-model="lgnCtrl.data.username">
             </div>
+            <button type="submit" class="btn btn-default" ng-click="lgnCtrl.showQuestions()">Next</button>
+        </form>
+    </div>
+    <div class="container panel-body" ng-show="lgnCtrl.showVerQuestions">
+        <form>
             <div class="form-group">
                 <label for="verificationQuestion">Verification Question:</label>
-                <select class="form-control" name="ques1" ng-model="lgnCtrl.data.questId" ng-options="question.Question_id[0] as question.Question_name for question in lgnCtrl.questions"></select>
+                <select class="form-control" name="ques1" ng-model="lgnCtrl.data.questId" ng-options="question.Question_id[0] as question.Question_name for question in lgnCtrl.verQuestions"></select>
             </div>
             <div class="form-group">
-                <label for="verificationAnswer">Verification Answer:</label>
-                <input type="text" class="form-control" id="answer" placeholder="Enter answer" name="answer" ng-model="lgnCtrl.data.ans">
+                <label for="verificationAnswer">Answer:</label>
+                <input class="form-control" type="text" name="answer" ng-model="lgnCtrl.data.ans">
             </div>
-            <button type="submit" class="btn btn-default" ng-click="lgnCtrl.retrivePassword()">Retrieve my password</button>
-            <span ng-model="lgnCtrl.user.password" ng-show="lgnCtrl.user.correctPassword">Your password is: {{lgnCtrl.user.password}}</span>
+            <button type="submit" class="btn btn-info" ng-click="lgnCtrl.retrivePassword()">Retrieve my password</button>
+            <span ng-model=lgnCtrl.user.password ng-show=lgnCtrl.user.correctPassword>Your password is: {{lgnCtrl.user.password}}</span>
         </form>
     </div>
 </div>

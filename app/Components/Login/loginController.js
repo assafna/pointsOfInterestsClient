@@ -71,13 +71,12 @@ angular.module('poiApp')
                         self.verQuestions = []
                         self.verQuestions.push(self.questions[verQuestionsID[0].QuestId1]);
                         self.verQuestions.push(self.questions[verQuestionsID[0].QuestId2]);
+                        self.showVerQuestions = false;
                         self.showVerQuestions = true;
 
                     }, function (response) {
                         console.log(response);
                     });
-
-
             }
 
             self.showPoiDetails = function (id) {
