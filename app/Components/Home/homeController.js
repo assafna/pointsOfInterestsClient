@@ -49,6 +49,7 @@ angular.module('poiApp')
         };
 
         self.showPoiDetails = function (id) {
+            $scope.indxCtrl.setMap(id);
             $scope.indxCtrl.showPoiDetails(id);
         }
 

@@ -12,6 +12,14 @@ angular.module('poiApp')
             if ($scope.loggedIn)
                 self.numOfFavorite = localStorageService.get('favouritePOIS').length;
 
+            var mymap = L.map('mapid').setView([51.505, -0.09], 13);
+            L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                maxZoom: 18,
+                id: 'mapbox.streets',
+                accessToken: 'pk.eyJ1IjoiYXNzYWZuYSIsImEiOiJjamluZDB6bXQwY284M2tudzB6NjgyYXJ6In0.JvduB2-EOw4yMWHu6x30EA'
+            }).addTo(mymap);
+
             // get all pois from the server, insert into local storage
             $http.get(serverUrl + "poi/AllPointsOfInterst")
                 .then(function (response) {
@@ -54,7 +62,11 @@ angular.module('poiApp')
                                 break;
                             }
                         }
-                        document.getElementById("poiDialog").showModal();
+                        // document.getElementById("poiDialog").showModal();
+                        $("#poiModal").modal("show");
+                        setTimeout(function () {
+                            mymap.invalidateSize();
+                        }, 1000);
                     }, function (response) {
                         pois = [];
                     })
@@ -152,6 +164,17 @@ angular.module('poiApp')
                 document.getElementById("reviewDialog").close();
 
             }
+
+            self.setMap = function (id) {
+                self.pois = localStorageService.get('allPOI');
+                for (let i = 0; i < self.pois.length; i++) {
+                    if (self.pois[i].poiInfo.POI_id == id){
+                        mymap.setView({ lat: self.pois[i].poiInfo.Latitude, lng: self.pois[i].poiInfo.Longitude }, 15);
+                        var marker = L.marker({ lat: self.pois[i].poiInfo.Latitude, lng: self.pois[i].poiInfo.Longitude }).addTo(mymap);
+                    }
+                }
+            }
+
         }
 
 
