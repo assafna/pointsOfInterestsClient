@@ -92,6 +92,12 @@ angular.module('poiApp')
                 $scope.indxCtrl.showPoiDetails(id);
             }
 
-
+            self.setMap = function (id) {
+                self.pois = localStorageService.get('allPOI');
+                for (let i = 0; i < self.pois.length; i++) {
+                    if (self.pois[i].poiInfo.POI_id == id)
+                        mymap = L.map('mapid').setView([self.pois[i].poiInfo.Latitude, self.pois[i].poiInfo.Longitude], 13);
+                }
+            }
 
         }]);

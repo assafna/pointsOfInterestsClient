@@ -69,8 +69,6 @@
         <br>
         <br>
 
-        <div id="mapid"></div>
-
         <div class="container">
             <div class="row">
                 <div class="col-xs-12">
@@ -99,6 +97,7 @@
             <div ng-repeat="review in poiToShow.poiReview">
                 <p>{{review.POI_reviewDate}} {{review.POI_review}}</p>
             </div>
+            <div id="mapid" ng-init="setMap(poiToShow.poiInfo.POI_id)"></div>
             <button ng-click="indxCtrl.closeDialog()">Close</button>
         </center>
     </dialog>
