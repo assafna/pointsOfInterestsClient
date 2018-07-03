@@ -67,7 +67,7 @@
                 <label class="control-label col-sm-3" for="email">Email:</label>
                 <div class="col-sm-9">
                     <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" ng-model="regCtrl.user.Email"
-                        ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" required>
+                        ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,}$/" required>
                     <span class="text-danger" ng-show="registerForm.email.$error.required">
                         This is a required field
                     </span>
