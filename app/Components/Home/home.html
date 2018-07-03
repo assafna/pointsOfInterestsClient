@@ -8,7 +8,7 @@
             <div class="row">
               <div class="col-sm-6" ng-repeat="poi in homeCtrl.recomendedPOI">
                 <div class="thumbnail">
-                  <a href="">
+                  <a href="javascript:void(0);">
                     <img class="thumbnailImage" src="{{poi.poiInfo.ImgPath}}" ng-click="homeCtrl.showPoiDetails(poi.poiInfo.POI_id)">
                     <div class="caption">
                       {{poi.poiInfo.POI_name}}
@@ -29,7 +29,7 @@
             <div class="row">
               <div class="col-sm-6" ng-repeat="poi in homeCtrl.savedPOI">
                 <div class="thumbnail">
-                  <a href="">
+                  <a href="javascript:void(0);">
                     <img class="thumbnailImage" src="{{poi.poiInfo.ImgPath}}" ng-click="homeCtrl.showPoiDetails(poi.poiInfo.POI_id)">
                     <div class="caption">
                       {{poi.poiInfo.POI_name}}
