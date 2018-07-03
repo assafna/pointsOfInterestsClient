@@ -21,13 +21,13 @@
         </div>
       </center>
     </div>
-    <div class="col-sm-6" ng-hide="homeCtrl.noFavorites">
+    <div class="col-sm-6">
       <center>
         <div class="panel panel-primary">
           <div class="panel-heading">Most Recent Saved POIs</div>
           <div class="panel-body">
             <div class="row">
-              <div class="col-sm-6" ng-repeat="poi in homeCtrl.savedPOI">
+              <div class="col-sm-6" ng-repeat="poi in homeCtrl.savedPOI" ng-hide="homeCtrl.noFavorites">
                 <div class="thumbnail">
                   <a href="javascript:void(0);">
                     <img class="thumbnailImage" src="{{poi.poiInfo.ImgPath}}" ng-click="homeCtrl.showPoiDetails(poi.poiInfo.POI_id)">
@@ -37,6 +37,9 @@
                   </a>
                 </div>
               </div>
+              <center>
+                <h2 ng-show="homeCtrl.noFavorites">No saved points of Interest!</h2>
+              </center>
             </div>
           </div>
         </div>
@@ -44,6 +47,3 @@
     </div>
   </div>
 </div>
-<center>
-  <h2 ng-show="homeCtrl.noFavorites">No saved points of Interest!</h2>
-</center>

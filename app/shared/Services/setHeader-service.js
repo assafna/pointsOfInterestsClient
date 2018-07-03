@@ -43,7 +43,7 @@ function($http, localStorageService, $window){
 }])
 
 .service('setHeadersToken', ['$http', function($http) {
-    this.set = function (token, username) {
+    this.set = function (token) {
         $http.defaults.headers.common['x-access-token'] = token;
     }
 }])
