@@ -1,5 +1,5 @@
 angular.module('poiApp')
-    .controller('homeController', ['$http', 'localStorageService', '$scope', 'checkTokenValidation', function ($http, localStorageService, $scope, checkTokenValidation) {
+    .controller('homeController', ['$http', 'localStorageService', '$scope', 'checkTokenValidation', 'setHeadersToken', function ($http, localStorageService, $scope, checkTokenValidation, setHeadersToken) {
         self = this;
 
         let serverUrl = 'http://localhost:3000/';
@@ -13,7 +13,7 @@ angular.module('poiApp')
 
         self.noFavorites = false;
 
-
+        setHeadersToken.set(localStorageService.get('token'));
         $http.get(serverUrl + "poi/validation/RecomendedPointsOfInterest")
             .then(function (response) {
                 self.recomendedPOI = response.data;
