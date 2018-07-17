@@ -12,6 +12,7 @@ angular.module('poiApp')
             }
             self.forgetPassword = false;
             self.showVerQuestions = false;
+            self.wrongUser = false;
             // $scope.indxCtrl.loggedIn = checkTokenValidation.check();
             //$scope.indxCtrl = localStorageService.get('username');
 
@@ -69,11 +70,19 @@ angular.module('poiApp')
                 $http.get(serverUrl + "users/userQuestions", { params: { username: self.data.username } })
                     .then(function (response) {
                         verQuestionsID = response.data;
-                        self.verQuestions = []
-                        self.verQuestions.push(self.questions[verQuestionsID[0].QuestId1]);
-                        self.verQuestions.push(self.questions[verQuestionsID[0].QuestId2]);
-                        self.showVerQuestions = false;
-                        self.showVerQuestions = true;
+                        if (verQuestionsID[0] != undefined) {
+                            self.verQuestions = []
+                            self.verQuestions.push(self.questions[verQuestionsID[0].QuestId1]);
+                            self.verQuestions.push(self.questions[verQuestionsID[0].QuestId2]);
+                            self.showVerQuestions = false;
+                            self.showVerQuestions = true;
+                            self.wrongUser = false;
+                        }
+                        else {
+                            //user not found
+                            self.wrongUser = true;
+                            self.showVerQuestions = false;
+                        }
 
                     }, function (response) {
                         console.log(response);
