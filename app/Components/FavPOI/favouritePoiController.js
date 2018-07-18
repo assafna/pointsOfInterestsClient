@@ -14,7 +14,10 @@ angular.module('poiApp')
         self.savedPOI = localStorageService.get('favouritePOIS');
 
         self.addToFavourite = function (id) {
-            favouriteList.remove(id);
+            if (self.isInFavorites(id))
+                favouriteList.remove(id);
+            else
+                favouriteList.add(id);
             // $window.location.reload();
             checkOrUncheck(id);
         }
