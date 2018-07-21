@@ -67,13 +67,13 @@ angular.module('poiApp')
             }
 
             self.showQuestions = function () {
-                $http.get(serverUrl + "users/userQuestions", { params: { username: self.data.username } })
+                $http.get(serverUrl + "users/userQuestions/" + self.data.username)
                     .then(function (response) {
                         verQuestionsID = response.data;
                         if (verQuestionsID[0] != undefined) {
                             self.verQuestions = []
-                            self.verQuestions.push(self.questions[verQuestionsID[0].QuestId1]);
-                            self.verQuestions.push(self.questions[verQuestionsID[0].QuestId2]);
+                            self.verQuestions.push(self.questions[verQuestionsID[0].QuestId1 - 1]);
+                            self.verQuestions.push(self.questions[verQuestionsID[0].QuestId2 - 1]);
                             self.showVerQuestions = false;
                             self.showVerQuestions = true;
                             self.wrongUser = false;
